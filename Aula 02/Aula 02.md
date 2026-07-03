@@ -211,44 +211,6 @@ Em Ciência de Dados costumamos dizer:
 
 Esses termos aparecem frequentemente na documentação das bibliotecas.
 
----
-Excelente observação. Você encontrou um problema de sequência didática. Para um aluno iniciante, isso realmente causa confusão.
-
-As **features** e o **target** só deveriam aparecer **depois** que o aluno entender o que é um dataset e antes de começarmos a usar o Pandas. Na versão atual, eu os mencionei nos exercícios antes de defini-los formalmente.
-
-## Minha sugestão de reorganização
-
-A estrutura ficaria mais pedagógica assim:
-
-### Aula 01
-
-* Inteligência Artificial
-* Machine Learning
-* Deep Learning
-* Como computadores aprendem
-* Programação tradicional × Machine Learning
-
-### Aula 02
-
-* Como funciona um projeto de Machine Learning
-* Dataset
-* Linhas e colunas
-* Tipos de dados
-* **Features (novo tópico)**
-* **Target (novo tópico)**
-* Variáveis independentes e dependentes
-* Garbage In, Garbage Out (GIGO)
-* Pipeline de Machine Learning
-
-### Aula 03
-
-* Google Colab
-* Pandas
-* DataFrame
-* Criando tabelas
-* Explorando dados
-
-Assim, quando chegarmos ao código, o aluno já saberá exatamente o que significa `X` e `y`.
 
 ---
 
