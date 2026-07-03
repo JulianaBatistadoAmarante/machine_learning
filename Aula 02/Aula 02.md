@@ -1,1026 +1,803 @@
-# Aula 02 – NumPy e Pandas para Machine Learning
-
-## Preparando os Dados para a Inteligência Artificial
-
-**Carga Horária:** 4 horas
+# Capítulo 2 – Como um Projeto de Machine Learning Funciona
 
 ---
 
-# Objetivos da Aula
+# Antes de escrever código...
 
-Ao final desta aula você será capaz de:
+Imagine que uma rede de supermercados faça a seguinte pergunta para sua equipe:
 
-✅ Entender o que é NumPy.
+> **"É possível prever quais clientes deixarão de comprar conosco nos próximos meses?"**
 
-✅ Criar vetores e matrizes.
+Ou então:
 
-✅ Manipular dados utilizando Pandas.
+> **"É possível identificar uma fraude antes que ela aconteça?"**
 
-✅ Ler arquivos CSV.
+Ou ainda:
 
-✅ Filtrar informações.
+> **"É possível descobrir quais alunos têm maior risco de evasão escolar?"**
 
-✅ Tratar dados ausentes.
+Nenhuma dessas perguntas pode ser respondida apenas escrevendo código.
 
-✅ Preparar dados para Machine Learning.
+Primeiro precisamos entender o problema.
+
+É exatamente isso que acontece em qualquer projeto de Machine Learning.
+
+O algoritmo é apenas uma ferramenta.
+
+O verdadeiro trabalho começa muito antes dele.
 
 ---
 
-# Relembrando a Aula Anterior
+# O ciclo de vida de um projeto de Machine Learning
 
-Na aula passada aprendemos:
+Todo projeto segue, de maneira geral, um fluxo semelhante ao apresentado abaixo.
 
 ```text
-Dados → Algoritmo → Modelo → Previsão
+┌───────────────┐
+│ Definição do  │
+│    Problema   │
+└───────┬───────┘
+        │
+        ▼
+┌───────────────┐
+│ Coleta dos    │
+│     Dados     │
+└───────┬───────┘
+        │
+        ▼
+┌───────────────┐
+│ Limpeza e     │
+│ Preparação    │
+└───────┬───────┘
+        │
+        ▼
+┌───────────────┐
+│ Exploração    │
+│ dos Dados     │
+└───────┬───────┘
+        │
+        ▼
+┌───────────────┐
+│ Treinamento   │
+│ do Modelo     │
+└───────┬───────┘
+        │
+        ▼
+┌───────────────┐
+│ Avaliação     │
+└───────┬───────┘
+        │
+        ▼
+┌───────────────┐
+│ Implantação   │
+└───────┬───────┘
+        │
+        ▼
+┌───────────────┐
+│ Monitoramento │
+└───────────────┘
 ```
 
-Mas existe um problema...
-
-Na vida real os dados nunca vêm organizados.
-
-Imagine uma planilha assim:
-
-| Nome  | Idade | Salário |
-| ----- | ----- | ------- |
-| João  | 25    | 3000    |
-| Maria |       | 4500    |
-| Pedro | 40    |         |
-| Ana   | 22    | 2800    |
-
-Observe:
-
-❌ Idade faltando
-
-❌ Salário faltando
-
-❌ Dados incompletos
-
-Antes de ensinar uma IA precisamos organizar tudo.
-
-É exatamente isso que faremos hoje.
+Vamos entender cada etapa.
 
 ---
 
-# 1. O que é NumPy?
+# 1. Definição do problema
 
-NumPy significa:
+Um erro muito comum é começar escolhendo um algoritmo.
 
-```text
-Numerical Python
-```
+Na prática, o primeiro passo nunca é esse.
 
-É uma biblioteca criada para trabalhar com números e matrizes.
+Primeiro definimos o problema.
 
-Praticamente todas as bibliotecas de IA utilizam NumPy internamente.
+Exemplos:
+
+| Área      | Problema                                          |
+| --------- | ------------------------------------------------- |
+| Hospital  | Prever pacientes com risco de internação          |
+| Banco     | Detectar fraudes                                  |
+| Escola    | Identificar alunos com risco de evasão            |
+| Loja      | Recomendar produtos                               |
+| Indústria | Prever falhas em máquinas                         |
+| RH        | Identificar risco de desligamento de funcionários |
+
+Sem um problema bem definido, não existe projeto de Machine Learning.
 
 ---
 
 ## Analogia
 
-Imagine uma calculadora comum.
+Imagine um médico.
 
-Ela faz:
+Antes de prescrever um remédio ele precisa descobrir qual é a doença.
 
-```text
-2 + 2
-```
+O algoritmo é o remédio.
 
-Agora imagine uma calculadora capaz de realizar milhões de cálculos por segundo.
-
-Essa é a ideia do NumPy.
+O problema é o diagnóstico.
 
 ---
 
-# Importando o NumPy
+# 2. Coleta de dados
 
-```python
-import numpy as np
-```
+Depois de definir o problema, precisamos reunir informações.
 
-## Explicação
+Essas informações recebem o nome de **dados** (*data*).
 
-### import
+Quanto maior a qualidade dos dados, melhor tende a ser o desempenho do modelo.
 
-Importa uma biblioteca.
+Imagine um sistema que deseja prever a aprovação de alunos.
 
-### numpy
+Quais informações poderiam ajudar?
 
-Nome da biblioteca.
+* idade;
+* frequência;
+* média das notas;
+* quantidade de trabalhos entregues;
+* participação em aula.
 
-### as np
-
-Apelido utilizado mundialmente.
-
----
-
-# 2. Criando Arrays
-
-Em Machine Learning quase tudo é armazenado em Arrays.
+Cada uma dessas informações pode contribuir para que o modelo encontre padrões.
 
 ---
 
-## Lista Python
+## De onde vêm os dados?
 
-```python
-idades = [18, 22, 30, 40]
-```
+Os dados podem ser obtidos de diversas fontes:
 
----
+* bancos de dados;
+* planilhas;
+* arquivos CSV;
+* APIs;
+* sensores;
+* formulários;
+* sistemas corporativos;
+* dispositivos móveis.
 
-## Array NumPy
-
-```python
-import numpy as np
-
-idades = np.array([18, 22, 30, 40])
-
-print(idades)
-```
-
-Resultado:
-
-```text
-[18 22 30 40]
-```
+No nosso curso utilizaremos principalmente arquivos CSV e DataFrames criados no próprio Python.
 
 ---
 
-# O que é um Array?
+# O que é um Dataset?
 
-Um Array é semelhante a uma lista.
+Um **dataset** é um conjunto organizado de dados.
 
-Porém:
-
-✅ Mais rápido
-
-✅ Menos memória
-
-✅ Melhor para cálculos matemáticos
-
----
-
-# 3. Operações Matemáticas
-
-Lista Python:
-
-```python
-numeros = [1,2,3]
-
-print(numeros * 2)
-```
-
-Resultado:
-
-```text
-[1,2,3,1,2,3]
-```
-
-A lista foi repetida.
-
----
-
-Com NumPy:
-
-```python
-numeros = np.array([1,2,3])
-
-print(numeros * 2)
-```
-
-Resultado:
-
-```text
-[2 4 6]
-```
-
-Cada elemento foi multiplicado.
-
----
-
-# Analogia
-
-Imagine uma sala com 40 alunos.
-
-Você deseja aumentar todas as notas em 1 ponto.
-
-Sem NumPy:
-
-```text
-Aluno por aluno...
-```
-
-Com NumPy:
-
-```text
-Todos ao mesmo tempo.
-```
-
----
-
-# 4. Matrizes
-
-Machine Learning trabalha principalmente com matrizes.
-
----
-
-## Criando uma matriz
-
-```python
-dados = np.array([
-    [18, 1500],
-    [25, 3000],
-    [35, 5000]
-])
-
-print(dados)
-```
-
-Resultado:
-
-```text
-[[  18 1500]
- [  25 3000]
- [  35 5000]]
-```
-
----
-
-## Visualizando
-
-| Idade | Salário |
-| ----- | ------- |
-| 18    | 1500    |
-| 25    | 3000    |
-| 35    | 5000    |
-
----
-
-# 5. Acessando Posições
-
-```python
-dados = np.array([
-    [18,1500],
-    [25,3000],
-    [35,5000]
-])
-
-print(dados[0])
-```
-
-Resultado:
-
-```text
-[18 1500]
-```
-
-Primeira linha.
-
----
-
-## Linha e Coluna
-
-```python
-print(dados[1,1])
-```
-
-Resultado:
-
-```text
-3000
-```
-
----
-
-## Explicação
-
-```text
-dados[linha, coluna]
-```
-
----
-
-# 6. Conhecendo Melhor o Pandas
-
-Na aula anterior criamos DataFrames.
-
-Hoje vamos manipulá-los.
-
----
-
-# Criando uma tabela
-
-```python
-import pandas as pd
-
-dados = {
-    "nome": ["João", "Maria", "Pedro"],
-    "idade": [25, 30, 40]
-}
-
-df = pd.DataFrame(dados)
-
-print(df)
-```
-
----
-
-Resultado
-
-| nome  | idade |
-| ----- | ----- |
-| João  | 25    |
-| Maria | 30    |
-| Pedro | 40    |
-
----
-
-# 7. Informações da Tabela
-
-```python
-df.info()
-```
-
-Resultado:
-
-```text
-Quantidade de linhas
-Quantidade de colunas
-Tipo dos dados
-```
-
----
-
-# Analogia
-
-É como olhar a ficha técnica de um carro.
-
----
-
-# 8. Estatísticas Básicas
-
-```python
-df.describe()
-```
-
-Resultado:
-
-```text
-Média
-Máximo
-Mínimo
-Desvio padrão
-```
-
----
+Na prática, podemos imaginá-lo como uma planilha do Excel.
 
 Exemplo:
 
-| idade        |
-| ------------ |
-| Média = 31,6 |
-| Máximo = 40  |
-| Mínimo = 25  |
+| Nome   | Idade | Salário | Comprou |
+| ------ | ----: | ------: | ------: |
+| Ana    |    21 |    2500 |     Sim |
+| Carlos |    38 |    5200 |     Sim |
+| João   |    19 |    1600 |     Não |
+| Maria  |    45 |    7100 |     Sim |
+
+Cada linha representa um registro.
+
+Cada coluna representa uma característica.
 
 ---
 
-# Por que isso é importante?
+## Analogia
 
-Antes de treinar uma IA precisamos conhecer os dados.
+Imagine um álbum de figurinhas.
+
+Cada figurinha representa um aluno.
+
+Cada informação da figurinha é uma coluna.
+
+O álbum inteiro representa o dataset.
 
 ---
 
-# 9. Lendo Arquivos CSV
+# Linhas e colunas
 
-Grande parte dos datasets vêm em CSV.
+Vamos analisar a tabela anterior.
 
-CSV significa:
+| Nome   | Idade | Salário | Comprou |
+| ------ | ----: | ------: | ------: |
+| Ana    |    21 |    2500 |     Sim |
+| Carlos |    38 |    5200 |     Sim |
+| João   |    19 |    1600 |     Não |
+
+Observe:
+
+* Existem **3 linhas**.
+* Existem **4 colunas**.
+
+Em Ciência de Dados costumamos dizer:
+
+* **Linha = observação** (ou registro).
+* **Coluna = variável** (ou atributo).
+
+Esses termos aparecem frequentemente na documentação das bibliotecas.
+
+---
+Excelente observação. Você encontrou um problema de sequência didática. Para um aluno iniciante, isso realmente causa confusão.
+
+As **features** e o **target** só deveriam aparecer **depois** que o aluno entender o que é um dataset e antes de começarmos a usar o Pandas. Na versão atual, eu os mencionei nos exercícios antes de defini-los formalmente.
+
+## Minha sugestão de reorganização
+
+A estrutura ficaria mais pedagógica assim:
+
+### Aula 01
+
+* Inteligência Artificial
+* Machine Learning
+* Deep Learning
+* Como computadores aprendem
+* Programação tradicional × Machine Learning
+
+### Aula 02
+
+* Como funciona um projeto de Machine Learning
+* Dataset
+* Linhas e colunas
+* Tipos de dados
+* **Features (novo tópico)**
+* **Target (novo tópico)**
+* Variáveis independentes e dependentes
+* Garbage In, Garbage Out (GIGO)
+* Pipeline de Machine Learning
+
+### Aula 03
+
+* Google Colab
+* Pandas
+* DataFrame
+* Criando tabelas
+* Explorando dados
+
+Assim, quando chegarmos ao código, o aluno já saberá exatamente o que significa `X` e `y`.
+
+---
+
+# O que são Features?
+
+Durante todo o curso você verá a palavra **feature**.
+
+Ela pode parecer complicada no início, mas seu significado é bastante simples.
+
+Uma **feature** é uma característica utilizada pelo computador para aprender.
+
+Imagine que desejamos prever se um aluno será aprovado.
+
+Temos a seguinte tabela:
+
+| Horas de Estudo | Faltas | Nota Anterior | Aprovado |
+| --------------- | ------ | ------------- | -------- |
+| 2               | 15     | 5,0           | Não      |
+| 5               | 4      | 8,5           | Sim      |
+| 3               | 10     | 6,0           | Não      |
+| 8               | 1      | 9,2           | Sim      |
+
+Observe que existem várias informações sobre cada aluno.
+
+* Horas de estudo
+* Número de faltas
+* Nota anterior
+
+Essas informações ajudam o algoritmo a tomar uma decisão.
+
+Cada uma delas é uma **feature**.
+
+---
+
+## Analogia
+
+Imagine um médico tentando diagnosticar uma doença.
+
+Antes de dar um diagnóstico, ele observa várias características do paciente:
+
+* temperatura;
+* pressão arterial;
+* idade;
+* exames laboratoriais;
+* frequência cardíaca.
+
+Cada uma dessas informações ajuda o médico a chegar a uma conclusão.
+
+No Machine Learning acontece exatamente a mesma coisa.
+
+As **features** são as informações utilizadas para tomar uma decisão.
+
+---
+
+## Outro exemplo
+
+Imagine um banco que deseja prever se um cliente pagará um empréstimo.
+
+O banco pode utilizar informações como:
+
+| Idade | Salário | Tempo de Empresa | Possui Dívidas |
+| ----: | ------: | ---------------: | -------------: |
+|    22 |    2500 |            1 ano |            Não |
+|    45 |    9000 |          15 anos |            Sim |
+|    30 |    4500 |           4 anos |            Não |
+
+Todas essas colunas são **features**.
+
+---
+
+# O que é o Target?
+
+Agora imagine que queremos responder à pergunta:
+
+> **O cliente pagará o empréstimo?**
+
+A resposta correta aparece em outra coluna.
+
+| Idade | Salário | Tempo | Pagou Empréstimo |
+| ----: | ------: | ----: | ---------------: |
+|    22 |    2500 |     1 |              Não |
+|    45 |    9000 |    15 |              Sim |
+|    30 |    4500 |     4 |              Sim |
+
+A coluna **"Pagou Empréstimo"** contém aquilo que queremos prever.
+
+Ela recebe o nome de **target**.
+
+---
+
+## Definição
+
+O **target** é a resposta correta utilizada durante o treinamento do algoritmo.
+
+Também é chamado de:
+
+* variável alvo;
+* variável resposta;
+* variável dependente.
+
+Todos esses nomes significam praticamente a mesma coisa.
+
+---
+
+## Analogia
+
+Imagine um professor corrigindo uma prova.
+
+As respostas dos alunos representam as **features**.
+
+O gabarito representa o **target**.
+
+O algoritmo compara as respostas com o gabarito para aprender.
+
+---
+
+# Features × Target
+
+Observe novamente.
+
+| Horas Estudo | Faltas | Nota | Aprovado |
+| ------------ | ------ | ---- | -------- |
+| 2            | 10     | 5    | Não      |
+| 5            | 2      | 8    | Sim      |
+
+As **features** são:
+
+* Horas de Estudo
+* Faltas
+* Nota
+
+O **target** é:
+
+* Aprovado
+
+Podemos representar isso assim:
 
 ```text
-Comma Separated Values
-```
+Features
+↓
 
-Valores separados por vírgulas.
+Horas de estudo
+
+Faltas
+
+Nota
+
+↓
+
+Algoritmo
+
+↓
+
+Target
+
+↓
+
+Aprovado
+```
 
 ---
 
-## Exemplo
+# Como isso aparece no Python?
 
-arquivo.csv
-
-```csv
-nome,idade,salario
-João,25,3000
-Maria,30,4500
-Pedro,40,5000
-```
-
----
-
-# 9.1 Como Carregar Arquivos CSV no Google Colab
-
+Mais adiante veremos este código:
 
 ```python
-df = pd.read_csv("arquivo.csv")
+X = df[["horas_estudo", "faltas", "nota"]]
+
+y = df["aprovado"]
 ```
 
-Mas para isso funcionar, o arquivo precisa estar disponível dentro do ambiente do Colab.
+Por convenção:
+
+* `X` representa as **features**;
+* `y` representa o **target**.
+
+Você ainda não precisa decorar isso.
+
+Quando chegarmos ao código, esse conceito fará muito mais sentido.
 
 ---
 
-# Opção 1 – Enviar Arquivo do Computador
+# Dica de Mercado
 
-Esta é a forma mais simples para iniciantes.
+Durante reuniões de projetos é muito comum ouvir frases como:
 
-Execute:
+> "Quais serão as features do modelo?"
 
-```python
-from google.colab import files
+ou
 
-uploaded = files.upload()
-```
+> "Já definimos o target?"
 
-Ao executar a célula aparecerá um botão:
+Esses dois termos fazem parte do vocabulário diário de cientistas de dados e engenheiros de Machine Learning.
+
+---
+
+## Exercício (antes do Pandas)
+
+Observe a tabela.
+
+| Idade | Salário | Cidade        | Comprou |
+| ----: | ------: | ------------- | ------- |
+|    22 |    2500 | Blumenau      | Não     |
+|    35 |    5000 | Joinville     | Sim     |
+|    40 |    7200 | Florianópolis | Sim     |
+
+Responda:
+
+1. Quais colunas representam as **features**?
+2. Qual coluna representa o **target**?
+3. Se o objetivo fosse prever o salário de uma pessoa, qual coluna passaria a ser o **target**?
+
+
+# Tipos de dados
+
+Nem toda informação possui o mesmo formato.
+
+Observe.
+
+## Dados numéricos
+
+São utilizados em cálculos.
+
+Exemplos:
 
 ```text
-Escolher arquivos
+18
+2500
+7.5
+95
 ```
 
-Selecione o arquivo CSV do seu computador.
+---
 
-Exemplo:
+## Dados textuais
+
+Representam palavras.
 
 ```text
-alunos.csv
-```
+Blumenau
 
-Após o upload, o Colab exibirá algo semelhante a:
+Python
 
-```text
-Saving alunos.csv to alunos.csv
-```
-
-Agora o arquivo já está disponível para uso.
-
----
-
-## Lendo o arquivo
-
-```python
-import pandas as pd
-
-df = pd.read_csv("alunos.csv")
-
-print(df)
-```
-## Em Caso de erro
-```python
-import pandas as pd
-
-df = pd.read_csv(
-    "arquivo.csv",
-    sep=";",
-    encoding="latin1"
-)
-
-print(df)
-```
----
-
-# Verificando se o arquivo foi carregado
-
-Você pode listar os arquivos disponíveis:
-
-```python
-import os
-
-print(os.listdir())
-```
-
-Exemplo de saída:
-
-```text
-['alunos.csv']
+Maria
 ```
 
 ---
 
-# Opção 2 – Utilizando Arquivos do Google Drive
+## Dados booleanos
 
-Quando trabalhamos com projetos maiores, é comum armazenar datasets no Google Drive.
-
----
-
-## Conectando o Drive
-
-```python
-from google.colab import drive
-
-drive.mount('/content/drive')
-```
-
-Ao executar:
-
-1. Clique no link exibido.
-2. Faça login.
-3. Copie o código de autorização.
-4. Cole no Colab.
-
----
-
-## Acessando o arquivo
-
-Suponha que o arquivo esteja em:
-
-```text
-Meu Drive
-└── MachineLearning
-    └── alunos.csv
-```
-
-O caminho será:
-
-```python
-import pandas as pd
-
-df = pd.read_csv(
-    "/content/drive/MyDrive/MachineLearning/alunos.csv"
-)
-
-print(df)
-```
-
----
-
-# Descobrindo o Caminho do Arquivo
-
-Após montar o Drive, clique no ícone da pasta à esquerda do Colab.
-
-Você verá algo semelhante a:
-
-```text
-content
-└── drive
-    └── MyDrive
-```
-
-Navegue até o arquivo.
-
-Clique nos três pontos ao lado do arquivo e escolha:
-
-```text
-Copiar caminho
-```
-
-Cole diretamente no código:
-
-```python
-df = pd.read_csv("CAMINHO_COPIADO")
-```
-
----
-
-# Exercício Prático
-
-Crie uma planilha no Google Planilhas com os dados:
-
-| Nome  | Idade | Nota |
-| ----- | ----- | ---- |
-| Ana   | 18    | 8    |
-| João  | 17    | 7    |
-| Maria | 19    | 10   |
-| Pedro | 18    | 6    |
-
----
-
-## Passo 1
-
-Baixe a planilha em formato CSV.
-
-```text
-Arquivo → Fazer download → Valores separados por vírgula (.csv)
-```
-
----
-
-## Passo 2
-
-Faça upload para o Colab.
-
----
-
-## Passo 3
-
-Carregue os dados utilizando:
-
-```python
-import pandas as pd
-
-df = pd.read_csv("nome_do_arquivo.csv")
-
-print(df)
-```
-
----
-
-## Passo 4
-
-Mostre as cinco primeiras linhas:
-
-```python
-df.head()
-```
-
----
-
-## Passo 5
-
-Mostre informações da tabela:
-
-```python
-df.info()
-```
-
----
-
-# Desafio
-
-Após carregar o arquivo, responda:
-
-1. Quantos registros existem?
-2. Qual a média das notas?
-3. Qual o aluno com a maior nota?
-4. Quantos alunos possuem nota maior ou igual a 7?
-
-Dica:
-
-```python
-df.describe()
-```
-
-e
-
-```python
-df[df["Nota"] >= 7]
-```
-
-ajudarão a responder essas perguntas.
-
----
-
-### Observação Importante
-
-No Google Colab, os arquivos enviados pelo upload ficam disponíveis **somente durante a sessão atual**. Se o ambiente for reiniciado, será necessário enviar o arquivo novamente.
-
-Por isso, em projetos maiores, normalmente utilizamos o **Google Drive**, que mantém os arquivos armazenados permanentemente.
-
----
-
-
-# 10. Visualizando Dados
-
-Primeiras linhas:
-
-```python
-df.head()
-```
-
-Resultado:
-
-```text
-Mostra as 5 primeiras linhas
-```
-
----
-
-Últimas linhas:
-
-```python
-df.tail()
-```
-
-Resultado:
-
-```text
-Mostra as 5 últimas linhas
-```
-
----
-
-# Analogia
-
-É como abrir uma apostila e olhar a primeira e a última página.
-
----
-
-# 11. Filtrando Dados
-
-Tabela:
-
-| Nome  | Idade |
-| ----- | ----- |
-| João  | 18    |
-| Ana   | 25    |
-| Pedro | 35    |
-
----
-
-Mostrar somente maiores de idade acima de 20 anos:
-
-```python
-print(df[df["idade"] > 20])
-```
-
-Resultado:
-
-| Nome  | Idade |
-| ----- | ----- |
-| Ana   | 25    |
-| Pedro | 35    |
-
----
-
-# Entendendo
-
-```python
-df["idade"] > 20
-```
-
-Produz:
-
-```text
-False
-True
-True
-```
-
-O Pandas utiliza esse resultado para filtrar.
-
----
-
-# 12. Dados Faltando
-
-Problema muito comum.
-
----
-
-Tabela:
-
-| Nome  | Idade |
-| ----- | ----- |
-| João  | 25    |
-| Maria |       |
-| Pedro | 40    |
-
----
-
-## Verificando valores vazios
-
-```python
-df.isnull()
-```
-
-Resultado:
+Possuem apenas dois valores.
 
 ```text
 True
+
 False
 ```
 
+Também podem aparecer como:
+
+```text
+Sim
+
+Não
+```
+
+ou
+
+```text
+1
+
+0
+```
+
 ---
 
-## Quantidade de vazios
+## Dados categóricos
 
-```python
-df.isnull().sum()
-```
+Representam categorias.
 
 Exemplo:
 
-```text
-idade    1
-```
+| Curso          |
+| -------------- |
+| Python         |
+| Java           |
+| Banco de Dados |
+| Redes          |
+
+Embora sejam textos, representam grupos distintos.
+
+Mais adiante aprenderemos como transformar essas categorias em números para que possam ser utilizadas pelos algoritmos.
 
 ---
 
-# 13. Removendo Dados Vazios
+# Um computador entende texto?
 
-```python
-df = df.dropna()
-```
+Essa é uma pergunta interessante.
 
----
-
-## Explicação
-
-### drop
-
-Remover
-
-### na
-
-Not Available
-
-(Dado indisponível)
-
----
-
-# 14. Preenchendo Dados Vazios
-
-Em vez de apagar:
-
-```python
-df["idade"] = df["idade"].fillna(df["idade"].mean())
-```
-
----
-
-## O que acontece?
-
-Se a média for:
+Considere os valores:
 
 ```text
-30
+Azul
+
+Verde
+
+Vermelho
 ```
 
-Maria recebe:
+Nós entendemos imediatamente o significado dessas palavras.
 
-```text
-30
-```
+O computador não.
 
-automaticamente.
+Para um algoritmo de Machine Learning, letras não possuem significado matemático.
 
----
+Por isso, em muitos casos, será necessário converter categorias em valores numéricos antes do treinamento.
 
-# Analogia
-
-Imagine uma pesquisa com 100 pessoas.
-
-Uma delas esqueceu de informar a idade.
-
-Podemos usar a média do grupo para completar.
+Esse processo será estudado em aulas futuras.
 
 ---
 
-# 15. Preparando Dados para IA
+# Dados estruturados e não estruturados
 
-Tabela original:
+Nem todos os dados são organizados em tabelas.
 
-| Nome  | Idade | Salário | Comprou |
-| ----- | ----- | ------- | ------- |
-| João  | 25    | 3000    | Sim     |
-| Maria | 40    | 5000    | Sim     |
-| Pedro | 18    | 1500    | Não     |
+## Dados estruturados
 
----
+Possuem linhas e colunas.
 
-Separando entradas:
+Exemplo:
 
-```python
-X = df[["idade", "salario"]]
-```
+| Nome | Idade |
+| ---- | ----: |
+| Ana  |    20 |
+
+São os mais utilizados neste início do curso.
 
 ---
 
-Separando resposta:
+## Dados não estruturados
 
-```python
-y = df["comprou"]
-```
+Não seguem um formato tabular.
 
----
+Exemplos:
 
-Agora os dados estão prontos para treinamento.
+* fotografias;
+* vídeos;
+* áudios;
+* documentos PDF;
+* mensagens de texto;
+* e-mails.
 
----
-
-# Exercício Prático
-
-Crie um DataFrame com:
-
-| Nome  | Nota |
-| ----- | ---- |
-| Ana   | 8    |
-| João  | 5    |
-| Pedro | 9    |
-| Maria | 7    |
-
-Depois:
-
-1. Mostre a tabela.
-2. Exiba apenas alunos com nota maior que 7.
-3. Mostre a média das notas.
+Grande parte dos modelos modernos de Inteligência Artificial trabalha justamente com esse tipo de dado.
 
 ---
 
-# Exercícios
+# 3. Limpeza dos dados
 
-## Exercício 1
+Imagine que uma empresa possui a seguinte planilha.
 
-Explique a diferença entre:
+| Nome   | Idade |
+| ------ | ----: |
+| Ana    |    20 |
+| João   |     — |
+| Carlos |   350 |
+| Maria  | vinte |
 
-```python
-lista = [1,2,3]
-```
+Você treinaria um modelo com esses dados?
 
-e
+Provavelmente não.
 
-```python
-np.array([1,2,3])
-```
+Antes do treinamento precisamos corrigir problemas.
 
----
+Essa etapa recebe o nome de **limpeza de dados**.
 
-## Exercício 2
+Ela pode envolver:
 
-O que faz:
-
-```python
-import numpy as np
-```
-
----
-
-## Exercício 3
-
-Explique:
-
-```python
-df.head()
-```
+* remoção de registros duplicados;
+* preenchimento de valores ausentes;
+* correção de erros de digitação;
+* padronização de formatos;
+* eliminação de informações inconsistentes.
 
 ---
 
-## Exercício 4
+## Analogia
 
-Explique:
+Imagine que você deseja preparar um bolo.
 
-```python
-df.describe()
-```
+Os ingredientes representam os dados.
 
----
+Se um ingrediente estiver estragado, o resultado dificilmente será bom.
 
-## Exercício 5
+Da mesma forma, um algoritmo treinado com dados ruins produzirá previsões ruins.
 
-Qual a função de:
+Esse conceito é conhecido pela expressão:
 
-```python
-df.dropna()
-```
+> **Garbage In, Garbage Out (GIGO)**
 
----
+Ou seja:
 
-# Desafio da Aula
-
-Crie uma tabela com:
-
-| Horas Estudo | Nota |
-| ------------ | ---- |
-| 2            | 4    |
-| 3            | 5    |
-| 5            | 7    |
-| 6            | 8    |
-| 8            | 10   |
-
-Utilize Pandas para:
-
-* Criar o DataFrame.
-* Mostrar estatísticas.
-* Exibir apenas notas maiores que 7.
+> **"Se entram dados ruins, saem resultados ruins."**
 
 ---
 
-# Resumo
+# 4. Exploração dos dados
 
-Hoje aprendemos:
+Antes de treinar qualquer algoritmo, precisamos conhecer os dados.
 
-✅ O que é NumPy
+Perguntas comuns nessa etapa são:
 
-✅ Arrays e matrizes
+* Quantas linhas existem?
+* Quantas colunas?
+* Existem valores vazios?
+* Qual a média das idades?
+* Qual o maior salário?
+* Existem valores muito diferentes dos demais?
 
-✅ Operações matemáticas vetorizadas
+Essa análise é chamada de **Análise Exploratória de Dados (EDA – Exploratory Data Analysis)**.
 
-✅ O que é Pandas
+Nas próximas aulas utilizaremos o **Pandas** para responder essas perguntas de forma simples.
 
-✅ DataFrame
+---
 
-✅ Leitura de CSV
+# 5. Treinamento
 
-✅ Filtros
+Somente agora chegamos à etapa que a maioria das pessoas imagina ser todo o Machine Learning.
 
-✅ Tratamento de dados faltantes
+Nela utilizamos um algoritmo para aprender padrões existentes no dataset.
 
-✅ Preparação dos dados para Machine Learning
+No nosso primeiro exemplo utilizaremos uma **Árvore de Decisão**.
 
-### Próxima Aula
+Mas poderíamos utilizar dezenas de outros algoritmos.
 
-**Treinamento e Teste de Modelos**
+O treinamento consiste em mostrar muitos exemplos para que o algoritmo construa um modelo matemático.
 
-Você aprenderá:
+---
 
-* `train_test_split()`
-* Treino e teste
-* Overfitting
-* Underfitting
-* Primeira avaliação de um modelo de Machine Learning com dados reais.
+# 6. Avaliação
+
+Depois do treinamento precisamos verificar se o modelo realmente aprendeu.
+
+Imagine um aluno.
+
+Não basta assistir às aulas.
+
+Ele precisa fazer uma prova.
+
+O mesmo acontece com um algoritmo.
+
+Precisamos testar se ele consegue responder corretamente casos que nunca viu antes.
+
+Esse assunto será aprofundado quando estudarmos métricas como:
+
+* acurácia;
+* precisão;
+* recall;
+* F1-score.
+
+---
+
+# 7. Implantação
+
+Quando o modelo apresenta bons resultados, ele pode ser colocado em produção.
+
+É nessa etapa que ele começa a responder perguntas de usuários reais.
+
+Exemplos:
+
+* prever fraudes bancárias;
+* recomendar filmes;
+* sugerir músicas;
+* aprovar crédito;
+* classificar e-mails como spam.
+
+---
+
+# 8. Monitoramento
+
+Os dados mudam com o tempo.
+
+Os hábitos das pessoas mudam.
+
+O mercado muda.
+
+Por isso um modelo não pode ficar anos sem atualização.
+
+Ele precisa ser monitorado e, quando necessário, treinado novamente.
+
+---
+
+# Curiosidade
+
+Grandes empresas como Netflix, Google e Amazon atualizam seus modelos constantemente.
+
+Em alguns casos, novos treinamentos acontecem diariamente para acompanhar mudanças no comportamento dos usuários.
+
+---
+
+# Resumo do capítulo
+
+Neste capítulo você aprendeu que:
+
+* um projeto de Machine Learning começa pela definição do problema;
+* datasets são conjuntos organizados de dados;
+* linhas representam observações e colunas representam variáveis;
+* existem diferentes tipos de dados (numéricos, textuais, booleanos e categóricos);
+* dados de qualidade são fundamentais para bons modelos;
+* a maior parte do trabalho de um cientista de dados acontece antes do treinamento do algoritmo;
+* o ciclo de Machine Learning inclui definição do problema, coleta, limpeza, exploração, treinamento, avaliação, implantação e monitoramento.
+
+---
+
+## Exercícios
+
+### Questões conceituais
+
+1. Explique, com suas palavras, por que um projeto de Machine Learning não começa pela escolha do algoritmo.
+
+2. Qual a diferença entre um problema de negócio e um algoritmo?
+
+3. O que é um dataset?
+
+4. O que representa uma linha em um dataset? E uma coluna?
+
+5. Cite três fontes de dados utilizadas em projetos de Machine Learning.
+
+6. Explique a diferença entre dados estruturados e dados não estruturados.
+
+7. O que significa a expressão **Garbage In, Garbage Out (GIGO)**?
+
+8. Por que é importante realizar a limpeza dos dados antes do treinamento?
+
+9. O que é Análise Exploratória de Dados (EDA)?
+
+10. Em qual etapa do ciclo de Machine Learning um modelo começa a ser utilizado por usuários reais?
+
+---
+
+## Desafio
+
+Imagine que uma escola deseja prever quais alunos têm maior risco de reprovação.
+
+1. Quais informações você coletaria para montar o dataset?
+2. Quais dessas informações poderiam ser utilizadas como **features**?
+3. Qual seria o **target** do modelo?
+4. Que problemas de qualidade dos dados poderiam prejudicar o treinamento?
+
+---
+
+Na próxima aula começaremos a programação com **Python e Pandas**, aprendendo a criar nosso primeiro **DataFrame**, explorar um conjunto de dados e preparar as variáveis que serão utilizadas pelo primeiro modelo de Machine Learning. Isso servirá como ponte entre a teoria apresentada até aqui e a prática no Google Colab.
