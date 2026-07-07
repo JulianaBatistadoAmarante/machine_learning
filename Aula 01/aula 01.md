@@ -18,8 +18,6 @@ Módulo 01 – Bem-vindo ao Machine Learning
 >
 > **Nível:** Iniciante
 >
-> **Carga horária estimada:** 30 minutos
->
 > **Ferramenta utilizada:** Google Colab
 >
 > **Autor:** @karizeviecelli - 2026
