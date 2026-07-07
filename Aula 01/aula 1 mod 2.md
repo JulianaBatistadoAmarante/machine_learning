@@ -12,8 +12,6 @@ Módulo 02 – Inteligência Artificial na Prática
 
 ---
 
-> **Tempo estimado:** 35 minutos
-
 > **Nível:** 🟢 Iniciante
 
 ---
@@ -60,14 +58,6 @@ Existe Inteligência Artificial trabalhando.
 
 ---
 
-## Ao abrir o Spotify
-
-Quando uma nova música aparece como recomendação.
-
-Existe Inteligência Artificial.
-
----
-
 ## Ao assistir Netflix
 
 A ordem dos filmes muda para cada pessoa.
@@ -83,16 +73,6 @@ Existe um algoritmo tentando descobrir quais filmes possuem maior chance de agra
 Quando o aplicativo muda automaticamente a rota por causa do trânsito.
 
 Existe Inteligência Artificial analisando milhares de informações em tempo real.
-
----
-
-## Bancos
-
-Uma compra realizada em outro estado pode ser bloqueada em poucos segundos.
-
-O sistema compara essa compra com seu comportamento habitual.
-
-Caso encontre algo muito diferente, pode suspeitar de fraude.
 
 ---
 
