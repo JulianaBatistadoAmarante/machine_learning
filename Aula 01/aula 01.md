@@ -10,7 +10,7 @@ Módulo 01 – Bem-vindo ao Machine Learning
 
 # Aula 01 – Introdução ao Machine Learning
 
-# Módulo 01 – Bem-vindo ao Machine Learning
+# Módulo 01 –
 
 ---
 
