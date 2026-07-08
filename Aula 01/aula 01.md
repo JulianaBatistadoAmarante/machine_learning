@@ -721,3 +721,756 @@ Voltaremos a essa atividade nas próximas aulas.
 
 © @karizeviecelli - 2026
 
+<!--
+=========================================================
+Curso: Machine Learning com Python
+Aula 01 – Introdução ao Machine Learning
+Módulo 03 – Como um Computador Aprende?
+
+© @karizeviecelli - 2026
+=========================================================
+-->
+
+# Módulo 03 – Como um Computador Aprende?
+
+---
+
+> **Nível:** 🟢 Iniciante
+
+---
+
+# Objetivos
+
+Ao concluir este módulo você será capaz de:
+
+✔ Entender como ocorre o aprendizado de um algoritmo.
+
+✔ Compreender o conceito de padrão.
+
+✔ Entender por que exemplos são importantes.
+
+✔ Conhecer o ciclo básico de treinamento.
+
+---
+
+
+# O computador não pensa
+
+Este é um dos maiores mitos sobre Inteligência Artificial.
+
+Muitas pessoas dizem:
+
+> "O computador pensa."
+
+Na realidade...
+
+O computador **não pensa como um ser humano**.
+
+Ele faz cálculos.
+
+Muitos cálculos.
+
+Milhões deles em poucos segundos.
+
+Esses cálculos permitem identificar padrões.
+
+---
+
+# O segredo está nos padrões
+
+Imagine as seguintes informações.
+
+| Horas de Estudo | Aprovado |
+|----------------:|-----------|
+| 1 | Não |
+| 2 | Não |
+| 3 | Não |
+| 4 | Sim |
+| 5 | Sim |
+| 6 | Sim |
+
+Observe atentamente.
+
+Existe algum padrão?
+
+Provavelmente você percebeu rapidamente que alunos que estudam mais possuem maior chance de aprovação.
+
+Você descobriu um padrão.
+
+O algoritmo faz exatamente isso.
+
+---
+
+# Outro exemplo
+
+Agora imagine um banco.
+
+Ele possui milhares de registros.
+
+| Salário | Comprou um carro? |
+|---------:|-------------------|
+| 1800 | Não |
+| 2200 | Não |
+| 5000 | Sim |
+| 6500 | Sim |
+| 8000 | Sim |
+
+Novamente existe um padrão.
+
+Quanto maior o salário...
+
+Maior parece ser a probabilidade de compra.
+
+O algoritmo procura relações semelhantes.
+
+---
+
+# Atenção!
+
+Observe que utilizamos a palavra:
+
+> **Parece**
+
+Isso acontece porque Machine Learning trabalha com probabilidades.
+
+Nem toda pessoa que ganha bem compra um carro.
+
+Nem toda pessoa que estuda muito será aprovada.
+
+Os algoritmos procuram tendências.
+
+Não certezas absolutas.
+
+---
+
+# Aprender é encontrar padrões
+
+Podemos resumir o Machine Learning da seguinte forma.
+
+```
+Exemplos
+
+↓
+
+Análise
+
+↓
+
+Identificação de padrões
+
+↓
+
+Construção do modelo
+
+↓
+
+Novas previsões
+```
+
+Esse processo recebe o nome de **treinamento**.
+
+---
+
+# O que é treinamento?
+
+Treinar um modelo significa apresentar diversos exemplos para que ele aprenda relações entre as informações.
+
+Imagine um professor corrigindo milhares de provas.
+
+Depois de algum tempo ele percebe padrões.
+
+Alunos que estudam diariamente costumam obter melhores notas.
+
+Alunos muito faltosos costumam apresentar maior dificuldade.
+
+O algoritmo faz algo parecido.
+
+Quanto mais exemplos recebe, melhor tende a compreender os padrões.
+
+---
+
+# Analogia
+
+Imagine um médico recém-formado.
+
+No primeiro dia de trabalho ele possui pouco conhecimento prático.
+
+Após atender milhares de pacientes.
+
+Observar exames.
+
+Comparar sintomas.
+
+Ele passa a reconhecer doenças com maior facilidade.
+
+Isso aconteceu porque acumulou experiência.
+
+O algoritmo também acumula experiência.
+
+A diferença é que essa experiência vem dos dados.
+
+---
+
+# O ciclo do aprendizado
+
+Sempre que treinamos um modelo, seguimos praticamente o mesmo processo.
+
+```
+Receber os dados
+
+↓
+
+Organizar
+
+↓
+
+Treinar
+
+↓
+
+Aprender padrões
+
+↓
+
+Realizar previsões
+```
+
+Mais adiante você perceberá que esse ciclo aparecerá em praticamente todos os algoritmos estudados.
+
+---
+
+# Curiosidade
+
+Alguns modelos modernos são treinados utilizando milhões de exemplos.
+
+Em projetos de reconhecimento de imagens, por exemplo, um algoritmo pode analisar milhões de fotografias antes de aprender a identificar corretamente um objeto.
+
+Isso explica por que o treinamento pode levar horas ou até dias em projetos muito grandes.
+
+---
+
+# No mercado
+
+Uma das primeiras perguntas feitas por um Cientista de Dados costuma ser:
+
+> "Temos dados suficientes para treinar um modelo?"
+
+Sem exemplos suficientes, o algoritmo terá dificuldade para aprender padrões confiáveis.
+
+---
+
+# Erro comum
+
+Muitos iniciantes acreditam que basta utilizar um algoritmo famoso para obter excelentes resultados.
+
+Na prática, isso raramente acontece.
+
+Mesmo um algoritmo muito sofisticado produzirá resultados ruins se os exemplos apresentados forem insuficientes ou de baixa qualidade.
+
+Lembre-se do conceito estudado anteriormente:
+
+```
+Garbage In
+
+↓
+
+Garbage Out
+```
+
+---
+
+# Conectando os conceitos
+
+Até agora aprendemos três ideias fundamentais.
+
+```
+Inteligência Artificial
+
+↓
+
+Machine Learning
+
+↓
+
+Dados
+```
+
+Agora acrescentamos uma quarta peça.
+
+```
+Dados
+
+↓
+
+Padrões
+
+↓
+
+Modelo
+
+↓
+
+Previsões
+```
+
+Esse será o fluxo utilizado durante todo o curso.
+
+---
+
+# O que aprenderemos a seguir?
+
+Você já sabe que o computador aprende observando exemplos.
+
+Mas...
+
+Existem diferentes formas de aprender.
+
+Alguns modelos recebem a resposta correta durante o treinamento.
+
+Outros não.
+
+Essa diferença dá origem aos principais tipos de Machine Learning.
+
+É exatamente isso que estudaremos no próximo módulo.
+
+---
+
+# Resumo
+
+Neste módulo você aprendeu que:
+
+- O computador não pensa como um ser humano.
+- Os algoritmos aprendem identificando padrões.
+- O treinamento consiste em apresentar exemplos ao algoritmo.
+- Machine Learning trabalha com probabilidades.
+- Dados de qualidade são essenciais para que os padrões encontrados sejam confiáveis.
+
+---
+
+# Checklist
+
+Antes de continuar, verifique se você consegue responder às seguintes perguntas:
+
+- [ ] O computador realmente "pensa"?
+- [ ] O que significa encontrar um padrão?
+- [ ] O que é treinamento?
+- [ ] Por que um algoritmo precisa de exemplos?
+- [ ] Qual é a relação entre treinamento e previsão?
+
+---
+
+© @karizeviecelli - 2026
+
+<!--
+=========================================================
+Curso: Machine Learning com Python
+Aula 01 – Introdução ao Machine Learning
+Módulo 04 – Conhecendo os Dados
+
+© @karizeviecelli - 2026
+=========================================================
+-->
+
+# Módulo 04 – Conhecendo os Dados
+
+---
+
+> **Nível:** 🟢 Iniciante
+
+---
+
+# Onde estamos?
+
+Observe novamente o ciclo de um projeto de Machine Learning.
+
+```text
+Problema de Negócio
+        │
+        ▼
+Coleta de Dados
+        │
+        ▼
+Exploração dos Dados   ◄──────── VOCÊ ESTÁ AQUI
+        │
+        ▼
+Limpeza e Preparação
+        │
+        ▼
+Seleção de Features
+        │
+        ▼
+Treinamento
+        │
+        ▼
+Avaliação
+        │
+        ▼
+Uso do Modelo
+```
+
+Perceba que **ainda não estamos treinando algoritmos**.
+
+Antes disso, precisamos conhecer os dados.
+
+Esse é exatamente o primeiro trabalho realizado por um Cientista de Dados.
+
+---
+
+# Imagine a seguinte situação
+
+Você foi contratado por uma escola.
+
+No primeiro dia de trabalho o diretor entrega um arquivo chamado:
+
+```
+alunos.csv
+```
+
+Ele diz:
+
+> "Gostaríamos de utilizar Inteligência Artificial para prever quais alunos possuem maior chance de aprovação."
+
+Você abre o arquivo.
+
+E agora?
+
+Você começa criando um algoritmo?
+
+Não.
+
+Primeiro você precisa entender o que recebeu.
+
+---
+
+# O que é um Dataset?
+
+A palavra **dataset** pode ser traduzida como:
+
+> **Conjunto de Dados**
+
+Na prática, um dataset é um conjunto organizado de informações sobre algum assunto.
+
+Por exemplo:
+
+- alunos;
+- clientes;
+- produtos;
+- pacientes;
+- veículos;
+- imóveis.
+
+Sempre que existir um conjunto organizado de informações, provavelmente estamos diante de um dataset.
+
+---
+
+# Analogia
+
+Imagine uma biblioteca.
+
+Cada livro contém diversas informações.
+
+- título;
+- autor;
+- editora;
+- ano;
+- quantidade de páginas.
+
+Agora imagine uma tabela onde cada linha representa um livro.
+
+Essa tabela é um dataset.
+
+---
+
+# Estrutura de um Dataset
+
+Observe a tabela abaixo.
+
+| ID | Nome | Idade | Curso | Nota |
+|----|-------|--------|--------|------|
+| 1 | Ana | 18 | Python | 8.5 |
+| 2 | João | 20 | Java | 6.2 |
+| 3 | Maria | 19 | Python | 9.4 |
+
+Essa pequena tabela já é um dataset.
+
+Mesmo contendo apenas três registros.
+
+---
+
+# Linhas
+
+Cada linha representa um elemento do mundo real.
+
+Neste exemplo.
+
+```
+Linha 1
+
+↓
+
+Ana
+```
+
+```
+Linha 2
+
+↓
+
+João
+```
+
+Cada aluno ocupa uma linha.
+
+Por isso também chamamos as linhas de:
+
+- registros;
+- observações;
+- instâncias;
+- amostras (dependendo do contexto).
+
+Durante este curso utilizaremos principalmente o termo **registro**.
+
+---
+
+# Colunas
+
+Agora observe apenas os títulos.
+
+| ID | Nome | Idade | Curso | Nota |
+
+Cada coluna representa uma característica.
+
+Ou seja.
+
+Cada coluna descreve alguma informação sobre o aluno.
+
+---
+
+# Registro × Coluna
+
+É muito comum estudantes confundirem esses conceitos.
+
+Observe.
+
+```
+                COLUNAS
+
+ ID | Nome | Curso | Nota
+
+----------------------------
+
+1 | Ana | Python | 8.5
+
+↑
+
+Registro
+```
+
+Uma linha inteira corresponde a um registro.
+
+Uma coluna corresponde a uma característica.
+
+---
+
+# Outro exemplo
+
+Imagine um hospital.
+
+| Nome | Idade | Peso | Pressão |
+
+Cada paciente ocupa uma linha.
+
+Cada informação ocupa uma coluna.
+
+O conceito continua exatamente o mesmo.
+
+---
+
+# Quais tipos de informações podem existir?
+
+Nem todas as colunas armazenam o mesmo tipo de dado.
+
+Veja alguns exemplos.
+
+| Coluna | Tipo |
+|---------|------|
+| Nome | Texto |
+| Idade | Número inteiro |
+| Nota | Número decimal |
+| Data da Matrícula | Data |
+| Aprovado | Verdadeiro/Falso ou Sim/Não |
+
+Esses tipos serão muito importantes quando começarmos a utilizar o Pandas.
+
+---
+
+# Dados estruturados
+
+São aqueles organizados em linhas e colunas.
+
+Exemplos.
+
+- CSV
+
+- Excel
+
+- Banco de Dados
+
+São exatamente esses dados que utilizaremos durante boa parte deste curso.
+
+---
+
+# Dados não estruturados
+
+Agora pense em uma fotografia.
+
+Ela possui linhas?
+
+Colunas?
+
+Registros?
+
+Não.
+
+O mesmo acontece com:
+
+- vídeos;
+
+- áudios;
+
+- documentos PDF;
+
+- e-mails;
+
+- mensagens.
+
+Esses são chamados de **dados não estruturados**.
+
+---
+
+# Dados semiestruturados
+
+Existe ainda um terceiro grupo.
+
+Os dados semiestruturados.
+
+Como.
+
+```
+JSON
+```
+
+```
+XML
+```
+
+Eles possuem organização.
+
+Mas não utilizam necessariamente linhas e colunas.
+
+Mais adiante você verá que muitas APIs trabalham exatamente com esse formato.
+
+---
+
+# Curiosidade
+
+Você sabia que grande parte dos dados produzidos atualmente não está em tabelas?
+
+Fotos publicadas nas redes sociais.
+
+Vídeos.
+
+Mensagens.
+
+Áudios.
+
+Documentos.
+
+Tudo isso também pode ser utilizado em projetos de Inteligência Artificial.
+
+---
+
+# No Mercado
+
+Uma das primeiras perguntas feitas por um Cientista de Dados costuma ser:
+
+> "Como esse dataset foi produzido?"
+
+Dependendo da resposta.
+
+Os cuidados durante a análise podem mudar completamente.
+
+---
+
+# Erro comum
+
+Muitos iniciantes acreditam que basta abrir um arquivo CSV e começar a treinar um modelo.
+
+Na prática.
+
+Antes de qualquer treinamento precisamos responder perguntas como:
+
+- Quantas linhas existem?
+
+- Quantas colunas?
+
+- Existem dados faltando?
+
+- Existem informações duplicadas?
+
+- Existem valores incorretos?
+
+Essas perguntas serão respondidas nas próximas aulas.
+
+---
+
+# Pare e Pense
+
+Você recebeu um arquivo chamado:
+
+```
+clientes.csv
+```
+
+Sem abrir o arquivo.
+
+Responda.
+
+Que tipo de informações você acredita que encontrará?
+
+Discuta sua resposta com seus colegas.
+
+---
+
+# Resumo
+
+Neste módulo você aprendeu que:
+
+- Dataset significa conjunto de dados.
+- Cada linha representa um registro.
+- Cada coluna representa uma característica.
+- Existem diferentes tipos de dados.
+- Nem todos os dados estão organizados em tabelas.
+
+---
+
+# Preparando o próximo módulo
+
+Agora que você já conhece a estrutura de um dataset, chegou o momento de descobrir que **nem todas as colunas possuem a mesma importância**.
+
+Algumas serão utilizadas para ensinar o algoritmo.
+
+Outras conterão exatamente a resposta que desejamos prever.
+
+Esses dois conceitos recebem os nomes de:
+
+- **Features**
+- **Target**
+
+Eles serão a base para todo o restante do curso.
+
+---
+
+© @karizeviecelli - 2026
+
+
