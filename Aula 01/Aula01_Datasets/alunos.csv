@@ -1,0 +1,21 @@
+﻿ID,Nome,Idade,Curso,Nota,Frequencia,Aprovado
+1,Ana,27,Python,5.1,77,Não
+2,Bruno,20,Java,5.7,66,Não
+3,Carla,27,Machine Learning,5.4,87,Não
+4,Diego,17,Python,5.5,74,Não
+5,Eduarda,25,Machine Learning,5.1,72,Não
+6,Felipe,28,Machine Learning,7.1,88,Sim
+7,Gabriela,26,Front-end,9.0,60,Não
+8,Henrique,19,Banco de Dados,6.7,69,Não
+9,Isabela,20,Front-end,5.5,84,Não
+10,João,18,Front-end,9.2,98,Sim
+11,Karen,21,Python,8.6,94,Sim
+12,Lucas,18,Banco de Dados,5.4,78,Não
+13,Mariana,27,Machine Learning,9.4,83,Sim
+14,Nicolas,26,Java,8.5,62,Não
+15,Olivia,27,Java,8.9,65,Não
+16,Pedro,20,Python,6.9,89,Não
+17,Rafaela,27,Front-end,5.8,82,Não
+18,Samuel,20,Front-end,8.5,64,Não
+19,Tatiane,26,Java,7.7,75,Sim
+20,Vinicius,19,Banco de Dados,6.9,100,Não
