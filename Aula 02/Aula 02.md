@@ -1,765 +1,323 @@
-# Capítulo 2 – Como um Projeto de Machine Learning Funciona
+<!--
+=========================================================
+Curso: Machine Learning com Python
+Aula 02 – Limpeza e Preparação de Dados
+Módulo 01 – Por que limpar os dados?
+
+© @karizeviecelli - 2026
+=========================================================
+-->
+
+# Aula 02
+# Módulo 01 – Por que limpar os dados?
 
 ---
 
-# Antes de escrever código...
+## 🎯 Objetivos
 
-Imagine que uma rede de supermercados faça a seguinte pergunta para sua equipe:
+Ao final deste módulo você será capaz de:
 
-> **"É possível prever quais clientes deixarão de comprar conosco nos próximos meses?"**
-
-Ou então:
-
-> **"É possível identificar uma fraude antes que ela aconteça?"**
-
-Ou ainda:
-
-> **"É possível descobrir quais alunos têm maior risco de evasão escolar?"**
-
-Nenhuma dessas perguntas pode ser respondida apenas escrevendo código.
-
-Primeiro precisamos entender o problema.
-
-É exatamente isso que acontece em qualquer projeto de Machine Learning.
-
-O algoritmo é apenas uma ferramenta.
-
-O verdadeiro trabalho começa muito antes dele.
+- Entender por que limpar um dataset antes do treinamento.
+- Reconhecer problemas comuns em bases de dados.
+- Explicar o conceito de GIGO.
+- Identificar situações que prejudicam um modelo de Machine Learning.
 
 ---
 
-# O ciclo de vida de um projeto de Machine Learning
+## 📍 Onde estamos?
 
-Todo projeto segue, de maneira geral, um fluxo semelhante ao apresentado abaixo.
+Na aula anterior aprendemos a:
 
-```text
-┌───────────────┐
-│ Definição do  │
-│    Problema   │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│ Coleta dos    │
-│     Dados     │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│ Limpeza e     │
-│ Preparação    │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│ Exploração    │
-│ dos Dados     │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│ Treinamento   │
-│ do Modelo     │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│ Avaliação     │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│ Implantação   │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│ Monitoramento │
-└───────────────┘
+- importar um arquivo CSV;
+- abrir um dataset com Pandas;
+- explorar informações utilizando `head()`, `info()`, `shape()` e `describe()`.
+
+Hoje vamos dar o próximo passo.
+
+Antes de criar um modelo de Machine Learning, precisamos responder uma pergunta muito importante:
+
+> **Os nossos dados estão prontos para serem utilizados?**
+
+Na maioria das vezes, a resposta é **não**.
+
+---
+
+# Situação-Problema
+
+Imagine que você trabalha em uma escola.
+
+O diretor entrega o seguinte arquivo.
+
+| Nome | Idade | Curso | Nota |
+|------|------:|--------|------:|
+| Ana | 18 | Python | 8.5 |
+| João | | Java | 7.2 |
+| Maria | -5 | Python | 9.1 |
+| Pedro | 20 | PYTHON | 8.0 |
+| Pedro | 20 | PYTHON | 8.0 |
+
+O diretor pergunta:
+
+> **"Podemos utilizar esse arquivo para treinar uma Inteligência Artificial?"**
+
+Observe atentamente.
+
+O que chamou sua atenção?
+
+Pense por alguns segundos antes de continuar.
+
+---
+
+# O que você encontrou?
+
+Provavelmente você percebeu alguns problemas.
+
+✔ Existe uma idade negativa.
+
+✔ Existe uma idade em branco.
+
+✔ O curso aparece escrito de formas diferentes.
+
+✔ Existe um registro duplicado.
+
+Esses problemas são muito comuns em empresas.
+
+---
+
+# O que acontece se ignorarmos esses erros?
+
+Imagine que queremos ensinar uma criança a reconhecer frutas.
+
+Mostramos várias imagens.
+
+Mas algumas delas estão erradas.
+
+```
+🍎  → Maçã
+
+🍌  → Banana
+
+🚗  → Banana
+
+🍎  → Carro
 ```
 
-Vamos entender cada etapa.
+A criança ficará confusa.
+
+Com o computador acontece exatamente a mesma coisa.
+
+Se ensinarmos utilizando dados incorretos, ele aprenderá padrões incorretos.
 
 ---
 
-# 1. Definição do problema
+# GIGO
 
-Um erro muito comum é começar escolhendo um algoritmo.
-
-Na prática, o primeiro passo nunca é esse.
-
-Primeiro definimos o problema.
-
-Exemplos:
-
-| Área      | Problema                                          |
-| --------- | ------------------------------------------------- |
-| Hospital  | Prever pacientes com risco de internação          |
-| Banco     | Detectar fraudes                                  |
-| Escola    | Identificar alunos com risco de evasão            |
-| Loja      | Recomendar produtos                               |
-| Indústria | Prever falhas em máquinas                         |
-| RH        | Identificar risco de desligamento de funcionários |
-
-Sem um problema bem definido, não existe projeto de Machine Learning.
-
----
-
-## Analogia
-
-Imagine um médico.
-
-Antes de prescrever um remédio ele precisa descobrir qual é a doença.
-
-O algoritmo é o remédio.
-
-O problema é o diagnóstico.
-
----
-
-# 2. Coleta de dados
-
-Depois de definir o problema, precisamos reunir informações.
-
-Essas informações recebem o nome de **dados** (*data*).
-
-Quanto maior a qualidade dos dados, melhor tende a ser o desempenho do modelo.
-
-Imagine um sistema que deseja prever a aprovação de alunos.
-
-Quais informações poderiam ajudar?
-
-* idade;
-* frequência;
-* média das notas;
-* quantidade de trabalhos entregues;
-* participação em aula.
-
-Cada uma dessas informações pode contribuir para que o modelo encontre padrões.
-
----
-
-## De onde vêm os dados?
-
-Os dados podem ser obtidos de diversas fontes:
-
-* bancos de dados;
-* planilhas;
-* arquivos CSV;
-* APIs;
-* sensores;
-* formulários;
-* sistemas corporativos;
-* dispositivos móveis.
-
-No nosso curso utilizaremos principalmente arquivos CSV e DataFrames criados no próprio Python.
-
----
-
-# O que é um Dataset?
-
-Um **dataset** é um conjunto organizado de dados.
-
-Na prática, podemos imaginá-lo como uma planilha do Excel.
-
-Exemplo:
-
-| Nome   | Idade | Salário | Comprou |
-| ------ | ----: | ------: | ------: |
-| Ana    |    21 |    2500 |     Sim |
-| Carlos |    38 |    5200 |     Sim |
-| João   |    19 |    1600 |     Não |
-| Maria  |    45 |    7100 |     Sim |
-
-Cada linha representa um registro.
-
-Cada coluna representa uma característica.
-
----
-
-## Analogia
-
-Imagine um álbum de figurinhas.
-
-Cada figurinha representa um aluno.
-
-Cada informação da figurinha é uma coluna.
-
-O álbum inteiro representa o dataset.
-
----
-
-# Linhas e colunas
-
-Vamos analisar a tabela anterior.
-
-| Nome   | Idade | Salário | Comprou |
-| ------ | ----: | ------: | ------: |
-| Ana    |    21 |    2500 |     Sim |
-| Carlos |    38 |    5200 |     Sim |
-| João   |    19 |    1600 |     Não |
-
-Observe:
-
-* Existem **3 linhas**.
-* Existem **4 colunas**.
-
-Em Ciência de Dados costumamos dizer:
-
-* **Linha = observação** (ou registro).
-* **Coluna = variável** (ou atributo).
-
-Esses termos aparecem frequentemente na documentação das bibliotecas.
-
-
----
-
-# O que são Features?
-
-Durante todo o curso você verá a palavra **feature**.
-
-Ela pode parecer complicada no início, mas seu significado é bastante simples.
-
-Uma **feature** é uma característica utilizada pelo computador para aprender.
-
-Imagine que desejamos prever se um aluno será aprovado.
-
-Temos a seguinte tabela:
-
-| Horas de Estudo | Faltas | Nota Anterior | Aprovado |
-| --------------- | ------ | ------------- | -------- |
-| 2               | 15     | 5,0           | Não      |
-| 5               | 4      | 8,5           | Sim      |
-| 3               | 10     | 6,0           | Não      |
-| 8               | 1      | 9,2           | Sim      |
-
-Observe que existem várias informações sobre cada aluno.
-
-* Horas de estudo
-* Número de faltas
-* Nota anterior
-
-Essas informações ajudam o algoritmo a tomar uma decisão.
-
-Cada uma delas é uma **feature**.
-
----
-
-## Analogia
-
-Imagine um médico tentando diagnosticar uma doença.
-
-Antes de dar um diagnóstico, ele observa várias características do paciente:
-
-* temperatura;
-* pressão arterial;
-* idade;
-* exames laboratoriais;
-* frequência cardíaca.
-
-Cada uma dessas informações ajuda o médico a chegar a uma conclusão.
-
-No Machine Learning acontece exatamente a mesma coisa.
-
-As **features** são as informações utilizadas para tomar uma decisão.
-
----
-
-## Outro exemplo
-
-Imagine um banco que deseja prever se um cliente pagará um empréstimo.
-
-O banco pode utilizar informações como:
-
-| Idade | Salário | Tempo de Empresa | Possui Dívidas |
-| ----: | ------: | ---------------: | -------------: |
-|    22 |    2500 |            1 ano |            Não |
-|    45 |    9000 |          15 anos |            Sim |
-|    30 |    4500 |           4 anos |            Não |
-
-Todas essas colunas são **features**.
-
----
-
-# O que é o Target?
-
-Agora imagine que queremos responder à pergunta:
-
-> **O cliente pagará o empréstimo?**
-
-A resposta correta aparece em outra coluna.
-
-| Idade | Salário | Tempo | Pagou Empréstimo |
-| ----: | ------: | ----: | ---------------: |
-|    22 |    2500 |     1 |              Não |
-|    45 |    9000 |    15 |              Sim |
-|    30 |    4500 |     4 |              Sim |
-
-A coluna **"Pagou Empréstimo"** contém aquilo que queremos prever.
-
-Ela recebe o nome de **target**.
-
----
-
-## Definição
-
-O **target** é a resposta correta utilizada durante o treinamento do algoritmo.
-
-Também é chamado de:
-
-* variável alvo;
-* variável resposta;
-* variável dependente.
-
-Todos esses nomes significam praticamente a mesma coisa.
-
----
-
-## Analogia
-
-Imagine um professor corrigindo uma prova.
-
-As respostas dos alunos representam as **features**.
-
-O gabarito representa o **target**.
-
-O algoritmo compara as respostas com o gabarito para aprender.
-
----
-
-# Features × Target
-
-Observe novamente.
-
-| Horas Estudo | Faltas | Nota | Aprovado |
-| ------------ | ------ | ---- | -------- |
-| 2            | 10     | 5    | Não      |
-| 5            | 2      | 8    | Sim      |
-
-As **features** são:
-
-* Horas de Estudo
-* Faltas
-* Nota
-
-O **target** é:
-
-* Aprovado
-
-Podemos representar isso assim:
+Existe uma regra muito conhecida na Ciência de Dados.
 
 ```text
-Features
-↓
-
-Horas de estudo
-
-Faltas
-
-Nota
+Garbage In
 
 ↓
 
-Algoritmo
+Garbage Out
+```
+
+Em português.
+
+> **Entrou lixo, saiu lixo.**
+
+Ou seja.
+
+```
+Dados ruins
 
 ↓
 
-Target
+Modelo ruim
 
 ↓
 
-Aprovado
+Resultados ruins
 ```
 
 ---
 
-# Como isso aparece no Python?
-
-Mais adiante veremos este código:
-
-```python
-X = df[["horas_estudo", "faltas", "nota"]]
-
-y = df["aprovado"]
-```
-
-Por convenção:
-
-* `X` representa as **features**;
-* `y` representa o **target**.
-
-Você ainda não precisa decorar isso.
-
-Quando chegarmos ao código, esse conceito fará muito mais sentido.
-
----
-
-# Dica de Mercado
-
-Durante reuniões de projetos é muito comum ouvir frases como:
-
-> "Quais serão as features do modelo?"
-
-ou
-
-> "Já definimos o target?"
-
-Esses dois termos fazem parte do vocabulário diário de cientistas de dados e engenheiros de Machine Learning.
-
----
-
-## Exercício (antes do Pandas)
-
-Observe a tabela.
-
-| Idade | Salário | Cidade        | Comprou |
-| ----: | ------: | ------------- | ------- |
-|    22 |    2500 | Blumenau      | Não     |
-|    35 |    5000 | Joinville     | Sim     |
-|    40 |    7200 | Florianópolis | Sim     |
-
-Responda:
-
-1. Quais colunas representam as **features**?
-2. Qual coluna representa o **target**?
-3. Se o objetivo fosse prever o salário de uma pessoa, qual coluna passaria a ser o **target**?
-
-
-# Tipos de dados
-
-Nem toda informação possui o mesmo formato.
-
-Observe.
-
-## Dados numéricos
-
-São utilizados em cálculos.
-
-Exemplos:
-
-```text
-18
-2500
-7.5
-95
-```
-
----
-
-## Dados textuais
-
-Representam palavras.
-
-```text
-Blumenau
-
-Python
-
-Maria
-```
-
----
-
-## Dados booleanos
-
-Possuem apenas dois valores.
-
-```text
-True
-
-False
-```
-
-Também podem aparecer como:
-
-```text
-Sim
-
-Não
-```
-
-ou
-
-```text
-1
-
-0
-```
-
----
-
-## Dados categóricos
-
-Representam categorias.
-
-Exemplo:
-
-| Curso          |
-| -------------- |
-| Python         |
-| Java           |
-| Banco de Dados |
-| Redes          |
-
-Embora sejam textos, representam grupos distintos.
-
-Mais adiante aprenderemos como transformar essas categorias em números para que possam ser utilizadas pelos algoritmos.
-
----
-
-# Um computador entende texto?
-
-Essa é uma pergunta interessante.
-
-Considere os valores:
-
-```text
-Azul
-
-Verde
-
-Vermelho
-```
-
-Nós entendemos imediatamente o significado dessas palavras.
-
-O computador não.
-
-Para um algoritmo de Machine Learning, letras não possuem significado matemático.
-
-Por isso, em muitos casos, será necessário converter categorias em valores numéricos antes do treinamento.
-
-Esse processo será estudado em aulas futuras.
-
----
-
-# Dados estruturados e não estruturados
-
-Nem todos os dados são organizados em tabelas.
-
-## Dados estruturados
-
-Possuem linhas e colunas.
-
-Exemplo:
-
-| Nome | Idade |
-| ---- | ----: |
-| Ana  |    20 |
-
-São os mais utilizados neste início do curso.
-
----
-
-## Dados não estruturados
-
-Não seguem um formato tabular.
-
-Exemplos:
-
-* fotografias;
-* vídeos;
-* áudios;
-* documentos PDF;
-* mensagens de texto;
-* e-mails.
-
-Grande parte dos modelos modernos de Inteligência Artificial trabalha justamente com esse tipo de dado.
-
----
-
-# 3. Limpeza dos dados
-
-Imagine que uma empresa possui a seguinte planilha.
-
-| Nome   | Idade |
-| ------ | ----: |
-| Ana    |    20 |
-| João   |     — |
-| Carlos |   350 |
-| Maria  | vinte |
-
-Você treinaria um modelo com esses dados?
-
-Provavelmente não.
-
-Antes do treinamento precisamos corrigir problemas.
-
-Essa etapa recebe o nome de **limpeza de dados**.
-
-Ela pode envolver:
-
-* remoção de registros duplicados;
-* preenchimento de valores ausentes;
-* correção de erros de digitação;
-* padronização de formatos;
-* eliminação de informações inconsistentes.
-
----
-
-## Analogia
+# Analogia
 
 Imagine que você deseja preparar um bolo.
 
-Os ingredientes representam os dados.
+Você utiliza:
 
-Se um ingrediente estiver estragado, o resultado dificilmente será bom.
+- farinha vencida;
+- leite estragado;
+- ovos quebrados.
 
-Da mesma forma, um algoritmo treinado com dados ruins produzirá previsões ruins.
+O bolo ficará bom?
 
-Esse conceito é conhecido pela expressão:
+Claro que não.
 
-> **Garbage In, Garbage Out (GIGO)**
+Mesmo utilizando a melhor receita.
 
-Ou seja:
+No Machine Learning acontece exatamente a mesma coisa.
 
-> **"Se entram dados ruins, saem resultados ruins."**
+Não importa o algoritmo.
 
----
+Se os dados forem ruins.
 
-# 4. Exploração dos dados
-
-Antes de treinar qualquer algoritmo, precisamos conhecer os dados.
-
-Perguntas comuns nessa etapa são:
-
-* Quantas linhas existem?
-* Quantas colunas?
-* Existem valores vazios?
-* Qual a média das idades?
-* Qual o maior salário?
-* Existem valores muito diferentes dos demais?
-
-Essa análise é chamada de **Análise Exploratória de Dados (EDA – Exploratory Data Analysis)**.
-
-Nas próximas aulas utilizaremos o **Pandas** para responder essas perguntas de forma simples.
+O resultado também será.
 
 ---
 
-# 5. Treinamento
+# A limpeza de dados faz parte do trabalho
 
-Somente agora chegamos à etapa que a maioria das pessoas imagina ser todo o Machine Learning.
+Muitas pessoas acreditam que um Cientista de Dados passa o dia criando Inteligência Artificial.
 
-Nela utilizamos um algoritmo para aprender padrões existentes no dataset.
+Na prática, grande parte do tempo é utilizada preparando os dados.
 
-No nosso primeiro exemplo utilizaremos uma **Árvore de Decisão**.
+Uma estimativa bastante citada na área mostra que profissionais de dados podem gastar entre **60% e 80% do tempo** coletando, entendendo e preparando dados antes da etapa de modelagem.
 
-Mas poderíamos utilizar dezenas de outros algoritmos.
-
-O treinamento consiste em mostrar muitos exemplos para que o algoritmo construa um modelo matemático.
+Isso mostra que a qualidade dos dados é tão importante quanto a escolha do algoritmo.
 
 ---
 
-# 6. Avaliação
+# Quais problemas encontramos em um dataset?
 
-Depois do treinamento precisamos verificar se o modelo realmente aprendeu.
+Durante este curso aprenderemos a identificar os principais problemas.
 
-Imagine um aluno.
+| Problema | Exemplo |
+|-----------|----------|
+| Valores nulos | Nota em branco |
+| Dados duplicados | Mesmo aluno cadastrado duas vezes |
+| Texto despadronizado | Python, python, PYTHON |
+| Tipos incorretos | "18" como texto em vez de número |
+| Valores inválidos | Idade = -5 |
+| Datas incorretas | 31/02/2026 |
 
-Não basta assistir às aulas.
+Hoje conheceremos todos eles.
 
-Ele precisa fazer uma prova.
-
-O mesmo acontece com um algoritmo.
-
-Precisamos testar se ele consegue responder corretamente casos que nunca viu antes.
-
-Esse assunto será aprofundado quando estudarmos métricas como:
-
-* acurácia;
-* precisão;
-* recall;
-* F1-score.
+Nas próximas aulas aprenderemos como corrigi-los.
 
 ---
 
-# 7. Implantação
+# Fluxo de preparação dos dados
 
-Quando o modelo apresenta bons resultados, ele pode ser colocado em produção.
+Sempre siga esta sequência.
 
-É nessa etapa que ele começa a responder perguntas de usuários reais.
+```text
+Receber o dataset
 
-Exemplos:
+↓
 
-* prever fraudes bancárias;
-* recomendar filmes;
-* sugerir músicas;
-* aprovar crédito;
-* classificar e-mails como spam.
+Explorar os dados
 
----
+↓
 
-# 8. Monitoramento
+Encontrar problemas
 
-Os dados mudam com o tempo.
+↓
 
-Os hábitos das pessoas mudam.
+Corrigir problemas
 
-O mercado muda.
+↓
 
-Por isso um modelo não pode ficar anos sem atualização.
+Validar os dados
 
-Ele precisa ser monitorado e, quando necessário, treinado novamente.
+↓
 
----
+Treinar o modelo
+```
 
-# Curiosidade
-
-Grandes empresas como Netflix, Google e Amazon atualizam seus modelos constantemente.
-
-Em alguns casos, novos treinamentos acontecem diariamente para acompanhar mudanças no comportamento dos usuários.
+Esse será o fluxo utilizado durante todo o curso.
 
 ---
 
-# Resumo do capítulo
+# 💻 Vamos para o laboratório!
 
-Neste capítulo você aprendeu que:
+Nesta aula utilizaremos o arquivo:
 
-* um projeto de Machine Learning começa pela definição do problema;
-* datasets são conjuntos organizados de dados;
-* linhas representam observações e colunas representam variáveis;
-* existem diferentes tipos de dados (numéricos, textuais, booleanos e categóricos);
-* dados de qualidade são fundamentais para bons modelos;
-* a maior parte do trabalho de um cientista de dados acontece antes do treinamento do algoritmo;
-* o ciclo de Machine Learning inclui definição do problema, coleta, limpeza, exploração, treinamento, avaliação, implantação e monitoramento.
+```text
+alunos_sujo.csv
+```
 
----
+Esse arquivo foi criado especialmente para esta aula.
 
-## Exercícios
-
-### Questões conceituais
-
-1. Explique, com suas palavras, por que um projeto de Machine Learning não começa pela escolha do algoritmo.
-
-2. Qual a diferença entre um problema de negócio e um algoritmo?
-
-3. O que é um dataset?
-
-4. O que representa uma linha em um dataset? E uma coluna?
-
-5. Cite três fontes de dados utilizadas em projetos de Machine Learning.
-
-6. Explique a diferença entre dados estruturados e dados não estruturados.
-
-7. O que significa a expressão **Garbage In, Garbage Out (GIGO)**?
-
-8. Por que é importante realizar a limpeza dos dados antes do treinamento?
-
-9. O que é Análise Exploratória de Dados (EDA)?
-
-10. Em qual etapa do ciclo de Machine Learning um modelo começa a ser utilizado por usuários reais?
+Ele possui diversos problemas que você aprenderá a identificar e corrigir.
 
 ---
 
-## Desafio
+# 🎯 Desafio Inicial
 
-Imagine que uma escola deseja prever quais alunos têm maior risco de reprovação.
+Antes de escrever qualquer código.
 
-1. Quais informações você coletaria para montar o dataset?
-2. Quais dessas informações poderiam ser utilizadas como **features**?
-3. Qual seria o **target** do modelo?
-4. Que problemas de qualidade dos dados poderiam prejudicar o treinamento?
+Abra o arquivo `alunos_sujo.csv` utilizando um editor de planilhas ou o próprio Google Colab.
+
+Sem utilizar Python, anote todos os problemas que conseguir encontrar.
+
+Depois compare sua lista com a dos colegas.
+
+Quantos problemas diferentes vocês encontraram?
 
 ---
 
-Na próxima aula começaremos a programação com **Python e Pandas**, aprendendo a criar nosso primeiro **DataFrame**, explorar um conjunto de dados e preparar as variáveis que serão utilizadas pelo primeiro modelo de Machine Learning. Isso servirá como ponte entre a teoria apresentada até aqui e a prática no Google Colab.
+# 💼 No mercado
+
+Imagine que uma empresa deseja criar um sistema para prever quais clientes irão cancelar um serviço.
+
+Se o cadastro possui:
+
+- nomes duplicados;
+- datas erradas;
+- idades inválidas;
+- campos vazios;
+
+o modelo fará previsões com baixa qualidade.
+
+Por isso, empresas investem muito tempo na preparação dos dados antes de treinar qualquer algoritmo.
+
+---
+
+# 📌 Resumo
+
+Neste módulo você aprendeu que:
+
+✅ Dados de baixa qualidade geram resultados de baixa qualidade.
+
+✅ GIGO significa **Garbage In, Garbage Out**.
+
+✅ Antes de treinar um modelo precisamos verificar se os dados fazem sentido.
+
+✅ Os principais problemas encontrados em datasets são:
+
+- valores nulos;
+- registros duplicados;
+- textos despadronizados;
+- tipos incorretos;
+- valores inválidos.
+
+---
+
+# 🚀 Preparando o próximo módulo
+
+Agora que entendemos por que limpar os dados é importante.
+
+Vamos abrir o arquivo **alunos_sujo.csv** utilizando Pandas e responder à primeira pergunta de um Cientista de Dados:
+
+> **"Quais problemas realmente existem neste dataset?"**
+
+No próximo módulo aprenderemos a investigar um dataset utilizando:
+
+```python
+df.info()
+
+df.shape
+
+df.isnull()
+
+df.describe()
+```
+
+Esses comandos serão nossas primeiras ferramentas para encontrar problemas automaticamente.
+
+---
+
+**© @karizeviecelli - 2026**
