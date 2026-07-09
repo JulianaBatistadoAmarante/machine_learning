@@ -1352,3 +1352,411 @@ Esses comandos ajudam a evitar que um mesmo registro influencie o treinamento ma
 ---
 
 **© @karizeviecelli - 2026**
+
+
+<!--
+=========================================================
+Curso: Machine Learning com Python
+Aula 02 – Limpeza e Preparação de Dados
+Módulo 04 – Registros Duplicados
+
+© @karizeviecelli - 2026
+=========================================================
+-->
+
+# Aula 02
+# Módulo 04 – Registros Duplicados
+
+---
+
+## 🎯 Objetivos
+
+Ao final deste módulo você será capaz de:
+
+- Identificar registros duplicados.
+- Entender por que eles prejudicam um modelo de Machine Learning.
+- Utilizar `duplicated()`.
+- Utilizar `drop_duplicates()`.
+- Escolher quando remover registros repetidos.
+
+---
+
+# Situação-Problema
+
+Imagine que uma escola possui o seguinte cadastro.
+
+| Nome | Curso | Nota |
+|------|--------|------:|
+| Ana | Python | 8.5 |
+| João | Java | 7.2 |
+| Pedro | Python | 8.0 |
+| Pedro | Python | 8.0 |
+| Maria | Front-end | 9.1 |
+
+Observe atentamente.
+
+Existe algum problema?
+
+Sim.
+
+O aluno **Pedro** aparece duas vezes.
+
+---
+
+# O que é um registro duplicado?
+
+Um registro duplicado ocorre quando uma mesma informação aparece mais de uma vez no dataset.
+
+Exemplo.
+
+| Nome | Curso |
+|------|--------|
+| Ana | Python |
+| Ana | Python |
+
+Nem sempre isso significa erro.
+
+Mas, na maioria das vezes, precisamos investigar.
+
+---
+
+# Por que isso acontece?
+
+Em empresas é muito comum.
+
+Algumas situações.
+
+- O usuário clicou duas vezes no botão "Salvar".
+- Dois funcionários cadastraram o mesmo cliente.
+- O sistema importou o arquivo duas vezes.
+- A integração entre sistemas repetiu informações.
+
+---
+
+# Qual o problema?
+
+Imagine uma pesquisa com apenas quatro alunos.
+
+| Nome | Nota |
+|------|------:|
+| Ana | 8 |
+| João | 6 |
+| Pedro | 10 |
+| Maria | 7 |
+
+Agora imagine que Pedro foi cadastrado novamente.
+
+| Nome | Nota |
+|------|------:|
+| Ana | 8 |
+| João | 6 |
+| Pedro | 10 |
+| Pedro | 10 |
+| Maria | 7 |
+
+Perceba.
+
+Pedro passou a influenciar o conjunto de dados duas vezes.
+
+Isso pode alterar estatísticas e também o treinamento do modelo.
+
+---
+
+# Como localizar registros duplicados?
+
+O Pandas possui um comando específico.
+
+```python
+df.duplicated()
+```
+
+---
+
+## O que esse comando faz?
+
+Ele verifica linha por linha.
+
+Quando encontra um registro repetido retorna:
+
+```text
+True
+```
+
+Caso contrário.
+
+```text
+False
+```
+
+---
+
+## Exemplo
+
+```python
+df.duplicated()
+```
+
+Resultado.
+
+```text
+0    False
+
+1    False
+
+2    False
+
+3     True
+
+4    False
+```
+
+Observe.
+
+A linha 3 é uma duplicata.
+
+---
+
+# Como visualizar apenas os registros repetidos?
+
+Podemos utilizar.
+
+```python
+df[df.duplicated()]
+```
+
+Resultado.
+
+| Nome | Curso | Nota |
+|------|--------|------:|
+| Pedro | Python | 8.0 |
+
+Muito mais fácil de analisar.
+
+---
+
+# Quantos registros duplicados existem?
+
+Execute.
+
+```python
+df.duplicated().sum()
+```
+
+Resultado.
+
+```text
+1
+```
+
+Esse comando conta quantas duplicidades existem.
+
+---
+
+# Removendo duplicados
+
+Depois da análise.
+
+Podemos remover.
+
+```python
+df = df.drop_duplicates()
+```
+
+Resultado.
+
+| Nome | Curso | Nota |
+|------|--------|------:|
+| Ana | Python | 8.5 |
+| João | Java | 7.2 |
+| Pedro | Python | 8.0 |
+| Maria | Front-end | 9.1 |
+
+Agora o registro repetido foi eliminado.
+
+---
+
+# Atenção!
+
+Nunca remova registros duplicados sem analisar.
+
+Imagine um hospital.
+
+| Paciente | Data |
+|-----------|------|
+| João | 10/05 |
+| João | 18/05 |
+
+São dois atendimentos diferentes.
+
+Apesar do mesmo nome.
+
+Os registros são válidos.
+
+Sempre analise antes de excluir.
+
+---
+
+# Laboratório 01
+
+Abra o arquivo.
+
+```text
+alunos_sujo.csv
+```
+
+Execute.
+
+```python
+df.duplicated()
+```
+
+Agora.
+
+Conte.
+
+```python
+df.duplicated().sum()
+```
+
+Depois.
+
+Visualize apenas as duplicatas.
+
+```python
+df[df.duplicated()]
+```
+
+---
+
+# Laboratório 02
+
+Remova as duplicatas.
+
+```python
+df = df.drop_duplicates()
+```
+
+Agora execute novamente.
+
+```python
+df.duplicated().sum()
+```
+
+Qual foi o resultado?
+
+---
+
+# Desafio
+
+Abra o arquivo.
+
+```text
+clientes_sujo.csv
+```
+
+Descubra.
+
+- Existem registros duplicados?
+- Quantos?
+- Quais são eles?
+
+Depois.
+
+Remova-os.
+
+---
+
+# ⚠️ Erro comum
+
+Alguns alunos fazem.
+
+```python
+df.drop_duplicates()
+```
+
+E acreditam que o DataFrame foi alterado.
+
+Na verdade.
+
+O comando retorna um novo DataFrame.
+
+Faça.
+
+```python
+df = df.drop_duplicates()
+```
+
+Ou.
+
+```python
+df.drop_duplicates(inplace=True)
+```
+
+---
+
+# 💼 No mercado
+
+Remover duplicidades é uma etapa comum em sistemas de:
+
+- CRM
+- ERP
+- E-commerce
+- Hospitais
+- Bancos
+- Indústrias
+
+Duplicidades podem gerar relatórios incorretos e prejudicar modelos de Machine Learning.
+
+---
+
+# 📌 Resumo
+
+Neste módulo você aprendeu:
+
+✅ O que são registros duplicados.
+
+✅ Como localizar duplicidades.
+
+✅ Como contar registros repetidos.
+
+✅ Como remover duplicatas.
+
+✅ Quando NÃO remover duplicidades.
+
+---
+
+# 🚀 Preparando o próximo módulo
+
+Agora nosso dataset já possui menos problemas.
+
+O próximo desafio será padronizar os textos.
+
+Você aprenderá a transformar situações como:
+
+```text
+Python
+
+python
+
+PYTHON
+
+ Python
+```
+
+em um único padrão utilizando o Pandas.
+
+Utilizaremos funções como:
+
+```python
+str.upper()
+
+str.lower()
+
+str.title()
+
+str.strip()
+```
+
+---
+
+**© @karizeviecelli - 2026**
