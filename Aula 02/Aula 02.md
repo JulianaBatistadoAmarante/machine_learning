@@ -321,3 +321,540 @@ Esses comandos serão nossas primeiras ferramentas para encontrar problemas auto
 ---
 
 **© @karizeviecelli - 2026**
+
+
+<!--
+=========================================================
+Curso: Machine Learning com Python
+Aula 02 – Limpeza e Preparação de Dados
+Módulo 02 – Investigando um Dataset
+
+© @karizeviecelli - 2026
+=========================================================
+-->
+
+# Aula 02
+# Módulo 02 – Investigando um Dataset
+
+---
+
+## 🎯 Objetivos
+
+Ao final deste módulo você será capaz de:
+
+- Abrir um dataset no Google Colab.
+- Identificar possíveis problemas utilizando Pandas.
+- Localizar valores nulos.
+- Conhecer a estrutura de um DataFrame.
+- Descobrir informações importantes antes da limpeza dos dados.
+
+---
+
+# Situação-Problema
+
+Imagine que você recebeu o arquivo:
+
+```text
+alunos_sujo.csv
+```
+
+Você sabe que ele possui alguns problemas.
+
+Mas...
+
+**Quais problemas são esses?**
+
+Antes de corrigir qualquer coisa, precisamos investigar.
+
+É exatamente isso que faremos agora.
+
+---
+
+# Etapa 1 — Importando o Pandas
+
+Como já aprendemos na Aula 01, o primeiro passo é importar a biblioteca Pandas.
+
+```python
+import pandas as pd
+```
+
+### O que este comando faz?
+
+Importa a biblioteca Pandas para que possamos trabalhar com tabelas.
+
+---
+
+# Etapa 2 — Abrindo o arquivo
+
+Agora vamos abrir o dataset.
+
+```python
+df = pd.read_csv("alunos_sujo.csv")
+```
+
+### Entendendo o código
+
+```python
+pd.read_csv()
+```
+
+Lê um arquivo CSV.
+
+---
+
+```python
+"alunos_sujo.csv"
+```
+
+É o nome do arquivo.
+
+---
+
+```python
+df
+```
+
+Receberá o DataFrame criado.
+
+---
+
+# Etapa 3 — Visualizando a tabela
+
+Agora basta escrever:
+
+```python
+df
+```
+
+Ou
+
+```python
+df.head()
+```
+
+Resultado esperado:
+
+| Nome | Idade | Curso | Nota | Frequencia |
+|------|------:|--------|------:|-----------:|
+| Ana | 18 | Python | 8.5 | 95 |
+| João | NaN | Java | 7.2 | 88 |
+| Maria | -5 | Python | NaN | 96 |
+| Pedro | 20 | PYTHON | 8.0 | 91 |
+| Pedro | 20 | PYTHON | 8.0 | 91 |
+
+Observe.
+
+Você já consegue perceber alguns problemas.
+
+---
+
+# Primeira pergunta
+
+## Quantas linhas e colunas existem?
+
+Execute.
+
+```python
+df.shape
+```
+
+Resultado.
+
+```text
+(25,6)
+```
+
+O primeiro número representa:
+
+```
+Linhas
+```
+
+O segundo número representa:
+
+```
+Colunas
+```
+
+Sempre leia assim.
+
+```
+(Linhas, Colunas)
+```
+
+---
+
+# Segunda pergunta
+
+## Quais colunas existem?
+
+```python
+df.columns
+```
+
+Resultado.
+
+```text
+Index([
+'Nome',
+'Idade',
+'Curso',
+'Nota',
+'Frequencia',
+'Aprovado'
+])
+```
+
+Agora sabemos exatamente quais informações estão armazenadas.
+
+---
+
+# Terceira pergunta
+
+## Que tipo de informação existe em cada coluna?
+
+Execute.
+
+```python
+df.dtypes
+```
+
+Resultado.
+
+```text
+Nome            object
+Idade            int64
+Curso           object
+Nota           float64
+Frequencia       int64
+Aprovado        object
+```
+
+---
+
+## Interpretando
+
+| Tipo | Significado |
+|-------|-------------|
+| object | Texto |
+| int64 | Número inteiro |
+| float64 | Número decimal |
+
+Saber o tipo de cada coluna será muito importante nas próximas aulas.
+
+---
+
+# Quarta pergunta
+
+## O DataFrame possui informações ausentes?
+
+Agora vamos utilizar um comando muito importante.
+
+```python
+df.info()
+```
+
+Exemplo de saída:
+
+```text
+<class 'pandas.core.frame.DataFrame'>
+
+RangeIndex: 25 entries
+
+Data columns (total 6 columns)
+
+Nome          25 non-null
+
+Idade         24 non-null
+
+Curso         25 non-null
+
+Nota          23 non-null
+
+Frequencia    25 non-null
+
+Aprovado      25 non-null
+```
+
+---
+
+## O que significa "non-null"?
+
+**Non-null** significa:
+
+```
+Não vazio
+```
+
+Observe.
+
+Se existem 25 registros.
+
+Mas a coluna **Nota** possui apenas 23 valores.
+
+Isso significa que:
+
+```
+Existem duas células vazias.
+```
+
+---
+
+# Quinta pergunta
+
+## Onde estão os valores nulos?
+
+Agora vamos localizar exatamente onde estão.
+
+Execute.
+
+```python
+df.isnull()
+```
+
+Resultado.
+
+```text
+Nome    Idade   Curso   Nota
+
+False   False   False   False
+
+False   True    False   False
+
+False   False   False   True
+```
+
+---
+
+## Como interpretar?
+
+```
+False
+
+↓
+
+Existe valor
+```
+
+```
+True
+
+↓
+
+Valor ausente
+```
+
+---
+
+# Sexta pergunta
+
+## Quantos valores nulos existem?
+
+O comando anterior mostra linha por linha.
+
+Agora queremos um resumo.
+
+```python
+df.isnull().sum()
+```
+
+Resultado.
+
+```text
+Nome           0
+
+Idade          1
+
+Curso          0
+
+Nota           2
+
+Frequencia     0
+
+Aprovado       0
+```
+
+Muito mais fácil de interpretar.
+
+---
+
+# Sétima pergunta
+
+## Como estão distribuídos os números?
+
+Execute.
+
+```python
+df.describe()
+```
+
+Resultado.
+
+| Estatística | Idade | Nota |
+|-------------|------:|-----:|
+| Média | 19.4 | 8.2 |
+| Mínimo | -5 | 6.8 |
+| Máximo | 23 | 9.9 |
+
+Observe.
+
+Existe uma idade igual a:
+
+```
+-5
+```
+
+Faz sentido?
+
+Claro que não.
+
+Acabamos de encontrar outro problema.
+
+---
+
+# O que descobrimos até agora?
+
+Sem corrigir absolutamente nada.
+
+Já encontramos.
+
+✅ Valores nulos.
+
+✅ Idade inválida.
+
+✅ Possível duplicidade.
+
+✅ Textos diferentes.
+
+Tudo isso apenas utilizando comandos simples do Pandas.
+
+---
+
+# 💻 Laboratório 01
+
+Abra o arquivo.
+
+```
+alunos_sujo.csv
+```
+
+Execute os seguintes comandos.
+
+```python
+df.head()
+```
+
+```python
+df.shape
+```
+
+```python
+df.columns
+```
+
+```python
+df.dtypes
+```
+
+```python
+df.info()
+```
+
+```python
+df.isnull()
+```
+
+```python
+df.isnull().sum()
+```
+
+```python
+df.describe()
+```
+
+Complete a tabela.
+
+| Pergunta | Resposta |
+|-----------|----------|
+| Quantas linhas existem? | |
+| Quantas colunas? | |
+| Existe valor nulo? | |
+| Em quais colunas? | |
+| Existe idade inválida? | |
+| Existem textos diferentes? | |
+
+---
+
+# ⚠️ Erro comum
+
+Muitos iniciantes executam:
+
+```python
+df.info()
+```
+
+e ignoram o resultado.
+
+Não faça isso.
+
+Esse comando fornece um resumo completo do DataFrame.
+
+Sempre analise cuidadosamente:
+
+- quantidade de linhas;
+- quantidade de colunas;
+- tipos de dados;
+- quantidade de valores preenchidos.
+
+---
+
+# 💼 No mercado
+
+Receber um dataset e executar:
+
+```python
+df.head()
+
+df.info()
+
+df.describe()
+
+df.isnull().sum()
+```
+
+é uma prática comum em praticamente todos os projetos de Ciência de Dados.
+
+Esses comandos ajudam o profissional a entender rapidamente a qualidade dos dados antes de qualquer tratamento.
+
+---
+
+# 📌 Resumo
+
+Neste módulo você aprendeu a investigar um dataset utilizando:
+
+| Comando | Finalidade |
+|----------|------------|
+| `head()` | Visualizar as primeiras linhas |
+| `shape` | Descobrir linhas e colunas |
+| `columns` | Listar colunas |
+| `dtypes` | Verificar tipos de dados |
+| `info()` | Obter um resumo do DataFrame |
+| `isnull()` | Localizar valores nulos |
+| `isnull().sum()` | Contar valores nulos |
+| `describe()` | Exibir estatísticas numéricas |
+
+---
+
+# 🚀 Preparando o próximo módulo
+
+Agora já sabemos quais problemas existem.
+
+No próximo módulo aprenderemos a resolver o primeiro deles.
+
+> **Valores nulos (Missing Values)**
+
+Você aprenderá quando remover registros e quando preencher informações ausentes utilizando o Pandas.
+
+---
+
+**© @karizeviecelli - 2026**
