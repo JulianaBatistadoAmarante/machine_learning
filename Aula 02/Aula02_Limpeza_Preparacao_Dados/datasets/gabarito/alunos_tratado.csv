@@ -1,0 +1,21 @@
+﻿ID,Nome,Idade,Curso,Nota,Frequencia,Data_Matricula,Aprovado
+1,Ana Souza,18,Front-end,7.5,92,14/03/2026,Sim
+2,Bruno Lima,18,Java,7.6,99,08/03/2026,Sim
+3,Carla Mendes,23,Machine Learning,7.7,91,21/03/2026,Sim
+4,Diego Alves,23,Machine Learning,7.2,60,12/03/2026,Não
+5,Eduarda Costa,18,Python,6.4,66,01/03/2026,Não
+6,Felipe Martins,17,Python,8.4,73,26/02/2026,Não
+7,Gabriela Rocha,21,Python,9.9,82,24/03/2026,Sim
+8,Henrique Dias,23,Machine Learning,8.2,81,06/02/2026,Sim
+9,Isabela Gomes,23,Machine Learning,6.5,89,10/02/2026,Não
+10,João Oliveira,27,Machine Learning,6.5,83,24/02/2026,Não
+11,Karen Ribeiro,24,Banco de Dados,5.5,100,08/03/2026,Não
+12,Lucas Pereira,24,Python,7.1,98,29/03/2026,Sim
+13,Mariana Silva,24,Banco de Dados,10.0,76,27/03/2026,Sim
+14,Nicolas Santos,23,Machine Learning,9.6,90,05/03/2026,Sim
+15,Olivia Castro,25,Python,7.9,68,12/03/2026,Não
+16,Pedro Almeida,17,Machine Learning,9.4,66,18/03/2026,Não
+17,Rafaela Nunes,26,Banco de Dados,7.4,90,29/03/2026,Sim
+18,Samuel Cardoso,20,Python,8.1,89,16/03/2026,Sim
+19,Tatiane Freitas,24,Machine Learning,6.3,85,15/03/2026,Não
+20,Vinicius Moraes,21,Machine Learning,9.0,92,17/03/2026,Sim
