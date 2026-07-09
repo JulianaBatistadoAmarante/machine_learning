@@ -1760,3 +1760,2158 @@ str.strip()
 ---
 
 **© @karizeviecelli - 2026**
+
+
+<!--
+=========================================================
+Curso: Machine Learning com Python
+Aula 02 – Limpeza e Preparação de Dados
+Módulo 05 – Padronizando Dados de Texto
+
+© @karizeviecelli - 2026
+=========================================================
+-->
+
+# Aula 02
+# Módulo 05 – Padronizando Dados de Texto
+
+---
+
+## 🎯 Objetivos
+
+Ao final deste módulo você será capaz de:
+
+- Entender por que textos despadronizados prejudicam análises.
+- Remover espaços em branco desnecessários.
+- Converter textos para maiúsculas, minúsculas ou formato de título.
+- Padronizar informações utilizando o Pandas.
+
+---
+
+# Situação-Problema
+
+Imagine que uma escola cadastrou os cursos dos alunos.
+
+Observe a coluna abaixo.
+
+| Curso |
+|--------|
+| Python |
+| python |
+| PYTHON |
+| Python |
+|  Python |
+| python  |
+
+Você considera que existem seis cursos diferentes?
+
+Claro que não.
+
+Todos representam o mesmo curso.
+
+Mas o computador enxerga cada um deles como um valor diferente.
+
+---
+
+# Por que isso acontece?
+
+Para o computador:
+
+```text
+Python
+```
+
+é diferente de
+
+```text
+python
+```
+
+que também é diferente de
+
+```text
+PYTHON
+```
+
+e diferente de
+
+```text
+ Python
+```
+
+Mesmo que para nós todos representem a mesma informação.
+
+---
+
+# Problemas causados
+
+Imagine que você deseja contar quantos alunos estudam Python.
+
+Observe.
+
+| Curso |
+|--------|
+| Python |
+| python |
+| PYTHON |
+
+O resultado esperado seria:
+
+```
+Python
+
+↓
+
+3 alunos
+```
+
+Mas o computador pode interpretar como:
+
+```
+Python
+
+↓
+
+1
+```
+
+```
+python
+
+↓
+
+1
+```
+
+```
+PYTHON
+
+↓
+
+1
+```
+
+A análise ficará incorreta.
+
+---
+
+# Nosso objetivo
+
+Transformar isto:
+
+```text
+Python
+
+python
+
+PYTHON
+
+ Python
+
+python
+```
+
+Em apenas um padrão.
+
+Por exemplo.
+
+```text
+Python
+```
+
+---
+
+# Primeiro problema
+
+## Espaços em branco
+
+Observe.
+
+```text
+Python
+```
+
+e
+
+```text
+ Python
+```
+
+São diferentes.
+
+Também.
+
+```text
+Python
+```
+
+e
+
+```text
+Python
+```
+
+(com espaço no final)
+
+São diferentes.
+
+---
+
+# Removendo espaços
+
+Utilizamos.
+
+```python
+df["Curso"] = df["Curso"].str.strip()
+```
+
+---
+
+## O que significa strip()?
+
+A função:
+
+```python
+strip()
+```
+
+Remove espaços no início e no final do texto.
+
+Exemplo.
+
+Antes.
+
+```text
+" Python "
+```
+
+Depois.
+
+```text
+"Python"
+```
+
+---
+
+# Vamos testar
+
+Execute.
+
+```python
+print(df["Curso"])
+```
+
+Depois.
+
+```python
+df["Curso"] = df["Curso"].str.strip()
+```
+
+Exiba novamente.
+
+```python
+print(df["Curso"])
+```
+
+Observe a diferença.
+
+---
+
+# Segundo problema
+
+## Letras maiúsculas
+
+Observe.
+
+```text
+Python
+
+PYTHON
+```
+
+Ainda são considerados valores diferentes.
+
+---
+
+# Transformando tudo em maiúsculas
+
+```python
+df["Curso"] = df["Curso"].str.upper()
+```
+
+Resultado.
+
+```text
+PYTHON
+
+PYTHON
+
+PYTHON
+```
+
+Agora todos seguem o mesmo padrão.
+
+---
+
+# O que faz upper()?
+
+A função:
+
+```python
+upper()
+```
+
+Converte todas as letras para maiúsculas.
+
+Exemplo.
+
+Antes.
+
+```text
+Python
+```
+
+Depois.
+
+```text
+PYTHON
+```
+
+---
+
+# Transformando tudo em minúsculas
+
+Também podemos fazer.
+
+```python
+df["Curso"] = df["Curso"].str.lower()
+```
+
+Resultado.
+
+```text
+python
+
+python
+
+python
+```
+
+---
+
+# O que faz lower()?
+
+Converte todas as letras para minúsculas.
+
+Antes.
+
+```text
+JAVA
+```
+
+Depois.
+
+```text
+java
+```
+
+---
+
+# Formato de título
+
+Outra opção muito utilizada.
+
+```python
+df["Curso"] = df["Curso"].str.title()
+```
+
+Resultado.
+
+```text
+Python
+
+Banco De Dados
+
+Front-End
+```
+
+A primeira letra de cada palavra fica maiúscula.
+
+---
+
+# Comparando
+
+| Função | Resultado |
+|---------|-----------|
+| `upper()` | PYTHON |
+| `lower()` | python |
+| `title()` | Python |
+| `strip()` | Remove espaços |
+
+---
+
+# Aplicando várias funções
+
+Podemos combinar funções.
+
+```python
+df["Curso"] = df["Curso"].str.strip().str.title()
+```
+
+O que acontece?
+
+Primeiro.
+
+Remove os espaços.
+
+Depois.
+
+Padroniza o texto.
+
+É uma prática muito comum em projetos reais.
+
+---
+
+# Exemplo completo
+
+Antes.
+
+| Curso |
+|--------|
+| python |
+| PYTHON |
+|  Python |
+| python  |
+
+Depois.
+
+| Curso |
+|--------|
+| Python |
+| Python |
+| Python |
+| Python |
+
+Agora todos os registros seguem o mesmo padrão.
+
+---
+
+# Laboratório 01
+
+Abra o arquivo.
+
+```text
+alunos_sujo.csv
+```
+
+Visualize apenas a coluna Curso.
+
+```python
+df["Curso"]
+```
+
+Observe os diferentes formatos.
+
+Agora execute.
+
+```python
+df["Curso"] = df["Curso"].str.strip()
+```
+
+Depois.
+
+```python
+df["Curso"] = df["Curso"].str.title()
+```
+
+Visualize novamente.
+
+```python
+df["Curso"]
+```
+
+O que mudou?
+
+---
+
+# Laboratório 02
+
+Abra.
+
+```text
+clientes_sujo.csv
+```
+
+Padronize a coluna Cidade.
+
+Depois.
+
+Padronize qualquer outra coluna de texto.
+
+---
+
+# Desafio
+
+Utilizando apenas os comandos aprendidos.
+
+Padronize todas as colunas de texto do dataset.
+
+Dica.
+
+Você pode utilizar.
+
+```python
+df.columns
+```
+
+para descobrir quais colunas existem.
+
+---
+
+# ⚠️ Erro comum
+
+Alguns alunos fazem.
+
+```python
+df.upper()
+```
+
+Isso gera erro.
+
+Por quê?
+
+Porque:
+
+```python
+upper()
+```
+
+é uma função para textos.
+
+Quando trabalhamos com uma coluna textual no Pandas devemos utilizar:
+
+```python
+df["Curso"].str.upper()
+```
+
+Observe o uso de:
+
+```python
+.str
+```
+
+Ela informa ao Pandas que queremos utilizar funções específicas para texto.
+
+---
+
+# 💼 No mercado
+
+Padronização de textos é uma das primeiras etapas em projetos de:
+
+- CRM
+- E-commerce
+- Sistemas hospitalares
+- Recursos Humanos
+- Marketing
+- Bancos
+
+Sem padronização, relatórios podem apresentar informações duplicadas ou incorretas.
+
+---
+
+# 📌 Resumo
+
+Neste módulo você aprendeu:
+
+✅ Como remover espaços desnecessários.
+
+✅ Como converter textos para maiúsculas.
+
+✅ Como converter textos para minúsculas.
+
+✅ Como utilizar o formato de título.
+
+✅ Como combinar funções para padronizar dados.
+
+---
+
+# 🧪 Mini Projeto
+
+O arquivo abaixo possui diversos problemas de padronização.
+
+```text
+Curso
+
+Python
+
+ python
+
+PYTHON
+
+Python
+
+JAVA
+
+java
+
+ Java
+```
+
+Escreva um código que transforme todos os registros em:
+
+```text
+Python
+
+Python
+
+Python
+
+Python
+
+Java
+
+Java
+
+Java
+```
+
+---
+
+# 🚀 Preparando o próximo módulo
+
+Agora nosso dataset já possui:
+
+✅ Valores nulos tratados.
+
+✅ Registros duplicados removidos.
+
+✅ Textos padronizados.
+
+O próximo passo será verificar se cada coluna possui o tipo de dado correto.
+
+Aprenderemos funções como:
+
+```python
+astype()
+
+to_numeric()
+
+to_datetime()
+```
+
+Essas funções serão fundamentais para preparar nossos dados para o primeiro modelo de Machine Learning.
+
+---
+
+**© @karizeviecelli - 2026**
+
+<!--
+=========================================================
+Curso: Machine Learning com Python
+Aula 02 – Limpeza e Preparação de Dados
+Módulo 06 – Corrigindo Tipos de Dados
+
+© @karizeviecelli - 2026
+=========================================================
+-->
+
+# Aula 02
+# Módulo 06 – Corrigindo Tipos de Dados
+
+---
+
+## 🎯 Objetivos
+
+Ao final deste módulo você será capaz de:
+
+- Entender o que são tipos de dados.
+- Identificar quando uma coluna possui um tipo incorreto.
+- Converter textos em números.
+- Converter textos em datas.
+- Alterar o tipo de uma coluna utilizando Pandas.
+
+---
+
+# Situação-Problema
+
+Imagine que você recebeu o seguinte arquivo.
+
+| Nome | Idade |
+|------|-------|
+| Ana | 18 |
+| João | 20 |
+| Maria | 25 |
+
+Visualmente parece correto.
+
+Mas existe um detalhe importante.
+
+Observe o resultado do comando:
+
+```python
+df.dtypes
+```
+
+Resultado.
+
+```text
+Nome      object
+
+Idade     object
+```
+
+Espere...
+
+A idade não deveria ser um número?
+
+Sim.
+
+Mas ela foi importada como texto.
+
+---
+
+# Por que isso acontece?
+
+Isso pode acontecer quando:
+
+- o arquivo foi exportado incorretamente;
+- existem letras misturadas com números;
+- existem espaços em branco;
+- existe algum valor inválido.
+
+Veja um exemplo.
+
+| Idade |
+|-------|
+| 18 |
+| 20 |
+| vinte |
+| 25 |
+
+Como existe um texto ("vinte"), o Pandas entende que toda a coluna deve ser tratada como texto.
+
+---
+
+# Por que isso é um problema?
+
+Imagine calcular a média da idade.
+
+```python
+df["Idade"].mean()
+```
+
+Se a coluna for texto.
+
+O Pandas exibirá erro.
+
+Algumas operações matemáticas só funcionam com números.
+
+---
+
+# Como descobrir o tipo de cada coluna?
+
+Utilize:
+
+```python
+df.dtypes
+```
+
+Exemplo.
+
+```text
+Nome            object
+
+Idade            int64
+
+Nota           float64
+
+Data            object
+```
+
+---
+
+## Relembrando
+
+| Tipo | Significado |
+|-------|-------------|
+| object | Texto |
+| int64 | Número inteiro |
+| float64 | Número decimal |
+| bool | Verdadeiro ou falso |
+
+---
+
+# Convertendo para número inteiro
+
+Utilizamos.
+
+```python
+df["Idade"] = df["Idade"].astype(int)
+```
+
+Resultado.
+
+A coluna passa a ser do tipo:
+
+```text
+int64
+```
+
+---
+
+# Convertendo para número decimal
+
+```python
+df["Nota"] = df["Nota"].astype(float)
+```
+
+Resultado.
+
+```text
+float64
+```
+
+Agora será possível calcular médias.
+
+---
+
+# Quando usar astype()?
+
+Sempre que você tiver certeza de que todos os valores podem ser convertidos.
+
+Por exemplo.
+
+```
+18
+
+20
+
+25
+```
+
+Não haverá problemas.
+
+---
+
+# E se existir um valor inválido?
+
+Observe.
+
+| Idade |
+|-------|
+| 18 |
+| 20 |
+| vinte |
+| 25 |
+
+Agora execute.
+
+```python
+df["Idade"].astype(int)
+```
+
+Resultado.
+
+```text
+ValueError
+```
+
+O Pandas não consegue transformar a palavra "vinte" em número.
+
+---
+
+# A solução
+
+Utilizamos.
+
+```python
+pd.to_numeric()
+```
+
+Exemplo.
+
+```python
+df["Idade"] = pd.to_numeric(df["Idade"], errors="coerce")
+```
+
+---
+
+## O que significa?
+
+### pd.to_numeric()
+
+Converte textos em números.
+
+---
+
+### errors="coerce"
+
+Quando encontrar um valor inválido.
+
+Transforma em:
+
+```text
+NaN
+```
+
+Assim.
+
+Não ocorre erro.
+
+Depois podemos tratar esses valores utilizando os comandos aprendidos no módulo anterior.
+
+---
+
+# Exemplo
+
+Antes.
+
+| Idade |
+|-------|
+| 18 |
+| 20 |
+| vinte |
+| 25 |
+
+Depois.
+
+| Idade |
+|-------:|
+| 18 |
+| 20 |
+| NaN |
+| 25 |
+
+Muito melhor.
+
+Agora conseguimos localizar o problema.
+
+---
+
+# Trabalhando com datas
+
+Imagine esta coluna.
+
+| Data |
+|-----------|
+| 15/03/2026 |
+| 18/03/2026 |
+| 25/03/2026 |
+
+Visualmente parece uma data.
+
+Mas para o Pandas.
+
+Ela pode ser apenas um texto.
+
+---
+
+# Convertendo para data
+
+Utilizamos.
+
+```python
+df["Data"] = pd.to_datetime(df["Data"])
+```
+
+Agora o Pandas entende que aquela coluna representa datas.
+
+---
+
+# Informando o formato brasileiro
+
+Quando a data estiver no formato:
+
+```text
+15/03/2026
+```
+
+É recomendado utilizar.
+
+```python
+df["Data"] = pd.to_datetime(
+    df["Data"],
+    format="%d/%m/%Y"
+)
+```
+
+---
+
+# Principais códigos
+
+| Código | Significado |
+|---------|-------------|
+| %d | Dia |
+| %m | Mês |
+| %Y | Ano com quatro dígitos |
+
+---
+
+# Comparando
+
+| Função | Utilização |
+|---------|------------|
+| `astype(int)` | Número inteiro |
+| `astype(float)` | Número decimal |
+| `pd.to_numeric()` | Texto para número |
+| `pd.to_datetime()` | Texto para data |
+
+---
+
+# Laboratório 01
+
+Abra.
+
+```text
+clientes_sujo.csv
+```
+
+Execute.
+
+```python
+df.dtypes
+```
+
+Responda.
+
+- Quais colunas são texto?
+- Quais são números?
+
+---
+
+Agora tente converter uma coluna numérica.
+
+```python
+df["Renda"] = df["Renda"].astype(float)
+```
+
+Verifique novamente.
+
+```python
+df.dtypes
+```
+
+---
+
+# Laboratório 02
+
+Abra.
+
+```text
+vendas.csv
+```
+
+Observe a coluna:
+
+```text
+Data
+```
+
+Converta-a para data.
+
+```python
+df["Data"] = pd.to_datetime(
+    df["Data"],
+    format="%d/%m/%Y"
+)
+```
+
+Depois execute.
+
+```python
+df.dtypes
+```
+
+O tipo mudou?
+
+---
+
+# Desafio
+
+Imagine que um arquivo possui a coluna.
+
+| Idade |
+|-------|
+| 18 |
+| 22 |
+| vinte |
+| 30 |
+| 25 |
+
+Utilize.
+
+```python
+pd.to_numeric()
+```
+
+Para converter a coluna.
+
+Depois descubra.
+
+```python
+df.isnull().sum()
+```
+
+Quantos valores inválidos existiam?
+
+---
+
+# ⚠️ Erro comum
+
+Muitos iniciantes fazem.
+
+```python
+df["Idade"] = df["Idade"].astype(int)
+```
+
+Mesmo existindo textos.
+
+O resultado será um erro.
+
+Sempre que existir dúvida.
+
+Utilize.
+
+```python
+pd.to_numeric(
+    errors="coerce"
+)
+```
+
+É muito mais seguro.
+
+---
+
+# 💼 No mercado
+
+Grande parte dos problemas encontrados em datasets está relacionada a tipos incorretos.
+
+É comum receber:
+
+- números armazenados como texto;
+- datas armazenadas como texto;
+- valores monetários contendo símbolos.
+
+Corrigir esses tipos é uma das primeiras tarefas de um Analista de Dados.
+
+---
+
+# 📌 Resumo
+
+Neste módulo você aprendeu:
+
+✅ Como verificar tipos de dados.
+
+✅ Como converter textos em números.
+
+✅ Como converter textos em datas.
+
+✅ Como utilizar `astype()`.
+
+✅ Como utilizar `pd.to_numeric()`.
+
+✅ Como utilizar `pd.to_datetime()`.
+
+---
+
+# 🧪 Mini Projeto
+
+O arquivo abaixo possui vários problemas.
+
+| Produto | Valor | Data |
+|----------|-------|------------|
+| Mouse | 120.50 | 15/03/2026 |
+| Teclado | 89.90 | 20/03/2026 |
+| Monitor | cento e vinte | 25/03/2026 |
+
+Sua missão é:
+
+- Converter a coluna **Valor** para número.
+- Descobrir quais valores são inválidos.
+- Converter a coluna **Data** para o tipo data.
+- Verificar os tipos utilizando `df.dtypes`.
+
+---
+
+# 🚀 Preparando o próximo módulo
+
+Nosso dataset já está muito melhor.
+
+Agora vamos aprender a identificar outro problema bastante comum:
+
+- idades negativas;
+- notas acima de 10;
+- frequências maiores que 100%;
+- valores extremamente altos ou baixos.
+
+Esses são chamados de **valores inválidos** e **outliers simples**, e aprenderemos como identificá-los utilizando filtros no Pandas.
+
+---
+
+**© @karizeviecelli - 2026**
+
+<!--
+=========================================================
+Curso: Machine Learning com Python
+Aula 02 – Limpeza e Preparação de Dados
+Módulo 07 – Identificando Valores Inválidos
+
+© @karizeviecelli - 2026
+=========================================================
+-->
+
+# Aula 02
+# Módulo 07 – Identificando Valores Inválidos
+
+---
+
+## 🎯 Objetivos
+
+Ao final deste módulo você será capaz de:
+
+- Identificar valores que não fazem sentido em um dataset.
+- Utilizar filtros para localizar registros incorretos.
+- Corrigir ou remover valores inválidos.
+- Aplicar boas práticas antes de treinar um modelo de Machine Learning.
+
+---
+
+# 📍 Onde estamos?
+
+Até agora aprendemos a:
+
+✔ Corrigir valores nulos.
+
+✔ Remover registros duplicados.
+
+✔ Padronizar textos.
+
+✔ Corrigir tipos de dados.
+
+Agora falta verificar se os valores armazenados realmente fazem sentido.
+
+---
+
+# Situação-Problema
+
+Observe a tabela abaixo.
+
+| Nome | Idade | Nota | Frequência |
+|------|------:|------:|-----------:|
+| Ana | 18 | 8.5 | 95 |
+| João | -5 | 7.2 | 82 |
+| Maria | 22 | 15.0 | 88 |
+| Pedro | 20 | 8.0 | 120 |
+
+Visualmente a tabela parece correta.
+
+Mas será que realmente está?
+
+---
+
+# O que há de errado?
+
+Observe cada coluna.
+
+## Idade
+
+```
+-5
+```
+
+Pode existir uma pessoa com idade negativa?
+
+❌ Não.
+
+---
+
+## Nota
+
+```
+15
+```
+
+Nossa escola utiliza notas de:
+
+```
+0 até 10
+```
+
+Logo.
+
+```
+15
+```
+
+É um valor inválido.
+
+---
+
+## Frequência
+
+```
+120%
+```
+
+Um aluno pode ter frequência maior que:
+
+```
+100%
+```
+
+❌ Não.
+
+---
+
+# O que é um valor inválido?
+
+Um valor inválido é uma informação que existe no dataset, mas não representa a realidade.
+
+Exemplos.
+
+| Coluna | Valor | Problema |
+|---------|------:|----------|
+| Idade | -3 | Não existe idade negativa |
+| Nota | 15 | Nota máxima é 10 |
+| Frequência | 120 | Máximo é 100% |
+| Salário | -2500 | Salário negativo normalmente é inválido |
+
+---
+
+# Como localizar valores inválidos?
+
+No Pandas podemos utilizar filtros.
+
+---
+
+# Exemplo 1
+
+## Idades negativas
+
+```python
+df[df["Idade"] < 0]
+```
+
+### Como funciona?
+
+Observe.
+
+```python
+df["Idade"] < 0
+```
+
+O Pandas verifica cada linha.
+
+Se a idade for menor que zero.
+
+Retorna:
+
+```
+True
+```
+
+Depois.
+
+```python
+df[ ... ]
+```
+
+Mostra apenas essas linhas.
+
+---
+
+# Resultado
+
+| Nome | Idade |
+|------|------:|
+| João | -5 |
+
+Encontramos o problema.
+
+---
+
+# Exemplo 2
+
+## Notas maiores que 10
+
+```python
+df[df["Nota"] > 10]
+```
+
+Resultado.
+
+| Nome | Nota |
+|------|-----:|
+| Maria | 15 |
+
+---
+
+# Exemplo 3
+
+## Frequência maior que 100
+
+```python
+df[df["Frequencia"] > 100]
+```
+
+Resultado.
+
+| Nome | Frequência |
+|------|-----------:|
+| Pedro | 120 |
+
+---
+
+# Combinando condições
+
+Imagine que queremos localizar:
+
+- idade negativa
+
+OU
+
+- nota maior que 10.
+
+Podemos utilizar.
+
+```python
+df[
+    (df["Idade"] < 0)
+    |
+    (df["Nota"] > 10)
+]
+```
+
+---
+
+## O que significa o símbolo |
+
+No Pandas.
+
+```text
+|
+```
+
+Significa:
+
+**OU**
+
+---
+
+# Utilizando E
+
+Agora queremos.
+
+Idade maior que 18
+
+E
+
+Nota maior que 8.
+
+```python
+df[
+    (df["Idade"] > 18)
+    &
+    (df["Nota"] > 8)
+]
+```
+
+---
+
+## O que significa &
+
+```text
+&
+```
+
+Significa.
+
+**E**
+
+---
+
+# Corrigindo um valor
+
+Imagine que encontramos.
+
+```
+Idade = -5
+```
+
+Podemos corrigir manualmente.
+
+```python
+df.loc[1, "Idade"] = 18
+```
+
+---
+
+## O que significa?
+
+```python
+loc
+```
+
+Permite alterar um valor específico.
+
+No exemplo.
+
+```
+Linha 1
+
+↓
+
+Coluna Idade
+
+↓
+
+18
+```
+
+---
+
+# Outra possibilidade
+
+Em alguns casos.
+
+É melhor remover o registro.
+
+```python
+df = df[df["Idade"] >= 0]
+```
+
+Assim permanecem apenas registros válidos.
+
+---
+
+# Laboratório 01
+
+Abra.
+
+```text
+alunos_sujo.csv
+```
+
+Descubra.
+
+- Existem idades negativas?
+- Existem notas maiores que 10?
+- Existe frequência maior que 100?
+
+Utilize.
+
+```python
+df[df["Idade"] < 0]
+```
+
+```python
+df[df["Nota"] > 10]
+```
+
+```python
+df[df["Frequencia"] > 100]
+```
+
+---
+
+# Laboratório 02
+
+Abra.
+
+```text
+clientes_sujo.csv
+```
+
+Descubra.
+
+- Existe renda negativa?
+- Existe idade menor que zero?
+- Existe algum valor muito estranho?
+
+Depois.
+
+Corrija ou remova esses registros.
+
+---
+
+# Desafio
+
+O arquivo abaixo representa vendas.
+
+| Produto | Quantidade | Valor |
+|----------|-----------:|------:|
+| Mouse | 2 | 120 |
+| Teclado | -1 | 90 |
+| Monitor | 3 | -1500 |
+| SSD | 1 | 450 |
+
+Responda.
+
+1. Quais registros possuem problemas?
+
+2. Como você corrigiria esses dados?
+
+3. Em quais situações seria melhor remover o registro?
+
+---
+
+# ⚠️ Erro comum
+
+Alguns alunos acreditam que todo número é válido.
+
+Mas um computador não sabe que:
+
+```
+Idade = -10
+```
+
+é impossível.
+
+Cabe ao Analista de Dados identificar esses problemas antes do treinamento.
+
+---
+
+# 💼 No mercado
+
+Empresas trabalham diariamente com milhões de registros.
+
+É comum encontrar:
+
+- salários negativos;
+- datas impossíveis;
+- idades incompatíveis;
+- valores financeiros incorretos;
+- sensores com leituras absurdas.
+
+Antes de qualquer análise, esses dados precisam ser revisados.
+
+---
+
+# 📌 Resumo
+
+Neste módulo você aprendeu:
+
+✅ O que são valores inválidos.
+
+✅ Como localizar registros utilizando filtros.
+
+✅ Como combinar condições com:
+
+- **E** (`&`)
+- **OU** (`|`)
+
+✅ Como corrigir valores específicos com `loc`.
+
+✅ Como remover registros inválidos.
+
+---
+
+# 🧪 Mini Projeto
+
+Utilizando o arquivo:
+
+```text
+alunos_sujo.csv
+```
+
+Realize as seguintes tarefas.
+
+✔ Localize idades negativas.
+
+✔ Localize notas maiores que 10.
+
+✔ Localize frequências maiores que 100.
+
+✔ Corrija os valores encontrados.
+
+✔ Exiba novamente o DataFrame.
+
+---
+
+# ✅ Checklist Profissional
+
+Antes de treinar um modelo de Machine Learning, pergunte sempre:
+
+☐ Existem valores nulos?
+
+☐ Existem registros duplicados?
+
+☐ Existem textos despadronizados?
+
+☐ Os tipos de dados estão corretos?
+
+☐ Existem valores inválidos?
+
+☐ O dataset representa a realidade?
+
+Se todas as respostas forem **SIM**, seu conjunto de dados estará muito mais preparado para treinar um modelo.
+
+---
+
+# 🚀 Preparando o próximo módulo
+
+Nos próximos módulos vamos reunir tudo o que aprendemos.
+
+Você realizará uma limpeza completa do arquivo **alunos_sujo.csv**, aplicando todas as técnicas estudadas nesta aula.
+
+Ao final, terá um dataset pronto para construir seu primeiro modelo de Machine Learning.
+
+---
+
+**© @karizeviecelli - 2026**
+
+
+<!--
+=========================================================
+Curso: Machine Learning com Python
+Aula 02 – Limpeza e Preparação de Dados
+Módulo 08 – Laboratório Prático: Limpando um Dataset Completo
+
+© @karizeviecelli - 2026
+=========================================================
+-->
+
+# Aula 02
+# Módulo 08 – Laboratório Prático
+
+---
+
+# 🎯 Objetivos
+
+Ao final deste módulo você será capaz de:
+
+- Aplicar todas as técnicas aprendidas na Aula 02.
+- Investigar um dataset.
+- Identificar problemas.
+- Corrigir problemas.
+- Gerar um dataset pronto para Machine Learning.
+
+---
+
+# Situação-Problema
+
+Você acaba de ser contratado como Analista de Dados.
+
+Seu gerente entrega o arquivo:
+
+```text
+alunos_sujo.csv
+```
+
+Ele informa:
+
+> "Precisamos utilizar Machine Learning para prever quais alunos serão aprovados.
+
+> Antes disso precisamos limpar completamente esta base."
+
+A partir deste momento a responsabilidade é sua.
+
+---
+
+# Missão
+
+Você deverá:
+
+✅ Encontrar problemas
+
+✅ Corrigir problemas
+
+✅ Validar os dados
+
+✅ Gerar um novo dataset
+
+---
+
+# Passo 1
+
+## Importando a biblioteca
+
+```python
+import pandas as pd
+```
+
+---
+
+# Passo 2
+
+## Abrindo o arquivo
+
+```python
+df = pd.read_csv("alunos_sujo.csv")
+```
+
+---
+
+# Passo 3
+
+## Visualizando os dados
+
+```python
+df.head()
+```
+
+Observe.
+
+Não tente corrigir nada ainda.
+
+---
+
+# Passo 4
+
+## Investigando o DataFrame
+
+Execute.
+
+```python
+df.info()
+```
+
+Depois.
+
+```python
+df.shape
+```
+
+Depois.
+
+```python
+df.describe()
+```
+
+Agora responda.
+
+- Quantas linhas existem?
+
+- Quantas colunas?
+
+- Existem valores nulos?
+
+- Existem números estranhos?
+
+---
+
+# Passo 5
+
+## Procurando valores nulos
+
+```python
+df.isnull().sum()
+```
+
+Anote.
+
+Em quais colunas existem problemas?
+
+---
+
+# Passo 6
+
+## Corrigindo valores nulos
+
+Para as colunas numéricas.
+
+```python
+df["Nota"] = df["Nota"].fillna(
+    df["Nota"].mean()
+)
+```
+
+Para colunas de texto.
+
+```python
+df["Curso"] = df["Curso"].fillna(
+    "Não informado"
+)
+```
+
+---
+
+# Passo 7
+
+## Procurando duplicidades
+
+```python
+df.duplicated().sum()
+```
+
+Agora visualize.
+
+```python
+df[df.duplicated()]
+```
+
+Remova.
+
+```python
+df = df.drop_duplicates()
+```
+
+---
+
+# Passo 8
+
+## Padronizando textos
+
+Removendo espaços.
+
+```python
+df["Curso"] = df["Curso"].str.strip()
+```
+
+Padronizando.
+
+```python
+df["Curso"] = df["Curso"].str.title()
+```
+
+Visualize.
+
+```python
+df["Curso"]
+```
+
+---
+
+# Passo 9
+
+## Verificando tipos
+
+```python
+df.dtypes
+```
+
+Existe alguma coluna que deveria ser número?
+
+Existe alguma coluna que deveria ser data?
+
+Caso necessário.
+
+```python
+df["Idade"] = df["Idade"].astype(int)
+```
+
+---
+
+# Passo 10
+
+## Procurando valores inválidos
+
+Idades negativas.
+
+```python
+df[df["Idade"] < 0]
+```
+
+Notas acima de 10.
+
+```python
+df[df["Nota"] > 10]
+```
+
+Frequências acima de 100.
+
+```python
+df[df["Frequencia"] > 100]
+```
+
+Corrija ou remova os registros.
+
+---
+
+# Passo 11
+
+## Conferência Final
+
+Execute novamente.
+
+```python
+df.info()
+```
+
+Depois.
+
+```python
+df.describe()
+```
+
+Depois.
+
+```python
+df.isnull().sum()
+```
+
+Compare com o início da aula.
+
+O dataset melhorou?
+
+---
+
+# Passo 12
+
+## Salvando o novo dataset
+
+Agora vamos gerar uma nova versão.
+
+```python
+df.to_csv(
+    "alunos_tratado.csv",
+    index=False
+)
+```
+
+Pronto.
+
+Você criou um novo arquivo.
+
+```
+alunos_tratado.csv
+```
+
+Esse será utilizado nas próximas aulas.
+
+---
+
+# Fluxo completo
+
+```text
+Receber o dataset
+
+↓
+
+Abrir o arquivo
+
+↓
+
+Investigar
+
+↓
+
+Encontrar problemas
+
+↓
+
+Corrigir
+
+↓
+
+Validar
+
+↓
+
+Salvar novo dataset
+```
+
+Esse fluxo será repetido durante todo o curso.
+
+---
+
+# Desafio
+
+Repita exatamente os mesmos passos utilizando:
+
+```text
+clientes_sujo.csv
+```
+
+Não consulte o material.
+
+Utilize apenas seus conhecimentos.
+
+---
+
+# Desafio Extra
+
+Faça a limpeza do arquivo:
+
+```text
+filmes_sujo.csv
+```
+
+Ao terminar responda.
+
+- Existem valores nulos?
+
+- Existem duplicidades?
+
+- Existem textos despadronizados?
+
+- Existem valores inválidos?
+
+---
+
+# 💼 No mercado
+
+É muito comum que empresas mantenham duas versões do mesmo conjunto de dados.
+
+```
+clientes.csv
+```
+
+Dados originais.
+
+↓
+
+Após limpeza.
+
+```
+clientes_tratado.csv
+```
+
+Essa prática evita perder os dados originais e permite repetir o processo caso seja necessário.
+
+---
+
+# 📌 Resumo
+
+Hoje você realizou todas as etapas de preparação dos dados.
+
+✔ Investigou o dataset.
+
+✔ Corrigiu valores nulos.
+
+✔ Removeu duplicidades.
+
+✔ Padronizou textos.
+
+✔ Corrigiu tipos de dados.
+
+✔ Localizou valores inválidos.
+
+✔ Gerou um novo dataset.
+
+Parabéns!
+
+Seu conjunto de dados agora está muito mais preparado para ser utilizado em Machine Learning.
+
+---
+
+# 🏆 Missão Concluída
+
+Você acaba de realizar exatamente uma das tarefas mais comuns de um Analista de Dados.
+
+Antes de qualquer algoritmo ser treinado, alguém precisa preparar os dados.
+
+Hoje esse profissional foi você.
+
+---
+
+# 🚀 Preparando a Aula 03
+
+Na próxima aula utilizaremos o arquivo:
+
+```text
+alunos_tratado.csv
+```
+
+Pela primeira vez construiremos um modelo de Machine Learning utilizando a biblioteca **Scikit-Learn**.
+
+Você aprenderá:
+
+- O que são **Features** e **Target** na prática.
+- Como separar os dados para treinamento.
+- Como criar sua primeira **Árvore de Decisão (Decision Tree)**.
+- Como fazer previsões com novos dados.
+
+---
+
+**© @karizeviecelli - 2026**
