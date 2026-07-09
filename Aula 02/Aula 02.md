@@ -858,3 +858,497 @@ Você aprenderá quando remover registros e quando preencher informações ausen
 ---
 
 **© @karizeviecelli - 2026**
+
+<!--
+=========================================================
+Curso: Machine Learning com Python
+Aula 02 – Limpeza e Preparação de Dados
+Módulo 03 – Tratando Valores Nulos
+
+© @karizeviecelli - 2026
+=========================================================
+-->
+
+# Aula 02
+# Módulo 03 – Tratando Valores Nulos (Missing Values)
+
+---
+
+## 🎯 Objetivos
+
+Ao final deste módulo você será capaz de:
+
+- Entender o que são valores nulos.
+- Identificar campos vazios em um dataset.
+- Utilizar `fillna()` para preencher informações.
+- Utilizar `dropna()` para remover registros incompletos.
+- Escolher a melhor estratégia para cada situação.
+
+---
+
+# Situação-Problema
+
+Você recebeu o arquivo:
+
+```text
+alunos_sujo.csv
+```
+
+Durante a investigação descobriu que algumas informações estão faltando.
+
+Veja um exemplo.
+
+| Nome | Idade | Curso | Nota |
+|------|------:|--------|------:|
+| Ana | 18 | Python | 8.5 |
+| João | 20 | Java | |
+| Maria | 19 | Python | 9.2 |
+
+Observe.
+
+João não possui nota.
+
+O computador não sabe se:
+
+- a nota foi esquecida;
+- o aluno não fez a prova;
+- ocorreu erro na importação.
+
+Esses valores recebem o nome de **Valores Nulos**.
+
+---
+
+# O que significa NaN?
+
+Quando um valor está ausente, o Pandas normalmente exibe:
+
+```text
+NaN
+```
+
+NaN significa:
+
+```
+Not a Number
+```
+
+Ou seja.
+
+"O valor não está disponível."
+
+Não significa necessariamente que seja um número errado.
+
+Significa apenas que aquela informação não existe.
+
+---
+
+# Por que aparecem valores nulos?
+
+Em empresas isso acontece diariamente.
+
+Alguns exemplos.
+
+✔ Cliente esqueceu de informar um telefone.
+
+✔ Sistema antigo perdeu informações.
+
+✔ Funcionário digitou apenas parte do cadastro.
+
+✔ Arquivo foi importado de maneira incorreta.
+
+✔ Sensor deixou de enviar dados.
+
+Portanto.
+
+Encontrar valores nulos é completamente normal.
+
+---
+
+# Como descobrir quantos valores nulos existem?
+
+Já vimos este comando.
+
+```python
+df.isnull().sum()
+```
+
+Resultado.
+
+```text
+Nome            0
+
+Idade           1
+
+Curso           0
+
+Nota            2
+
+Frequencia      0
+
+Aprovado        0
+```
+
+Observe.
+
+A coluna **Nota** possui dois valores ausentes.
+
+---
+
+# Primeira estratégia
+
+## Preencher os valores
+
+Em algumas situações podemos substituir os valores vazios.
+
+Para isso utilizamos:
+
+```python
+df.fillna(0)
+```
+
+Resultado.
+
+| Nome | Nota |
+|------|------:|
+| Ana | 8.5 |
+| João | 0.0 |
+| Maria | 9.2 |
+
+Todos os campos vazios passam a valer zero.
+
+---
+
+# Atenção!
+
+Nem sempre preencher com zero é a melhor escolha.
+
+Imagine um cadastro de pessoas.
+
+| Nome | Idade |
+|------|------:|
+| João | |
+
+Faz sentido substituir por:
+
+```
+0 anos?
+```
+
+Provavelmente não.
+
+Precisamos analisar o contexto.
+
+---
+
+# Preenchendo com um texto
+
+Quando a coluna é textual.
+
+Podemos fazer.
+
+```python
+df["Curso"] = df["Curso"].fillna("Não informado")
+```
+
+Resultado.
+
+| Nome | Curso |
+|------|--------|
+| Ana | Python |
+| João | Não informado |
+
+---
+
+# Preenchendo com a média
+
+Essa é uma estratégia muito utilizada.
+
+Imagine.
+
+| Nota |
+|------:|
+| 8.5 |
+| 9.0 |
+| |
+| 7.5 |
+
+Podemos substituir o valor vazio pela média.
+
+Código.
+
+```python
+media = df["Nota"].mean()
+
+df["Nota"] = df["Nota"].fillna(media)
+```
+
+---
+
+## O que significa `mean()`?
+
+Em inglês.
+
+```
+Mean
+
+↓
+
+Média
+```
+
+O Pandas calcula automaticamente a média da coluna.
+
+Depois.
+
+`fillna()` utiliza esse valor para preencher os espaços vazios.
+
+---
+
+# Visualizando o resultado
+
+Antes.
+
+| Nota |
+|------:|
+| 8.5 |
+| |
+| 9.0 |
+
+Depois.
+
+| Nota |
+|------:|
+| 8.5 |
+| 8.75 |
+| 9.0 |
+
+---
+
+# Segunda estratégia
+
+## Remover registros
+
+Em alguns casos.
+
+Pode ser melhor remover as linhas incompletas.
+
+Para isso utilizamos.
+
+```python
+df.dropna()
+```
+
+Resultado.
+
+Todas as linhas contendo valores nulos são removidas.
+
+---
+
+# Quando utilizar?
+
+Imagine um dataset com:
+
+```
+500.000 registros
+```
+
+Apenas cinco possuem problemas.
+
+Nesse caso.
+
+Remover essas cinco linhas dificilmente afetará o resultado.
+
+---
+
+Agora imagine outro cenário.
+
+```
+200 registros
+```
+
+E.
+
+```
+120 registros possuem valores nulos.
+```
+
+Remover tudo seria um grande prejuízo.
+
+Nesse caso.
+
+É melhor preencher os valores.
+
+---
+
+# Comparando
+
+| Estratégia | Quando utilizar |
+|------------|----------------|
+| `fillna()` | Quando é possível substituir a informação |
+| `dropna()` | Quando poucos registros possuem problemas |
+
+---
+
+# Laboratório 01
+
+Abra o arquivo.
+
+```text
+alunos_sujo.csv
+```
+
+Execute.
+
+```python
+df.isnull().sum()
+```
+
+Anote.
+
+Quais colunas possuem valores nulos?
+
+---
+
+Agora.
+
+Crie uma nova variável.
+
+```python
+novo_df = df.fillna(0)
+```
+
+Exiba.
+
+```python
+novo_df
+```
+
+Observe.
+
+O DataFrame original continua igual.
+
+---
+
+Agora.
+
+Preencha a coluna Nota utilizando a média.
+
+```python
+media = df["Nota"].mean()
+
+df["Nota"] = df["Nota"].fillna(media)
+```
+
+Verifique novamente.
+
+```python
+df.isnull().sum()
+```
+
+---
+
+# Laboratório 02
+
+Abra o dataset.
+
+```text
+clientes_sujo.csv
+```
+
+Descubra.
+
+- Existem valores nulos?
+
+Depois.
+
+Preencha-os utilizando a estratégia que você considera mais adequada.
+
+Explique sua escolha.
+
+---
+
+# ⚠️ Erro comum
+
+Muitos iniciantes fazem:
+
+```python
+df.fillna(0)
+```
+
+E acreditam que o DataFrame foi alterado.
+
+Na verdade.
+
+Esse comando retorna um novo DataFrame.
+
+Se quiser salvar a alteração.
+
+Faça.
+
+```python
+df = df.fillna(0)
+```
+
+Ou.
+
+```python
+df.fillna(0, inplace=True)
+```
+
+---
+
+# 💼 No mercado
+
+Não existe uma única maneira correta de tratar valores nulos.
+
+A decisão depende do problema.
+
+Um Cientista de Dados analisa:
+
+- quantidade de registros;
+- importância da coluna;
+- impacto da informação ausente.
+
+Só então escolhe a melhor estratégia.
+
+---
+
+# 📌 Resumo
+
+Neste módulo você aprendeu:
+
+✅ O que são valores nulos.
+
+✅ O significado de NaN.
+
+✅ Como localizar valores ausentes.
+
+✅ Como preencher utilizando:
+
+- zero;
+- texto;
+- média.
+
+✅ Como remover registros incompletos.
+
+---
+
+# 🚀 Preparando o próximo módulo
+
+Agora nosso dataset possui menos problemas.
+
+O próximo passo será localizar registros repetidos.
+
+Você aprenderá a identificar e remover duplicidades utilizando:
+
+```python
+df.duplicated()
+
+df.drop_duplicates()
+```
+
+Esses comandos ajudam a evitar que um mesmo registro influencie o treinamento mais de uma vez.
+
+---
+
+**© @karizeviecelli - 2026**
