@@ -1,0 +1,61 @@
+﻿ID,Nome,Idade,Curso,Nota,Frequencia,Aprovado
+1,Ana Souza,27,Java,4.7,72,Não
+2,Bruno Lima,20,Machine Learning,4.8,61,Não
+3,Carla Mendes,18,Python,7.5,57,Não
+4,Diego Alves,18,Machine Learning,5.3,87,Não
+5,Eduarda Costa,17,Machine Learning,7.4,100,Sim
+6,Felipe Martins,23,Front-end,5.3,92,Não
+7,Gabriela Rocha,29,Banco de Dados,9.2,65,Não
+8,Henrique Dias,22,Front-end,5.7,68,Não
+9,Isabela Gomes,18,Front-end,4.6,61,Não
+10,João Oliveira,22,Banco de Dados,7.6,57,Não
+11,Karen Ribeiro,25,Python,4.7,79,Não
+12,Lucas Pereira,25,Machine Learning,5.8,95,Não
+13,Mariana Silva,22,Python,7.5,100,Sim
+14,Nicolas Santos,17,Python,8.0,73,Não
+15,Olivia Castro,20,Front-end,9.2,79,Sim
+16,Pedro Almeida,24,Java,7.8,78,Sim
+17,Rafaela Nunes,22,Front-end,6.1,97,Não
+18,Samuel Cardoso,28,Python,9.6,96,Sim
+19,Tatiane Freitas,26,Java,7.8,89,Sim
+20,Vinicius Moraes,19,Machine Learning,6.8,72,Não
+21,Alice Moreira,20,Java,8.1,58,Não
+22,Bernardo Lopes,17,Front-end,8.8,80,Sim
+23,Cecília Ramos,18,Front-end,5.3,91,Não
+24,Daniel Cardoso,20,Banco de Dados,7.9,80,Sim
+25,Elisa Barros,19,Machine Learning,5.6,70,Não
+26,Fernando Reis,25,Banco de Dados,5.6,92,Não
+27,Giovana Vieira,26,Java,6.4,69,Não
+28,Heitor Teixeira,25,Python,7.0,58,Não
+29,Ingrid Fernandes,19,Banco de Dados,7.8,98,Sim
+30,Júlio Batista,26,Machine Learning,4.4,79,Não
+31,Larissa Prado,24,Python,7.2,90,Sim
+32,Mateus Freire,27,Machine Learning,8.3,98,Sim
+33,Natália Duarte,29,Front-end,5.6,96,Não
+34,Otávio Campos,18,Banco de Dados,5.8,65,Não
+35,Paula Andrade,17,Machine Learning,9.7,71,Não
+36,Renato Farias,29,Front-end,5.1,61,Não
+37,Sabrina Cunha,27,Java,7.0,67,Não
+38,Thiago Melo,22,Machine Learning,8.6,89,Sim
+39,Valentina Monteiro,17,Python,7.6,86,Sim
+40,William Araújo,18,Java,9.6,74,Não
+41,Yasmin Correia,17,Python,5.4,91,Não
+42,Arthur Pires,18,Machine Learning,8.4,59,Não
+43,Beatriz Neves,29,Banco de Dados,4.8,97,Não
+44,Caio Fonseca,25,Machine Learning,5.0,88,Não
+45,Débora Martins,23,Java,9.8,89,Sim
+46,Enzo Ribeiro,28,Front-end,5.9,97,Não
+47,Flávia Gomes,24,Python,9.4,83,Sim
+48,Gustavo Nunes,20,Python,5.3,76,Não
+49,Helena Castro,26,Java,7.3,92,Sim
+50,Igor Almeida,17,Python,4.4,95,Não
+51,Jéssica Dias,20,Front-end,4.4,57,Não
+52,Kleber Costa,18,Banco de Dados,7.1,72,Não
+53,Letícia Rocha,20,Machine Learning,7.2,91,Sim
+54,Murilo Santos,24,Banco de Dados,5.5,85,Não
+55,Nicole Pereira,20,Banco de Dados,4.6,97,Não
+56,Paulo Silva,22,Python,6.5,84,Não
+57,Queila Alves,27,Python,7.9,96,Sim
+58,Rodrigo Lima,17,Python,6.4,76,Não
+59,Sofia Mendes,20,Banco de Dados,5.1,89,Não
+60,Tomás Oliveira,19,Banco de Dados,6.5,72,Não
