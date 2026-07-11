@@ -32,10 +32,10 @@ Abra o arquivo `alunos.csv` no Google Colab.
 
 Em seguida, responda:
 
-1. O arquivo foi carregado corretamente?
-2. Quantas linhas existem?
-3. Quantas colunas existem?
-4. Qual é o nome de cada coluna?
+1. O arquivo foi carregado corretamente? Sim
+2. Quantas linhas existem? 5
+3. Quantas colunas existem? 6 
+4. Qual é o nome de cada coluna? Nome, Idade, Curso, Nota, Frequencia, Aprovado
 
 ---
 
@@ -43,10 +43,10 @@ Em seguida, responda:
 
 Agora descubra:
 
-5. Quais colunas armazenam números?
-6. Quais colunas armazenam textos?
-7. Existem colunas que representam datas?
-8. Qual é a quantidade total de registros?
+5. Quais colunas armazenam números? Idade, Nota, Frequencia
+6. Quais colunas armazenam textos? Nome, Curso, Aprovado
+7. Existem colunas que representam datas? não
+8. Qual é a quantidade total de registros? 5
 
 ---
 
@@ -54,11 +54,11 @@ Agora descubra:
 
 Utilize os comandos aprendidos para responder:
 
-9. Qual é a média da coluna **Nota**?
-10. Qual é a maior nota?
-11. Qual é a menor nota?
-12. Qual é a idade média dos alunos?
-13. Quais cursos aparecem no conjunto de dados?
+9. Qual é a média da coluna **Nota**? 7,82
+10. Qual é a maior nota? 9,3
+11. Qual é a menor nota? 6,2
+12. Qual é a idade média dos alunos? 20
+13. Quais cursos aparecem no conjunto de dados?  Python, Java, Front-end, Banco de Dados
 
 ---
 
@@ -66,7 +66,7 @@ Utilize os comandos aprendidos para responder:
 
 Analise cuidadosamente a tabela.
 
-Você consegue identificar algum possível problema?
+Você consegue identificar algum possível problema? Não
 
 Por exemplo:
 
