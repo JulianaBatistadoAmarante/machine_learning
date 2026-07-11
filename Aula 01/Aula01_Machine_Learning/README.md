@@ -101,15 +101,14 @@ df
 print("---Relatório---")
 print("Quantidade de linhas:", df.shape[0])
 print("Quantidade de colunas:", df.shape[1])
-print("Qual filme mais antigo:", df[df['Ano'] == df['Ano'].min()]['Filme'])
+print("Qual filme mais antigo:", df.loc[df['Ano'].idxmin(), 'Filme'])
 print("Qual a maior nota IMDb:", df['NotaIMDb'].max())
 print("Quais gêneros existem:", df['Genero'].unique())
 
 ---Relatório---
 Quantidade de linhas: 5
 Quantidade de colunas: 4
-Qual filme mais antigo: 2    Toy Story
-Name: Filme, dtype: object
+Qual filme mais antigo: Toy Story
 Qual a maior nota IMDb: 8.7
 Quais gêneros existem: ['Ficção Científica' 'Animação' 'Drama']
 ```
