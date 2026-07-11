@@ -100,6 +100,19 @@ Escreva suas respostas em Markdown ou em uma célula de texto do Google Colab.
 
 https://colab.research.google.com/drive/1UHB2Cje1Z01ulwG9CtrXMKQhJjzEnJAV?usp=sharing
 
+</>python
+'''
+import pandas as pd
+
+df = pd.read_csv("notas.csv")
+
+print("Quantidade de registros:", df.shape[0])
+print("Quantidade de colunas:", df.shape[1])
+print("Colunas:", list(df.columns))
+print("Média da nota:", df['nota'].mean())
+print("Menor nota:", df['nota'].min())
+print("Maior nota:", df['nota'].max())
+'''
 ---
 
 # Desafio Extra ⭐
