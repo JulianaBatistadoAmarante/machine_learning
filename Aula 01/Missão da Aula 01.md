@@ -100,6 +100,9 @@ Escreva suas respostas em Markdown ou em uma célula de texto do Google Colab.
 
 https://colab.research.google.com/drive/1UHB2Cje1Z01ulwG9CtrXMKQhJjzEnJAV?usp=sharing
 
+```python
+print("Olá, mundo!")
+```
 ---
 
 # Desafio Extra ⭐
