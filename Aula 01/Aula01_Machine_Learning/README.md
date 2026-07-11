@@ -65,6 +65,24 @@ df.describe()
 
 Abra `filmes.csv` e responda:
 
+```python
+import os
+
+os.listdir()
+
+import pandas as pd
+
+df = pd.read_csv("filmes.csv")
+df
+```
+|index|Filme|Ano|Genero|NotaIMDb|
+|---|---|---|---|---|
+|0|Interestelar|2014|Ficção Científica|8\.7|
+|1|Matrix|1999|Ficção Científica|8\.7|
+|2|Toy Story|1995|Animação|8\.3|
+|3|Parasita|2019|Drama|8\.5|
+|4|Avatar|2009|Ficção Científica|7\.9|
+
 - Quantas linhas?
 - Quantas colunas?
 - Qual o filme mais antigo?
