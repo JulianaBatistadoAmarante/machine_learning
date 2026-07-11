@@ -118,6 +118,22 @@ print("Média da nota:", df['Nota'].mean())
 print("Menor nota:", df['Nota'].min())
 print("Maior nota:", df['Nota'].max())
 print("Média da idade:", df['Idade'].mean())
+
+---Relatório---
+Quantidade de registros: 5
+Quantidade de colunas: 6
+Colunas: ['Nome', 'Idade', 'Curso', 'Nota', 'Frequencia', 'Aprovado']
+Tipos de dados: Nome           object
+Idade           int64
+Curso          object
+Nota          float64
+Frequencia      int64
+Aprovado       object
+dtype: object
+Média da nota: 7.82
+Menor nota: 6.2
+Maior nota: 9.3
+Média da idade: 20.0
 ```
 ---
 
