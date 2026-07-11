@@ -98,7 +98,7 @@ Crie um pequeno relatório contendo:
 
 Escreva suas respostas em Markdown ou em uma célula de texto do Google Colab.
 
-'''
+___________Comandos no Google Colab___________
 from google.colab import drive
 drive.mount('/content/drive')
 
@@ -110,30 +110,54 @@ import pandas as pd
 df = pd.read_csv("alunos.csv")
 
 print("---Relatório---")
-print("Quantidade de registros:", df.shape[0])
-print("Quantidade de colunas:", df.shape[1])
-print("Colunas:", list(df.columns))
-print("Tipos de dados:", df.dtypes)
-print("Média da nota:", df['Nota'].mean())
-print("Menor nota:", df['Nota'].min())
-print("Maior nota:", df['Nota'].max())
-print("Média da idade:", df['Idade'].mean())
-'''
 
+print("Quantidade de registros:", df.shape[0])
+
+print("Quantidade de colunas:", df.shape[1])
+
+print("Colunas:", list(df.columns))
+
+print("Tipos de dados:", df.dtypes)
+
+print("Média da nota:", df['Nota'].mean())
+
+print("Menor nota:", df['Nota'].min())
+
+print("Maior nota:", df['Nota'].max())
+
+print("Média da idade:", df['Idade'].mean())
+
+
+___________RESULTADO_________________________
 ---Relatório---
+
 Quantidade de registros: 5
+
 Quantidade de colunas: 6
-Colunas: ['Nome', 'Idade', 'Curso', 'Nota', 'Frequencia', 'Aprovado']
-Tipos de dados: Nome           object
+
+Colunas: ['Nome', 'Idade', 'Curso', 'Nota', 'Frequencia', 'Aprovado
+
+Tipos de dados:
+Nome           object
+
 Idade           int64
+
 Curso          object
+
 Nota          float64
+
 Frequencia      int64
+
 Aprovado       object
+
 dtype: object
+
 Média da nota: 7.82
+
 Menor nota: 6.2
+
 Maior nota: 9.3
+
 Média da idade: 20.0
 
 
