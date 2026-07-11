@@ -134,3 +134,28 @@ df
 |4|Python Crash Course|Eric Matthes|2019|544|
 
 
+```python
+import os
+
+os.listdir()
+
+import pandas as pd
+
+df = pd.read_csv("livros.csv")
+df
+
+print("---Relatório---")
+print("Quantidade de linhas:", df.shape[0])
+print("Quantidade de colunas:", df.shape[1])
+print("Qual livro mais antigo:", df.loc[df['Ano'].idxmin(), 'Titulo'])
+print("Qual livro tem maior número de páginas:", df.loc[df['Paginas'].idxmax(), 'Titulo'] )
+print("Quais são os livro:", df['Titulo'].unique())
+
+---Relatório---
+Quantidade de linhas: 5
+Quantidade de colunas: 4
+Qual livro mais antigo: Dom Casmurro
+Qual livro tem maior número de páginas: Python Crash Course
+Quais são os livro: ['1984' 'Dom Casmurro' 'O Hobbit' 'Clean Code' 'Python Crash Course']
+
+```
