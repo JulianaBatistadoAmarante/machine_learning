@@ -98,6 +98,7 @@ Crie um pequeno relatório contendo:
 
 Escreva suas respostas em Markdown ou em uma célula de texto do Google Colab.
 
+'''
 from google.colab import drive
 drive.mount('/content/drive')
 
@@ -117,6 +118,7 @@ print("Média da nota:", df['Nota'].mean())
 print("Menor nota:", df['Nota'].min())
 print("Maior nota:", df['Nota'].max())
 print("Média da idade:", df['Idade'].mean())
+'''
 
 ---Relatório---
 Quantidade de registros: 5
@@ -133,6 +135,7 @@ Média da nota: 7.82
 Menor nota: 6.2
 Maior nota: 9.3
 Média da idade: 20.0
+
 
 ---
 
