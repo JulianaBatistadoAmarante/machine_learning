@@ -114,3 +114,24 @@ Quais gêneros existem: ['Ficção Científica' 'Animação' 'Drama']
 ```
 
 Depois faça a mesma investigação em `livros.csv`.
+
+```python
+import os
+
+os.listdir()
+
+import pandas as pd
+
+df = pd.read_csv("livros.csv")
+df
+```
+|index|Titulo|Autor|Ano|Paginas|
+|---|---|---|---|---|
+|0|1984|George Orwell|1949|328|
+|1|Dom Casmurro|Machado de Assis|1899|256|
+|2|O Hobbit|J\.R\.R\. Tolkien|1937|336|
+|3|Clean Code|Robert C\. Martin|2008|464|
+|4|Python Crash Course|Eric Matthes|2019|544|
+
+
+
