@@ -1853,11 +1853,11 @@ Observe a tabela.
 
 Responda.
 
-Quais colunas representam as features?
+Quais colunas representam as features?    Idade, Salário
 
 ____________________
 
-Qual coluna representa o target?
+Qual coluna representa o target?  Comprou
 
 ____________________
 
@@ -2339,10 +2339,10 @@ Classifique os problemas abaixo.
 
 | Problema | Tipo |
 |-----------|------|
-| Descobrir se um e-mail é spam | __________ |
-| Prever o preço de um carro | __________ |
-| Agrupar clientes semelhantes | __________ |
-| Ensinar um robô a caminhar | __________ |
+| Descobrir se um e-mail é spam | __________ | Classificação
+| Prever o preço de um carro | __________ | Regressão
+| Agrupar clientes semelhantes | __________ | Agrupamento
+| Ensinar um robô a caminhar | __________ | Reforço
 
 ---
 
@@ -2815,14 +2815,25 @@ Neste módulo você aprendeu que:
 Responda às perguntas.
 
 1. O que é uma biblioteca em Python?
+R.: é um conjunto de códigos, funções e ferramentas prontas que outras pessoas já criaram para resolver determinados problemas.
 
 2. Qual é a função do Pandas?
+R.: Ele permite trabalhar com dados de forma organizada
 
 3. O que significa a palavra `import`?
+R.: carrega uma biblioteca
 
 4. Por que utilizamos `as pd`?
+R.: define um apelido para Pandas.
 
 5. O que aconteceria se tentássemos utilizar `pd.DataFrame()` antes de importar o Pandas?
+R.: O Python exibirá um erro semelhante a este:
+
+```text
+NameError: name 'pd' is not defined
+```
+
+Isso acontece porque a biblioteca ainda não foi carregada.
 
 ---
 
@@ -3359,6 +3370,33 @@ Crie um DataFrame contendo.
 
 Com cinco alunos.
 
+```python
+import pandas as pd
+
+dados = {
+
+    "Nome": ["Ana", "João", "Maria", "Carlos", "Vitor"],
+
+    "Idade": [18,20,19,21,18],
+
+    "Curso": ["Python", "Java", "Front-end", "Python", "IA"],
+
+    "Cidade": ["Blumenau", "Pomerode", "Indaial", "Blumenau", "Apiuna"]
+}
+
+df = pd.DataFrame(dados)
+
+df
+```
+
+|index|Nome|Idade|Curso|Cidade|
+|---|---|---|---|---|
+|0|Ana|18|Python|Blumenau|
+|1|João|20|Java|Pomerode|
+|2|Maria|19|Front-end|Indaial|
+|3|Carlos|21|Python|Blumenau|
+|4|Vitor|18|IA|Apiuna|
+
 ---
 
 ## Parte 2
@@ -3368,6 +3406,34 @@ Adicione.
 ```
 Nota
 ```
+
+```python
+import pandas as pd
+
+dados = {
+     "Nome": ["Ana", "João", "Maria", "Carlos", "Vitor"],
+
+    "Idade": [18,20,19,21,18],
+
+    "Curso": ["Python", "Java", "Front-end", "Python", "IA"],
+
+    "Cidade": ["Blumenau", "Pomerode", "Indaial", "Blumenau", "Apiuna"],
+     
+    "Notas": [8, 9.5, 10, 9.7, 8]
+   }
+
+df = pd.DataFrame(dados)
+
+df
+```
+
+|index|Nome|Idade|Curso|Cidade|Notas|
+|---|---|---|---|---|---|
+|0|Ana|18|Python|Blumenau|8\.0|
+|1|João|20|Java|Pomerode|9\.5|
+|2|Maria|19|Front-end|Indaial|10\.0|
+|3|Carlos|21|Python|Blumenau|9\.7|
+|4|Vitor|18|IA|Apiuna|8\.0|
 
 ---
 
@@ -3379,11 +3445,49 @@ Adicione.
 Frequência
 ```
 
+```python
+import pandas as pd
+
+dados = {
+     "Nome": ["Ana", "João", "Maria", "Carlos", "Vitor"],
+
+    "Idade": [18,20,19,21,18],
+
+    "Curso": ["Python", "Java", "Front-end", "Python", "IA"],
+
+    "Cidade": ["Blumenau", "Pomerode", "Indaial", "Blumenau", "Apiuna"],
+     
+    "Notas": [8, 9.5, 10, 9.7, 8],
+
+    "Frequencia": [75, 80, 96, 86, 98]
+   }
+
+df = pd.DataFrame(dados)
+
+df
+```
+
+|index|Nome|Idade|Curso|Cidade|Notas|Frequencia|
+|---|---|---|---|---|---|---|
+|0|Ana|18|Python|Blumenau|8\.0|75|
+|1|João|20|Java|Pomerode|9\.5|80|
+|2|Maria|19|Front-end|Indaial|10\.0|96|
+|3|Carlos|21|Python|Blumenau|9\.7|86|
+|4|Vitor|18|IA|Apiuna|8\.0|98|
+
 ---
 
 ## Parte 4
 
 Exiba o resultado.
+
+|index|Nome|Idade|Curso|Cidade|Notas|Frequencia|
+|---|---|---|---|---|---|---|
+|0|Ana|18|Python|Blumenau|8\.0|75|
+|1|João|20|Java|Pomerode|9\.5|80|
+|2|Maria|19|Front-end|Indaial|10\.0|96|
+|3|Carlos|21|Python|Blumenau|9\.7|86|
+|4|Vitor|18|IA|Apiuna|8\.0|98|
 
 ---
 
@@ -3405,6 +3509,33 @@ Crie um DataFrame contendo.
 
 Cadastre pelo menos cinco filmes.
 
+```python
+import pandas as pd
+
+locadora = {
+    "Filme" : ["Interestelar", "Matrix", "Toy Story", "Parasita", "Avatar"],
+
+    "Ano" : [2014, 1999, 1995, 2019, 2009],
+
+    "Genero" : ["Ficção Científica", "Ficção Científica", "Animação", "Drama", "Ficção Científica"],
+
+    "NotaIMDb" : [8.7, 8.7, 8.3, 8.5, 7.9],
+
+    "Duracao" : [90, 120, 95, 110, 180]
+}
+
+df = pd.DataFrame(locadora)
+
+df
+
+|index|Filme|Ano|Genero|NotaIMDb|Duracao|
+|---|---|---|---|---|---|
+|0|Interestelar|2014|Ficção Científica|8\.7|90|
+|1|Matrix|1999|Ficção Científica|8\.7|120|
+|2|Toy Story|1995|Animação|8\.3|95|
+|3|Parasita|2019|Drama|8\.5|110|
+|4|Avatar|2009|Ficção Científica|7\.9|180|
+```
 ---
 
 # No Mercado
