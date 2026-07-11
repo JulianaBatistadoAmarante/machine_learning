@@ -2339,10 +2339,10 @@ Classifique os problemas abaixo.
 
 | Problema | Tipo |
 |-----------|------|
-| Descobrir se um e-mail é spam | __________ | Classificação
-| Prever o preço de um carro | __________ | Regressão
-| Agrupar clientes semelhantes | __________ | Agrupamento
-| Ensinar um robô a caminhar | __________ | Reforço
+| Descobrir se um e-mail é spam | Classificação | 
+| Prever o preço de um carro | Regressão | 
+| Agrupar clientes semelhantes | Agrupamento | 
+| Ensinar um robô a caminhar | Reforço | 
 
 ---
 
