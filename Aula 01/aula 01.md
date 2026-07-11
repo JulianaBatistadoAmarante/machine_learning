@@ -3527,6 +3527,7 @@ locadora = {
 df = pd.DataFrame(locadora)
 
 df
+```
 
 |index|Filme|Ano|Genero|NotaIMDb|Duracao|
 |---|---|---|---|---|---|
@@ -3535,7 +3536,7 @@ df
 |2|Toy Story|1995|Animação|8\.3|95|
 |3|Parasita|2019|Drama|8\.5|110|
 |4|Avatar|2009|Ficção Científica|7\.9|180|
-```
+
 ---
 
 # No Mercado
