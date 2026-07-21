@@ -3,7 +3,7 @@
 
 # Aula 04 – Construindo o Primeiro Modelo de Machine Learning
 
-# Capítulo 1 – Conhecendo o NumPy: a Base Matemática do Machine Learning
+# Módulo 1 – Conhecendo o NumPy: a Base Matemática do Machine Learning
 
 
 ---
