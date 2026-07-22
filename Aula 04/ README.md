@@ -6061,3 +6061,3194 @@ Serão estudados:
 * preparação matemática dos dados para Machine Learning.
 
 © @karizeviecelli - 2026
+
+--
+# Aula 04 — Como os Dados Chegam ao Machine Learning e ao Deep Learning
+
+## Parte 4 — Operações vetorizadas, estatística, eixos e broadcasting
+
+© @karizeviecelli - 2026
+
+---
+
+# 143. Operações com arrays NumPy
+
+Nas partes anteriores, aprendemos a:
+
+* criar arrays;
+* verificar suas dimensões;
+* acessar linhas e colunas;
+* utilizar índices;
+* aplicar filtros;
+* selecionar registros;
+* corrigir valores.
+
+Agora vamos aprender a realizar cálculos sobre os dados.
+
+Esses cálculos são fundamentais em Machine Learning porque os algoritmos trabalham com números.
+
+Durante a preparação dos dados, podemos precisar:
+
+* aumentar ou diminuir valores;
+* calcular médias;
+* encontrar valores mínimos e máximos;
+* medir a variação dos dados;
+* comparar colunas;
+* ajustar escalas;
+* transformar matrizes;
+* aplicar cálculos em todas as amostras.
+
+O NumPy permite realizar essas operações de forma direta e eficiente.
+
+---
+
+# 144. Operações vetorizadas
+
+Uma operação vetorizada é aplicada a vários valores ao mesmo tempo.
+
+Considere:
+
+```python
+import numpy as np
+
+notas = np.array([5.0, 6.5, 7.0, 8.5, 9.0])
+```
+
+Para aumentar todas as notas em um ponto:
+
+```python
+notas_atualizadas = notas + 1
+
+print(notas_atualizadas)
+```
+
+Resultado:
+
+```text
+[ 6.   7.5  8.   9.5 10. ]
+```
+
+O NumPy aplicou a operação a todos os elementos do array.
+
+---
+
+# 145. Comparando lista Python e NumPy
+
+Com uma lista Python:
+
+```python
+notas_lista = [5.0, 6.5, 7.0, 8.5, 9.0]
+```
+
+Para aumentar todas as notas, poderíamos utilizar:
+
+```python
+novas_notas = []
+
+for nota in notas_lista:
+    novas_notas.append(nota + 1)
+
+print(novas_notas)
+```
+
+Com NumPy:
+
+```python
+notas_array = np.array([5.0, 6.5, 7.0, 8.5, 9.0])
+
+novas_notas = notas_array + 1
+
+print(novas_notas)
+```
+
+A operação vetorizada torna o código mais curto e mais próximo da linguagem matemática.
+
+---
+
+# 146. Soma
+
+```python
+valores = np.array([10, 20, 30, 40])
+
+resultado = valores + 5
+
+print(resultado)
+```
+
+Resultado:
+
+```text
+[15 25 35 45]
+```
+
+O valor `5` foi somado a cada elemento.
+
+---
+
+# 147. Subtração
+
+```python
+resultado = valores - 2
+
+print(resultado)
+```
+
+Resultado:
+
+```text
+[ 8 18 28 38]
+```
+
+---
+
+# 148. Multiplicação
+
+```python
+resultado = valores * 2
+
+print(resultado)
+```
+
+Resultado:
+
+```text
+[20 40 60 80]
+```
+
+---
+
+# 149. Divisão
+
+```python
+resultado = valores / 10
+
+print(resultado)
+```
+
+Resultado:
+
+```text
+[1. 2. 3. 4.]
+```
+
+Mesmo que os valores originais sejam inteiros, a divisão normalmente produz números decimais.
+
+---
+
+# 150. Potência
+
+```python
+resultado = valores ** 2
+
+print(resultado)
+```
+
+Resultado:
+
+```text
+[ 100  400  900 1600]
+```
+
+O operador `**` representa potência.
+
+---
+
+# 151. Raiz quadrada
+
+```python
+resultado = np.sqrt(valores)
+
+print(resultado)
+```
+
+Resultado aproximado:
+
+```text
+[3.16227766 4.47213595 5.47722558 6.32455532]
+```
+
+---
+
+# 152. Operações entre dois arrays
+
+Também podemos realizar operações entre arrays.
+
+```python
+array_a = np.array([10, 20, 30])
+
+array_b = np.array([1, 2, 3])
+```
+
+Soma:
+
+```python
+print(array_a + array_b)
+```
+
+Resultado:
+
+```text
+[11 22 33]
+```
+
+Subtração:
+
+```python
+print(array_a - array_b)
+```
+
+Resultado:
+
+```text
+[ 9 18 27]
+```
+
+Multiplicação:
+
+```python
+print(array_a * array_b)
+```
+
+Resultado:
+
+```text
+[10 40 90]
+```
+
+Divisão:
+
+```python
+print(array_a / array_b)
+```
+
+Resultado:
+
+```text
+[10. 10. 10.]
+```
+
+---
+
+# 153. Operações elemento a elemento
+
+As operações anteriores acontecem posição por posição.
+
+```text
+10 + 1
+20 + 2
+30 + 3
+```
+
+Por isso, dizemos que são operações elemento a elemento.
+
+Na multiplicação:
+
+```text
+10 × 1
+20 × 2
+30 × 3
+```
+
+Não se trata de multiplicação matricial.
+
+É uma multiplicação entre elementos correspondentes.
+
+---
+
+# 154. Arrays com formatos incompatíveis
+
+Considere:
+
+```python
+array_a = np.array([10, 20, 30])
+
+array_b = np.array([1, 2])
+```
+
+Ao executar:
+
+```python
+array_a + array_b
+```
+
+pode aparecer um erro semelhante a:
+
+```text
+ValueError: operands could not be broadcast together
+```
+
+Isso acontece porque os formatos não são compatíveis.
+
+```text
+array_a.shape = (3,)
+array_b.shape = (2,)
+```
+
+O NumPy não consegue decidir como combinar os elementos.
+
+---
+
+# 155. Operações em matrizes
+
+Considere:
+
+```python
+dados = np.array([
+    [18, 8.0, 90],
+    [19, 6.5, 75],
+    [20, 9.0, 98]
+])
+```
+
+Podemos somar um valor a toda a matriz:
+
+```python
+resultado = dados + 1
+
+print(resultado)
+```
+
+Resultado:
+
+```text
+[[19.   9.  91. ]
+ [20.   7.5 76. ]
+ [21.  10.  99. ]]
+```
+
+Entretanto, nesse caso, somar `1` a todas as colunas pode não fazer sentido.
+
+A idade, a nota e a frequência representam grandezas diferentes.
+
+Por isso, devemos pensar no significado dos dados antes de aplicar operações.
+
+---
+
+# 156. Aplicando operação em uma coluna
+
+Considere:
+
+```python
+dados = np.array([
+    [18, 8.0, 90],
+    [19, 6.5, 75],
+    [20, 9.0, 98]
+])
+```
+
+Para aumentar apenas as notas:
+
+```python
+dados[:, 1] = dados[:, 1] + 1
+
+print(dados)
+```
+
+Resultado:
+
+```text
+[[18.   9.  90. ]
+ [19.   7.5 75. ]
+ [20.  10.  98. ]]
+```
+
+---
+
+## 156.1 Forma reduzida
+
+Também podemos escrever:
+
+```python
+dados[:, 1] += 1
+```
+
+Esse comando altera diretamente a coluna.
+
+---
+
+# 157. Limitando os valores
+
+Após aumentar as notas, alguma nota pode ficar acima de 10.
+
+Podemos utilizar:
+
+```python
+dados[:, 1] = np.clip(
+    dados[:, 1],
+    0,
+    10
+)
+```
+
+Agora todas as notas permanecerão entre 0 e 10.
+
+---
+
+# 158. Funções estatísticas
+
+O NumPy possui várias funções para resumir os dados.
+
+As mais utilizadas são:
+
+```text
+np.sum()
+np.mean()
+np.median()
+np.min()
+np.max()
+np.std()
+np.var()
+```
+
+Essas funções ajudam a compreender o comportamento de um conjunto de dados.
+
+---
+
+# 159. Soma total com `np.sum()`
+
+```python
+notas = np.array([5.0, 6.5, 7.0, 8.5, 9.0])
+
+soma = np.sum(notas)
+
+print(soma)
+```
+
+Resultado:
+
+```text
+36.0
+```
+
+---
+
+# 160. Média com `np.mean()`
+
+```python
+media = np.mean(notas)
+
+print(media)
+```
+
+Resultado:
+
+```text
+7.2
+```
+
+A média é calculada pela soma dos valores dividida pela quantidade de elementos.
+
+```text
+36 ÷ 5 = 7,2
+```
+
+---
+
+# 161. Mediana com `np.median()`
+
+```python
+mediana = np.median(notas)
+
+print(mediana)
+```
+
+Resultado:
+
+```text
+7.0
+```
+
+A mediana é o valor central quando os dados estão ordenados.
+
+Considere:
+
+```text
+5.0
+6.5
+7.0
+8.5
+9.0
+```
+
+O valor central é 7.
+
+---
+
+# 162. Média e mediana não são a mesma coisa
+
+Considere:
+
+```python
+salarios = np.array([
+    2000,
+    2200,
+    2300,
+    2400,
+    15000
+])
+```
+
+Média:
+
+```python
+print(np.mean(salarios))
+```
+
+Resultado:
+
+```text
+4780.0
+```
+
+Mediana:
+
+```python
+print(np.median(salarios))
+```
+
+Resultado:
+
+```text
+2300.0
+```
+
+O valor 15000 aumenta bastante a média.
+
+A mediana representa melhor o centro dos dados nesse caso.
+
+---
+
+# 163. Valores mínimo e máximo
+
+```python
+print(np.min(notas))
+```
+
+Resultado:
+
+```text
+5.0
+```
+
+```python
+print(np.max(notas))
+```
+
+Resultado:
+
+```text
+9.0
+```
+
+Essas funções ajudam a identificar os limites do conjunto.
+
+---
+
+# 164. Amplitude
+
+A amplitude é a diferença entre o valor máximo e o mínimo.
+
+```python
+amplitude = np.max(notas) - np.min(notas)
+
+print(amplitude)
+```
+
+Resultado:
+
+```text
+4.0
+```
+
+A amplitude fornece uma medida simples da variação dos dados.
+
+---
+
+# 165. Desvio padrão
+
+O desvio padrão mede o quanto os valores se afastam da média.
+
+```python
+desvio = np.std(notas)
+
+print(desvio)
+```
+
+Um desvio padrão pequeno indica que os valores estão próximos da média.
+
+Um desvio padrão maior indica maior dispersão.
+
+---
+
+## 165.1 Analogia
+
+Considere duas turmas.
+
+Turma A:
+
+```text
+7.0
+7.1
+6.9
+7.0
+7.0
+```
+
+Turma B:
+
+```text
+2.0
+5.0
+7.0
+9.0
+12.0
+```
+
+As duas turmas podem ter médias semelhantes.
+
+Entretanto, os valores da Turma B estão muito mais espalhados.
+
+O desvio padrão ajuda a identificar essa diferença.
+
+---
+
+# 166. Variância
+
+A variância também mede a dispersão dos dados.
+
+```python
+variancia = np.var(notas)
+
+print(variancia)
+```
+
+O desvio padrão é a raiz quadrada da variância.
+
+```python
+print(np.sqrt(np.var(notas)))
+```
+
+Esse resultado deve ser equivalente a:
+
+```python
+print(np.std(notas))
+```
+
+---
+
+# 167. Resumo estatístico
+
+```python
+notas = np.array([5.0, 6.5, 7.0, 8.5, 9.0])
+
+print("Quantidade:", notas.size)
+print("Soma:", np.sum(notas))
+print("Média:", np.mean(notas))
+print("Mediana:", np.median(notas))
+print("Mínimo:", np.min(notas))
+print("Máximo:", np.max(notas))
+print("Desvio padrão:", np.std(notas))
+print("Variância:", np.var(notas))
+```
+
+---
+
+# 168. O conceito de eixo
+
+Em uma matriz, podemos calcular valores:
+
+* para a matriz inteira;
+* por coluna;
+* por linha.
+
+Para isso, utilizamos o parâmetro `axis`.
+
+Considere:
+
+```python
+dados = np.array([
+    [18, 8.0, 90],
+    [19, 6.5, 75],
+    [20, 9.0, 98],
+    [21, 7.5, 85]
+])
+```
+
+As colunas representam:
+
+```text
+idade
+nota
+frequência
+```
+
+---
+
+# 169. Operação sem eixo
+
+```python
+media_total = np.mean(dados)
+
+print(media_total)
+```
+
+O NumPy calcula a média de todos os números da matriz.
+
+Entretanto, esse resultado não possui grande significado, porque mistura:
+
+* idade;
+* nota;
+* frequência.
+
+Essas variáveis possuem escalas diferentes.
+
+---
+
+# 170. `axis=0`
+
+Ao utilizar:
+
+```python
+np.mean(dados, axis=0)
+```
+
+o NumPy calcula a média de cada coluna.
+
+```python
+medias_colunas = np.mean(
+    dados,
+    axis=0
+)
+
+print(medias_colunas)
+```
+
+Resultado aproximado:
+
+```text
+[19.5   7.75 87.  ]
+```
+
+Interpretação:
+
+```text
+média das idades
+média das notas
+média das frequências
+```
+
+---
+
+# 171. Como entender `axis=0`
+
+Podemos pensar que o eixo 0 percorre as linhas para calcular um resultado por coluna.
+
+```text
+           idade   nota   frequência
+Aluno 1      18     8.0       90
+Aluno 2      19     6.5       75
+Aluno 3      20     9.0       98
+Aluno 4      21     7.5       85
+             ↓       ↓         ↓
+          média   média      média
+```
+
+---
+
+# 172. `axis=1`
+
+Ao utilizar:
+
+```python
+np.mean(dados, axis=1)
+```
+
+o NumPy calcula uma média para cada linha.
+
+```python
+medias_linhas = np.mean(
+    dados,
+    axis=1
+)
+
+print(medias_linhas)
+```
+
+Entretanto, nesse exemplo, essa média mistura idade, nota e frequência.
+
+Matematicamente o cálculo funciona, mas pode não ter significado prático.
+
+---
+
+# 173. Como entender `axis=1`
+
+O eixo 1 percorre as colunas para calcular um resultado por linha.
+
+```text
+Aluno 1 → [18, 8.0, 90] → média
+Aluno 2 → [19, 6.5, 75] → média
+Aluno 3 → [20, 9.0, 98] → média
+Aluno 4 → [21, 7.5, 85] → média
+```
+
+---
+
+# 174. Regra prática para eixos
+
+Em uma matriz bidimensional:
+
+```text
+axis=0 → operação por coluna
+axis=1 → operação por linha
+```
+
+Essa regra ajuda a lembrar o comportamento.
+
+---
+
+# 175. Soma por coluna
+
+```python
+somas_colunas = np.sum(
+    dados,
+    axis=0
+)
+
+print(somas_colunas)
+```
+
+O resultado contém:
+
+```text
+soma das idades
+soma das notas
+soma das frequências
+```
+
+---
+
+# 176. Mínimo por coluna
+
+```python
+minimos = np.min(
+    dados,
+    axis=0
+)
+
+print(minimos)
+```
+
+Resultado:
+
+```text
+menor idade
+menor nota
+menor frequência
+```
+
+---
+
+# 177. Máximo por coluna
+
+```python
+maximos = np.max(
+    dados,
+    axis=0
+)
+
+print(maximos)
+```
+
+Resultado:
+
+```text
+maior idade
+maior nota
+maior frequência
+```
+
+---
+
+# 178. Desvio padrão por coluna
+
+```python
+desvios = np.std(
+    dados,
+    axis=0
+)
+
+print(desvios)
+```
+
+Isso permite verificar a dispersão de cada feature.
+
+---
+
+# 179. Analisando apenas notas e frequência
+
+Podemos selecionar colunas específicas:
+
+```python
+notas_frequencias = dados[:, 1:3]
+```
+
+Agora:
+
+```python
+print(
+    np.mean(
+        notas_frequencias,
+        axis=0
+    )
+)
+```
+
+O resultado conterá:
+
+```text
+média das notas
+média das frequências
+```
+
+---
+
+# 180. `argmin()` e `argmax()`
+
+As funções `argmin()` e `argmax()` retornam o índice do menor ou maior valor.
+
+```python
+notas = np.array([
+    5.0,
+    6.5,
+    9.0,
+    8.0
+])
+```
+
+Índice da menor nota:
+
+```python
+indice_menor = np.argmin(notas)
+
+print(indice_menor)
+```
+
+Resultado:
+
+```text
+0
+```
+
+Índice da maior nota:
+
+```python
+indice_maior = np.argmax(notas)
+
+print(indice_maior)
+```
+
+Resultado:
+
+```text
+2
+```
+
+---
+
+# 181. Encontrando o aluno com maior nota
+
+Considere:
+
+```python
+alunos = np.array([
+    [18, 8.0, 90],
+    [19, 6.5, 75],
+    [20, 9.0, 98],
+    [21, 7.5, 85]
+])
+```
+
+Extraímos as notas:
+
+```python
+notas = alunos[:, 1]
+```
+
+Encontramos o índice:
+
+```python
+indice_maior_nota = np.argmax(notas)
+```
+
+Selecionamos o aluno:
+
+```python
+aluno_maior_nota = alunos[
+    indice_maior_nota
+]
+
+print(aluno_maior_nota)
+```
+
+Resultado:
+
+```text
+[20.  9. 98.]
+```
+
+---
+
+# 182. Ordenando valores
+
+```python
+notas = np.array([
+    7.5,
+    5.0,
+    9.0,
+    6.5
+])
+
+notas_ordenadas = np.sort(notas)
+
+print(notas_ordenadas)
+```
+
+Resultado:
+
+```text
+[5.  6.5 7.5 9. ]
+```
+
+O array original não é alterado automaticamente.
+
+---
+
+# 183. Ordenação decrescente
+
+```python
+notas_decrescentes = np.sort(notas)[::-1]
+
+print(notas_decrescentes)
+```
+
+Resultado:
+
+```text
+[9.  7.5 6.5 5. ]
+```
+
+---
+
+# 184. Ordenando uma matriz por uma coluna
+
+Considere:
+
+```python
+alunos = np.array([
+    [18, 8.0, 90],
+    [19, 6.5, 75],
+    [20, 9.0, 98],
+    [21, 7.5, 85]
+])
+```
+
+Para ordenar pelas notas:
+
+```python
+indices = np.argsort(
+    alunos[:, 1]
+)
+
+alunos_ordenados = alunos[indices]
+
+print(alunos_ordenados)
+```
+
+---
+
+## 184.1 Ordem decrescente
+
+```python
+indices = np.argsort(
+    alunos[:, 1]
+)[::-1]
+
+alunos_ordenados = alunos[indices]
+
+print(alunos_ordenados)
+```
+
+---
+
+# 185. Percentis
+
+Percentis dividem os dados em partes.
+
+```python
+notas = np.array([
+    4.0,
+    5.0,
+    6.0,
+    7.0,
+    8.0,
+    9.0,
+    10.0
+])
+```
+
+Primeiro quartil:
+
+```python
+q1 = np.percentile(
+    notas,
+    25
+)
+```
+
+Mediana:
+
+```python
+q2 = np.percentile(
+    notas,
+    50
+)
+```
+
+Terceiro quartil:
+
+```python
+q3 = np.percentile(
+    notas,
+    75
+)
+```
+
+---
+
+# 186. Por que percentis são úteis?
+
+Percentis ajudam a:
+
+* compreender a distribuição;
+* identificar valores extremos;
+* comparar grupos;
+* estabelecer faixas;
+* detectar possíveis outliers.
+
+Exemplo:
+
+```python
+print("25%:", q1)
+print("50%:", q2)
+print("75%:", q3)
+```
+
+---
+
+# 187. O que é broadcasting?
+
+Broadcasting é um mecanismo do NumPy que permite combinar arrays de formatos diferentes em determinadas situações.
+
+Considere:
+
+```python
+notas = np.array([
+    5.0,
+    6.5,
+    7.0,
+    8.5
+])
+```
+
+Ao executar:
+
+```python
+notas + 1
+```
+
+o NumPy trata o valor `1` como se ele fosse aplicado a todas as posições.
+
+Podemos visualizar:
+
+```text
+[5.0, 6.5, 7.0, 8.5]
++
+[1.0, 1.0, 1.0, 1.0]
+```
+
+O NumPy não precisa criar explicitamente o segundo array.
+
+---
+
+# 188. Broadcasting em uma matriz
+
+Considere:
+
+```python
+dados = np.array([
+    [18, 8.0, 90],
+    [19, 6.5, 75],
+    [20, 9.0, 98]
+])
+```
+
+Agora:
+
+```python
+ajustes = np.array([
+    0,
+    1,
+    0
+])
+```
+
+Executando:
+
+```python
+resultado = dados + ajustes
+
+print(resultado)
+```
+
+Resultado:
+
+```text
+[[18.   9.  90. ]
+ [19.   7.5 75. ]
+ [20.  10.  98. ]]
+```
+
+O array `ajustes` foi aplicado a cada linha.
+
+---
+
+# 189. Interpretando o broadcasting
+
+Temos:
+
+```text
+dados.shape = (3, 3)
+ajustes.shape = (3,)
+```
+
+O NumPy associa:
+
+```text
+0 → idade
+1 → nota
+0 → frequência
+```
+
+Em cada linha, apenas a nota é aumentada.
+
+---
+
+# 190. Exemplo de ajuste por coluna
+
+```python
+ajustes = np.array([
+    1,
+    0.5,
+    2
+])
+```
+
+Aplicando:
+
+```python
+resultado = dados + ajustes
+```
+
+Interpretação:
+
+```text
+idade + 1
+nota + 0.5
+frequência + 2
+```
+
+para todos os alunos.
+
+---
+
+# 191. Subtraindo a média de cada coluna
+
+Considere:
+
+```python
+dados = np.array([
+    [18, 8.0, 90],
+    [19, 6.5, 75],
+    [20, 9.0, 98]
+])
+```
+
+Calculamos as médias:
+
+```python
+medias = np.mean(
+    dados,
+    axis=0
+)
+
+print(medias)
+```
+
+Agora subtraímos:
+
+```python
+dados_centralizados = dados - medias
+
+print(dados_centralizados)
+```
+
+O broadcasting aplica a média correspondente a cada coluna.
+
+---
+
+# 192. O que significa centralizar os dados?
+
+Centralizar significa subtrair a média.
+
+Após a centralização, cada coluna terá média próxima de zero.
+
+```python
+print(
+    np.mean(
+        dados_centralizados,
+        axis=0
+    )
+)
+```
+
+O resultado será próximo de:
+
+```text
+[0. 0. 0.]
+```
+
+Pequenas diferenças podem aparecer devido à precisão decimal.
+
+---
+
+# 193. Padronização manual
+
+Uma forma comum de padronização é:
+
+```text
+valor padronizado =
+(valor - média) ÷ desvio padrão
+```
+
+Com NumPy:
+
+```python
+medias = np.mean(
+    dados,
+    axis=0
+)
+
+desvios = np.std(
+    dados,
+    axis=0
+)
+
+dados_padronizados = (
+    dados - medias
+) / desvios
+
+print(dados_padronizados)
+```
+
+---
+
+# 194. O que acontece após a padronização?
+
+As colunas passam a ter aproximadamente:
+
+```text
+média = 0
+desvio padrão = 1
+```
+
+Verificando:
+
+```python
+print(
+    np.mean(
+        dados_padronizados,
+        axis=0
+    )
+)
+```
+
+```python
+print(
+    np.std(
+        dados_padronizados,
+        axis=0
+    )
+)
+```
+
+---
+
+# 195. Atenção à divisão por zero
+
+Se uma coluna possuir sempre o mesmo valor, seu desvio padrão será zero.
+
+Exemplo:
+
+```python
+dados = np.array([
+    [18, 10],
+    [19, 10],
+    [20, 10]
+])
+```
+
+A segunda coluna não varia.
+
+```python
+print(
+    np.std(
+        dados,
+        axis=0
+    )
+)
+```
+
+Resultado:
+
+```text
+[0.81649658 0.        ]
+```
+
+Dividir por zero pode gerar:
+
+```text
+nan
+inf
+```
+
+---
+
+## 195.1 Solução didática
+
+Podemos substituir desvios iguais a zero:
+
+```python
+desvios = np.std(
+    dados,
+    axis=0
+)
+
+desvios[desvios == 0] = 1
+```
+
+Depois:
+
+```python
+dados_padronizados = (
+    dados - np.mean(
+        dados,
+        axis=0
+    )
+) / desvios
+```
+
+Na prática, utilizaremos ferramentas prontas do Scikit-Learn, como `StandardScaler`.
+
+---
+
+# 196. Normalização entre zero e um
+
+Outra transformação comum é colocar os dados entre 0 e 1.
+
+A fórmula é:
+
+```text
+valor normalizado =
+(valor - mínimo) ÷ (máximo - mínimo)
+```
+
+Com NumPy:
+
+```python
+minimos = np.min(
+    dados,
+    axis=0
+)
+
+maximos = np.max(
+    dados,
+    axis=0
+)
+
+dados_normalizados = (
+    dados - minimos
+) / (
+    maximos - minimos
+)
+
+print(dados_normalizados)
+```
+
+---
+
+# 197. Por que ajustar a escala dos dados?
+
+Considere duas features:
+
+```text
+nota → entre 0 e 10
+frequência → entre 0 e 100
+```
+
+A frequência possui valores numericamente maiores.
+
+Alguns algoritmos utilizam distância.
+
+Nesses casos, a frequência pode influenciar mais o cálculo apenas por causa da escala.
+
+Isso será especialmente importante quando estudarmos KNN.
+
+---
+
+# 198. Exemplo de distância
+
+Aluno A:
+
+```text
+nota = 8
+frequência = 80
+```
+
+Aluno B:
+
+```text
+nota = 9
+frequência = 90
+```
+
+Diferenças:
+
+```text
+nota → diferença de 1
+frequência → diferença de 10
+```
+
+Sem ajuste de escala, a frequência terá maior peso numérico.
+
+Por isso, algoritmos baseados em distância costumam exigir normalização ou padronização.
+
+---
+
+# 199. Árvore de Decisão e escala
+
+A Árvore de Decisão geralmente não depende da distância entre os dados.
+
+Ela cria regras como:
+
+```text
+nota <= 6.5
+frequência > 75
+```
+
+Por isso, a escala costuma afetar menos esse algoritmo.
+
+Já algoritmos como KNN são bastante sensíveis à escala.
+
+---
+
+# 200. Broadcasting com vetor coluna
+
+Considere:
+
+```python
+valores = np.array([
+    [1],
+    [2],
+    [3]
+])
+```
+
+Formato:
+
+```python
+print(valores.shape)
+```
+
+Resultado:
+
+```text
+(3, 1)
+```
+
+Agora:
+
+```python
+colunas = np.array([
+    10,
+    20,
+    30
+])
+```
+
+Formato:
+
+```text
+(3,)
+```
+
+Ao somar:
+
+```python
+resultado = valores + colunas
+
+print(resultado)
+```
+
+Resultado:
+
+```text
+[[11 21 31]
+ [12 22 32]
+ [13 23 33]]
+```
+
+---
+
+# 201. Como o broadcasting funcionou?
+
+O NumPy combinou:
+
+```text
+(3, 1)
+com
+(3,)
+```
+
+O vetor coluna foi expandido horizontalmente.
+
+O vetor linha foi expandido verticalmente.
+
+O resultado possui formato:
+
+```text
+(3, 3)
+```
+
+---
+
+# 202. Regras simplificadas de broadcasting
+
+Ao comparar os formatos da direita para a esquerda, as dimensões são compatíveis quando:
+
+* são iguais;
+* uma delas é igual a 1;
+* uma dimensão não existe e pode ser adicionada.
+
+Exemplos compatíveis:
+
+```text
+(3, 3)
+(3,)
+```
+
+```text
+(4, 1)
+(3,)
+```
+
+Exemplo incompatível:
+
+```text
+(3,)
+(2,)
+```
+
+---
+
+# 203. Operações lógicas vetorizadas
+
+Além das operações matemáticas, também podemos aplicar lógica.
+
+```python
+notas = np.array([
+    5.0,
+    6.5,
+    7.0,
+    8.5,
+    9.0
+])
+```
+
+Criando uma condição:
+
+```python
+aprovados = notas >= 7
+
+print(aprovados)
+```
+
+Resultado:
+
+```text
+[False False  True  True  True]
+```
+
+Isso também é uma operação vetorizada.
+
+---
+
+# 204. Funções universais do NumPy
+
+O NumPy possui funções chamadas de `ufuncs`.
+
+São funções que operam elemento a elemento.
+
+Exemplos:
+
+```python
+np.sqrt()
+```
+
+```python
+np.abs()
+```
+
+```python
+np.exp()
+```
+
+```python
+np.log()
+```
+
+```python
+np.round()
+```
+
+```python
+np.maximum()
+```
+
+```python
+np.minimum()
+```
+
+---
+
+# 205. Valor absoluto
+
+```python
+valores = np.array([
+    -10,
+    -5,
+    0,
+    5,
+    10
+])
+
+print(np.abs(valores))
+```
+
+Resultado:
+
+```text
+[10  5  0  5 10]
+```
+
+---
+
+# 206. Arredondamento
+
+```python
+valores = np.array([
+    7.126,
+    8.789,
+    9.444
+])
+
+print(
+    np.round(
+        valores,
+        2
+    )
+)
+```
+
+Resultado:
+
+```text
+[7.13 8.79 9.44]
+```
+
+---
+
+# 207. Limites com `maximum()` e `minimum()`
+
+```python
+notas = np.array([
+    4.0,
+    6.0,
+    8.0,
+    12.0
+])
+```
+
+Limitando o máximo:
+
+```python
+print(
+    np.minimum(
+        notas,
+        10
+    )
+)
+```
+
+Resultado:
+
+```text
+[ 4.  6.  8. 10.]
+```
+
+Limitando o mínimo:
+
+```python
+print(
+    np.maximum(
+        notas,
+        5
+    )
+)
+```
+
+Resultado:
+
+```text
+[ 5.  6.  8. 12.]
+```
+
+---
+
+# 208. Produto escalar
+
+Considere:
+
+```python
+vetor_a = np.array([
+    1,
+    2,
+    3
+])
+
+vetor_b = np.array([
+    4,
+    5,
+    6
+])
+```
+
+Produto escalar:
+
+```python
+resultado = np.dot(
+    vetor_a,
+    vetor_b
+)
+
+print(resultado)
+```
+
+Cálculo:
+
+```text
+1 × 4
++
+2 × 5
++
+3 × 6
+```
+
+Resultado:
+
+```text
+32
+```
+
+---
+
+# 209. Conexão com Redes Neurais
+
+Em um neurônio artificial, as entradas são multiplicadas por pesos.
+
+Representação:
+
+```text
+x1 × peso1
++
+x2 × peso2
++
+x3 × peso3
+```
+
+Essa operação é semelhante a um produto escalar.
+
+Exemplo:
+
+```python
+entradas = np.array([
+    0.5,
+    0.8,
+    0.2
+])
+
+pesos = np.array([
+    0.4,
+    0.7,
+    0.1
+])
+
+resultado = np.dot(
+    entradas,
+    pesos
+)
+
+print(resultado)
+```
+
+---
+
+# 210. Adicionando o bias
+
+Um neurônio também pode utilizar um valor chamado `bias`.
+
+```python
+bias = 0.2
+```
+
+Resultado do neurônio:
+
+```python
+saida = np.dot(
+    entradas,
+    pesos
+) + bias
+
+print(saida)
+```
+
+Não construiremos uma Rede Neural nesta aula.
+
+O objetivo é perceber que operações estudadas com NumPy aparecem na base matemática das Redes Neurais.
+
+---
+
+# 211. Multiplicação de matrizes
+
+A multiplicação elemento a elemento utiliza:
+
+```python
+A * B
+```
+
+A multiplicação matricial utiliza:
+
+```python
+A @ B
+```
+
+ou:
+
+```python
+np.matmul(A, B)
+```
+
+Exemplo:
+
+```python
+A = np.array([
+    [1, 2],
+    [3, 4]
+])
+
+B = np.array([
+    [5, 6],
+    [7, 8]
+])
+```
+
+Elemento a elemento:
+
+```python
+print(A * B)
+```
+
+Resultado:
+
+```text
+[[ 5 12]
+ [21 32]]
+```
+
+Multiplicação matricial:
+
+```python
+print(A @ B)
+```
+
+Resultado:
+
+```text
+[[19 22]
+ [43 50]]
+```
+
+---
+
+# 212. Por que distinguir essas operações?
+
+Em Machine Learning e Redes Neurais, a multiplicação matricial é muito importante.
+
+Dados podem ser organizados em matrizes.
+
+Pesos também podem ser organizados em matrizes.
+
+O processamento pode envolver:
+
+```text
+matriz de entradas
+×
+matriz de pesos
+```
+
+Por isso, é importante não confundir:
+
+```python
+A * B
+```
+
+com:
+
+```python
+A @ B
+```
+
+---
+
+# 213. Exemplo de várias amostras e pesos
+
+```python
+X = np.array([
+    [1.0, 2.0, 3.0],
+    [4.0, 5.0, 6.0]
+])
+```
+
+Temos:
+
+```text
+2 amostras
+3 features
+```
+
+Pesos:
+
+```python
+pesos = np.array([
+    [0.2],
+    [0.5],
+    [0.1]
+])
+```
+
+Formato:
+
+```text
+3 pesos
+1 saída
+```
+
+Multiplicação:
+
+```python
+resultado = X @ pesos
+
+print(resultado)
+```
+
+Formato do resultado:
+
+```text
+(2, 1)
+```
+
+Cada amostra produziu uma saída.
+
+---
+
+# 214. Verificando os formatos antes da multiplicação
+
+```python
+print("X:", X.shape)
+print("Pesos:", pesos.shape)
+```
+
+Resultado:
+
+```text
+X: (2, 3)
+Pesos: (3, 1)
+```
+
+As dimensões internas são compatíveis:
+
+```text
+(2, 3) × (3, 1)
+```
+
+O resultado será:
+
+```text
+(2, 1)
+```
+
+---
+
+# 215. Erro de multiplicação matricial
+
+Considere:
+
+```python
+X.shape
+```
+
+```text
+(2, 3)
+```
+
+e:
+
+```python
+pesos_errados.shape
+```
+
+```text
+(2, 1)
+```
+
+Ao tentar:
+
+```python
+X @ pesos_errados
+```
+
+será gerado um erro porque:
+
+```text
+3 é diferente de 2
+```
+
+As dimensões internas precisam ser iguais.
+
+---
+
+# 216. Regra da multiplicação matricial
+
+Para multiplicar:
+
+```text
+(m, n) × (n, p)
+```
+
+o resultado terá:
+
+```text
+(m, p)
+```
+
+Exemplo:
+
+```text
+(2, 3) × (3, 1) = (2, 1)
+```
+
+---
+
+# 217. Transposição
+
+A transposição troca linhas por colunas.
+
+```python
+dados = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+```
+
+Formato original:
+
+```python
+print(dados.shape)
+```
+
+Resultado:
+
+```text
+(2, 3)
+```
+
+Transpondo:
+
+```python
+dados_transpostos = dados.T
+
+print(dados_transpostos)
+```
+
+Resultado:
+
+```text
+[[1 4]
+ [2 5]
+ [3 6]]
+```
+
+Formato:
+
+```text
+(3, 2)
+```
+
+---
+
+# 218. Aplicação da transposição
+
+A transposição pode ser utilizada para:
+
+* reorganizar dados;
+* ajustar formatos;
+* realizar multiplicações matriciais;
+* trocar linhas e colunas;
+* preparar estruturas matemáticas.
+
+Outra forma:
+
+```python
+np.transpose(dados)
+```
+
+---
+
+# 219. Operações vetorizadas e desempenho
+
+Operações vetorizadas costumam ser mais eficientes do que laços escritos manualmente em Python.
+
+Exemplo com laço:
+
+```python
+resultado = []
+
+for valor in notas:
+    resultado.append(valor * 2)
+```
+
+Exemplo vetorizado:
+
+```python
+resultado = notas * 2
+```
+
+O segundo código é:
+
+* menor;
+* mais legível;
+* mais próximo da matemática;
+* geralmente mais rápido.
+
+---
+
+# 220. Medindo o tempo
+
+Em um notebook, podemos utilizar:
+
+```python
+import time
+```
+
+Criando dados:
+
+```python
+valores = list(
+    range(1_000_000)
+)
+```
+
+Com lista:
+
+```python
+inicio = time.time()
+
+resultado_lista = []
+
+for valor in valores:
+    resultado_lista.append(
+        valor * 2
+    )
+
+fim = time.time()
+
+print(
+    "Tempo com lista:",
+    fim - inicio
+)
+```
+
+Com NumPy:
+
+```python
+array = np.array(valores)
+
+inicio = time.time()
+
+resultado_numpy = array * 2
+
+fim = time.time()
+
+print(
+    "Tempo com NumPy:",
+    fim - inicio
+)
+```
+
+Os resultados podem variar conforme o ambiente.
+
+---
+
+# 221. Cuidado ao interpretar desempenho
+
+NumPy tende a ser mais eficiente em grandes operações numéricas.
+
+Entretanto:
+
+* arrays pequenos podem não apresentar diferença perceptível;
+* o tempo varia entre máquinas;
+* o ambiente Colab pode oscilar;
+* criar o array também possui custo;
+* nem todo problema precisa ser resolvido com NumPy.
+
+O objetivo é entender que NumPy foi projetado para cálculos numéricos em grande escala.
+
+---
+
+# 222. Prática guiada — Estatística dos alunos
+
+Considere:
+
+```python
+alunos = np.array([
+    [18, 8.5, 95],
+    [19, 6.0, 75],
+    [20, 9.0, 98],
+    [21, 7.5, 85],
+    [22, 5.0, 60]
+])
+```
+
+Extraia as colunas:
+
+```python
+idades = alunos[:, 0]
+notas = alunos[:, 1]
+frequencias = alunos[:, 2]
+```
+
+Calcule:
+
+```python
+print("Média das idades:", np.mean(idades))
+print("Média das notas:", np.mean(notas))
+print("Média das frequências:", np.mean(frequencias))
+```
+
+Depois:
+
+```python
+print("Menor nota:", np.min(notas))
+print("Maior nota:", np.max(notas))
+print("Mediana das notas:", np.median(notas))
+print("Desvio padrão:", np.std(notas))
+```
+
+---
+
+# 223. Prática guiada — Estatística por coluna
+
+```python
+medias = np.mean(
+    alunos,
+    axis=0
+)
+
+minimos = np.min(
+    alunos,
+    axis=0
+)
+
+maximos = np.max(
+    alunos,
+    axis=0
+)
+
+desvios = np.std(
+    alunos,
+    axis=0
+)
+```
+
+Exiba:
+
+```python
+print("Médias:", medias)
+print("Mínimos:", minimos)
+print("Máximos:", maximos)
+print("Desvios:", desvios)
+```
+
+---
+
+# 224. Prática guiada — Aumento das notas
+
+Crie uma cópia:
+
+```python
+alunos_ajustados = alunos.copy()
+```
+
+Aumente as notas:
+
+```python
+alunos_ajustados[:, 1] += 0.5
+```
+
+Limite:
+
+```python
+alunos_ajustados[:, 1] = np.clip(
+    alunos_ajustados[:, 1],
+    0,
+    10
+)
+```
+
+Exiba:
+
+```python
+print(alunos_ajustados)
+```
+
+---
+
+# 225. Prática guiada — Centralização
+
+```python
+medias = np.mean(
+    alunos,
+    axis=0
+)
+
+alunos_centralizados = (
+    alunos - medias
+)
+
+print(alunos_centralizados)
+```
+
+Verifique:
+
+```python
+print(
+    np.mean(
+        alunos_centralizados,
+        axis=0
+    )
+)
+```
+
+---
+
+# 226. Prática guiada — Normalização
+
+```python
+minimos = np.min(
+    alunos,
+    axis=0
+)
+
+maximos = np.max(
+    alunos,
+    axis=0
+)
+
+alunos_normalizados = (
+    alunos - minimos
+) / (
+    maximos - minimos
+)
+
+print(alunos_normalizados)
+```
+
+---
+
+# 227. Comparando dados originais e normalizados
+
+Dados originais:
+
+```python
+print(alunos)
+```
+
+Dados normalizados:
+
+```python
+print(
+    np.round(
+        alunos_normalizados,
+        2
+    )
+)
+```
+
+Os dados normalizados ficarão entre 0 e 1.
+
+---
+
+# 228. Atividade prática 1 — Operações básicas
+
+Considere:
+
+```python
+valores = np.array([
+    10,
+    20,
+    30,
+    40,
+    50
+])
+```
+
+Resolva:
+
+1. Some 5 a todos os valores.
+2. Subtraia 10 de todos os valores.
+3. Multiplique todos os valores por 3.
+4. Divida todos os valores por 10.
+5. Eleve todos os valores ao quadrado.
+6. Calcule a raiz quadrada.
+7. Calcule a soma total.
+8. Calcule a média.
+9. Encontre o menor valor.
+10. Encontre o maior valor.
+
+---
+
+# 229. Atividade prática 2 — Estatística das notas
+
+Considere:
+
+```python
+notas = np.array([
+    4.5,
+    5.5,
+    6.0,
+    7.0,
+    8.5,
+    9.0,
+    10.0
+])
+```
+
+Calcule:
+
+1. soma;
+2. média;
+3. mediana;
+4. mínimo;
+5. máximo;
+6. amplitude;
+7. desvio padrão;
+8. variância;
+9. primeiro quartil;
+10. terceiro quartil.
+
+---
+
+# 230. Atividade prática 3 — Eixos
+
+Considere:
+
+```python
+dados = np.array([
+    [18, 8.0, 90],
+    [19, 6.0, 70],
+    [20, 9.0, 98],
+    [21, 7.0, 85]
+])
+```
+
+Resolva:
+
+1. Calcule a média de todos os valores.
+2. Calcule a média por coluna.
+3. Calcule a soma por coluna.
+4. Calcule o mínimo por coluna.
+5. Calcule o máximo por coluna.
+6. Calcule o desvio padrão por coluna.
+7. Explique o significado de cada resultado.
+8. Calcule a média por linha.
+9. Explique por que a média por linha não é adequada nesse exemplo.
+10. Extraia somente nota e frequência e calcule as médias.
+
+---
+
+# 231. Atividade prática 4 — Broadcasting
+
+Utilize:
+
+```python
+dados = np.array([
+    [18, 8.0, 90],
+    [19, 6.5, 75],
+    [20, 9.0, 98]
+])
+```
+
+Resolva:
+
+1. Some 1 a toda a matriz.
+2. Explique por que essa operação pode não fazer sentido.
+3. Crie o vetor:
+
+```python
+ajustes = np.array([
+    0,
+    0.5,
+    2
+])
+```
+
+4. Aplique os ajustes.
+5. Explique o que aconteceu em cada coluna.
+6. Calcule as médias de cada coluna.
+7. Subtraia as médias da matriz.
+8. Verifique se as novas médias estão próximas de zero.
+
+---
+
+# 232. Atividade prática 5 — Produto escalar
+
+Considere:
+
+```python
+entradas = np.array([
+    0.5,
+    0.8,
+    0.2
+])
+
+pesos = np.array([
+    0.4,
+    0.7,
+    0.1
+])
+```
+
+Resolva:
+
+1. Multiplique os arrays elemento a elemento.
+2. Some os resultados.
+3. Faça o mesmo cálculo com `np.dot()`.
+4. Compare os resultados.
+5. Adicione um bias de `0.2`.
+6. Explique como esse cálculo se relaciona com um neurônio artificial.
+
+---
+
+# 233. Desafio — Preparação numérica de dados escolares
+
+Considere:
+
+```python
+dados = np.array([
+    [16, 5.0, 60, 2],
+    [17, 7.5, 85, 8],
+    [18, 8.0, 90, 10],
+    [19, 6.0, 72, 5],
+    [20, 9.0, 98, 12],
+    [21, 4.5, 55, 1],
+    [22, 7.0, 80, 7],
+    [23, 8.5, 92, 11]
+])
+```
+
+Colunas:
+
+```text
+0 → idade
+1 → nota
+2 → frequência
+3 → atividades entregues
+```
+
+---
+
+## 233.1 Tarefas
+
+1. Exiba o `shape`.
+2. Exiba o `dtype`.
+3. Calcule as médias de cada coluna.
+4. Calcule os valores mínimos.
+5. Calcule os valores máximos.
+6. Calcule os desvios padrão.
+7. Identifique o aluno com maior nota.
+8. Identifique o aluno com menor frequência.
+9. Ordene os alunos pela nota.
+10. Ordene os alunos pela frequência.
+11. Normalize todas as colunas entre 0 e 1.
+12. Padronize todas as colunas.
+13. Verifique as médias após a padronização.
+14. Verifique os desvios após a padronização.
+15. Crie um target de risco escolar.
+
+Considere aluno em risco quando:
+
+```text
+nota < 6
+ou
+frequência < 70
+ou
+atividades < 4
+```
+
+---
+
+# 234. Criando o target do desafio
+
+```python
+notas = dados[:, 1]
+frequencias = dados[:, 2]
+atividades = dados[:, 3]
+```
+
+Máscara:
+
+```python
+risco = (
+    (notas < 6)
+    |
+    (frequencias < 70)
+    |
+    (atividades < 4)
+)
+```
+
+Target:
+
+```python
+y = risco.astype(int)
+```
+
+Verifique:
+
+```python
+print(y)
+print(y.shape)
+```
+
+---
+
+# 235. Comparando o dataset original e transformado
+
+Dataset original:
+
+```python
+X_original = dados.copy()
+```
+
+Dataset normalizado:
+
+```python
+X_normalizado = (
+    dados - np.min(
+        dados,
+        axis=0
+    )
+) / (
+    np.max(
+        dados,
+        axis=0
+    )
+    -
+    np.min(
+        dados,
+        axis=0
+    )
+)
+```
+
+Compare:
+
+```python
+print("Original:")
+print(X_original)
+
+print("Normalizado:")
+print(
+    np.round(
+        X_normalizado,
+        2
+    )
+)
+```
+
+---
+
+# 236. Reflexão sobre a transformação
+
+Responda:
+
+1. Os alunos mudaram após a normalização?
+2. O significado das features mudou?
+3. A ordem dos alunos mudou?
+4. Os valores passaram a ter a mesma escala?
+5. Por que isso pode ser importante para KNN?
+6. Por que isso pode ser importante para Redes Neurais?
+7. A Árvore de Decisão precisa obrigatoriamente dessa transformação?
+8. Devemos normalizar antes ou depois de separar treino e teste?
+9. Qual risco existe ao usar informações do conjunto de teste na preparação?
+10. O que é vazamento de dados?
+
+---
+
+# 237. Introdução ao vazamento de dados
+
+Vazamento de dados, ou `data leakage`, acontece quando informações que não deveriam estar disponíveis durante o treinamento influenciam o modelo.
+
+Exemplo incorreto:
+
+```text
+1. Calcular média usando todos os dados.
+2. Separar treino e teste.
+3. Utilizar essa média na transformação.
+```
+
+Nesse caso, o conjunto de teste influenciou a transformação.
+
+---
+
+# 238. Ordem recomendada
+
+Uma sequência mais adequada é:
+
+```text
+Dados
+  ↓
+Separação entre treino e teste
+  ↓
+Calcular parâmetros no treino
+  ↓
+Transformar o treino
+  ↓
+Aplicar os mesmos parâmetros no teste
+```
+
+Exemplo:
+
+```text
+média do treino
+desvio padrão do treino
+mínimo do treino
+máximo do treino
+```
+
+Esses valores são usados para transformar treino e teste.
+
+---
+
+# 239. Conexão com Scikit-Learn
+
+Na próxima aula, utilizaremos ferramentas como:
+
+```python
+from sklearn.preprocessing import StandardScaler
+```
+
+e:
+
+```python
+from sklearn.preprocessing import MinMaxScaler
+```
+
+Essas ferramentas ajudam a:
+
+* calcular os parâmetros no treino;
+* aplicar as mesmas transformações no teste;
+* organizar o pré-processamento;
+* reduzir erros;
+* evitar vazamento de dados.
+
+---
+
+# 240. Conexão com KNN
+
+O KNN utiliza distância entre exemplos.
+
+Por isso, a escala das features influencia o resultado.
+
+Considere:
+
+```text
+idade → 16 a 60
+nota → 0 a 10
+frequência → 0 a 100
+```
+
+Sem transformação, a frequência pode dominar o cálculo da distância.
+
+Na aula de KNN, retomaremos:
+
+* normalização;
+* padronização;
+* distância;
+* escolha do número de vizinhos.
+
+---
+
+# 241. Conexão com Deep Learning
+
+Redes Neurais também realizam muitos cálculos com matrizes.
+
+Os dados entram em formato numérico.
+
+Pesos são armazenados em matrizes.
+
+O treinamento envolve:
+
+* multiplicações;
+* somas;
+* produtos escalares;
+* operações vetorizadas;
+* transformação de matrizes.
+
+Um fluxo simplificado:
+
+```text
+Matriz de entradas
+        ↓
+Multiplicação por pesos
+        ↓
+Soma do bias
+        ↓
+Função de ativação
+        ↓
+Saída
+```
+
+---
+
+# 242. O que já conseguimos compreender
+
+Mesmo sem construir uma Rede Neural, já podemos compreender a base numérica de um neurônio:
+
+```python
+saida = (
+    np.dot(
+        entradas,
+        pesos
+    )
+    +
+    bias
+)
+```
+
+Esse cálculo utiliza conceitos estudados nesta aula:
+
+* arrays;
+* vetores;
+* multiplicação;
+* soma;
+* produto escalar;
+* operações vetorizadas.
+
+---
+
+# 243. Erros comuns nesta etapa
+
+## Erro 1 — Misturar features sem analisar a escala
+
+```python
+np.mean(dados)
+```
+
+Pode misturar idade, nota e frequência sem significado.
+
+---
+
+## Erro 2 — Utilizar o eixo incorreto
+
+```python
+np.mean(dados, axis=1)
+```
+
+pode produzir médias por aluno quando o objetivo era média por feature.
+
+---
+
+## Erro 3 — Confundir `*` com `@`
+
+```python
+A * B
+```
+
+é multiplicação elemento a elemento.
+
+```python
+A @ B
+```
+
+é multiplicação matricial.
+
+---
+
+## Erro 4 — Dividir por desvio padrão zero
+
+Isso pode gerar:
+
+```text
+nan
+inf
+```
+
+---
+
+## Erro 5 — Normalizar antes de separar treino e teste
+
+Isso pode gerar vazamento de dados.
+
+---
+
+## Erro 6 — Alterar o array original sem perceber
+
+```python
+dados[:, 1] += 1
+```
+
+modifica diretamente o array.
+
+Para preservar:
+
+```python
+dados_novos = dados.copy()
+```
+
+---
+
+## Erro 7 — Aplicar operação sem considerar o significado
+
+Somar o mesmo valor em idade, nota e frequência pode não fazer sentido.
+
+---
+
+# 244. Checklist de compreensão da Parte 4
+
+* [ ] Sei realizar soma em arrays.
+* [ ] Sei realizar subtração.
+* [ ] Sei realizar multiplicação.
+* [ ] Sei realizar divisão.
+* [ ] Sei utilizar potência.
+* [ ] Sei calcular média.
+* [ ] Sei calcular mediana.
+* [ ] Sei encontrar mínimo e máximo.
+* [ ] Sei calcular amplitude.
+* [ ] Sei calcular desvio padrão.
+* [ ] Sei calcular variância.
+* [ ] Sei utilizar `axis=0`.
+* [ ] Sei utilizar `axis=1`.
+* [ ] Sei explicar a diferença entre operação por linha e por coluna.
+* [ ] Sei utilizar `argmin()` e `argmax()`.
+* [ ] Sei ordenar arrays.
+* [ ] Sei explicar broadcasting.
+* [ ] Sei centralizar dados.
+* [ ] Sei normalizar entre 0 e 1.
+* [ ] Sei padronizar dados.
+* [ ] Sei explicar por que a escala importa.
+* [ ] Sei diferenciar `*` e `@`.
+* [ ] Sei calcular produto escalar.
+* [ ] Sei relacionar produto escalar a um neurônio artificial.
+* [ ] Sei explicar por que treino e teste devem ser separados antes da transformação.
+* [ ] Entendo o conceito inicial de vazamento de dados.
+
+---
+
+# 245. Resumo da Parte 4
+
+Nesta parte, aprendemos:
+
+* operações vetorizadas;
+* operações entre arrays;
+* soma, subtração, multiplicação e divisão;
+* potência e raiz quadrada;
+* funções estatísticas;
+* média e mediana;
+* mínimo e máximo;
+* amplitude;
+* desvio padrão;
+* variância;
+* operações por eixo;
+* médias por coluna;
+* médias por linha;
+* índices de valores mínimos e máximos;
+* ordenação;
+* percentis;
+* broadcasting;
+* centralização;
+* padronização;
+* normalização;
+* produto escalar;
+* multiplicação matricial;
+* transposição;
+* relação entre NumPy e Redes Neurais;
+* relação entre escala e KNN;
+* introdução ao vazamento de dados.
+
+---
+
+# 246. O que veremos na próxima aula
+
+Na próxima aula, aprenderemos a reorganizar e combinar arrays.
+
+Serão estudados:
+
+* `reshape()`;
+* `flatten()`;
+* `ravel()`;
+* transposição;
+* `concatenate()`;
+* `stack()`;
+* `vstack()`;
+* `hstack()`;
+* `column_stack()`;
+* separação de arrays;
+* arrays tridimensionais;
+* imagens como arrays;
+* introdução aos tensores;
+* formatos utilizados em Deep Learning;
+* lotes de dados;
+* canais de cor.
+
+© @karizeviecelli - 2026
+
