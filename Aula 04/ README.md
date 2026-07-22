@@ -9227,28 +9227,51 @@ Nesta parte, aprendemos:
 
 ---
 
-# 246. O que veremos na próxima aula
+# 246. Encerramento da Aula 04
 
-Na próxima aula, aprenderemos a reorganizar e combinar arrays.
+Nesta aula, compreendemos como os dados são organizados numericamente antes de serem utilizados por um modelo de Machine Learning.
 
-Serão estudados:
+Estudamos:
 
-* `reshape()`;
-* `flatten()`;
-* `ravel()`;
+* arrays NumPy;
+* vetores e matrizes;
+* tipos de dados;
+* dimensões e formatos;
+* acesso a linhas e colunas;
+* filtros e máscaras booleanas;
+* operações vetorizadas;
+* estatísticas;
+* eixos;
+* broadcasting;
+* normalização;
+* padronização;
+* conversão entre Pandas e NumPy;
+* preparação de dados para algoritmos de Machine Learning.
+
+Esses conceitos serão importantes nas próximas aulas, especialmente no estudo de algoritmos baseados em distância, como o KNN.
+
+Na próxima aula, aprenderemos a reorganizar e combinar arrays. Também iniciaremos o estudo de estruturas com mais dimensões, como imagens e tensores.
+
+---
+
+# Próxima aula
+
+## Aula 05 — Reorganização de Dados e Introdução aos Tensores
+
+Na Aula 05, estudaremos:
+
+* alteração de formato com `reshape()`;
+* transformação de matrizes em vetores;
+* combinação de arrays;
+* divisão de arrays;
 * transposição;
-* `concatenate()`;
-* `stack()`;
-* `vstack()`;
-* `hstack()`;
-* `column_stack()`;
-* separação de arrays;
 * arrays tridimensionais;
-* imagens como arrays;
+* representação numérica de imagens;
+* canais de cores;
+* lotes de imagens;
 * introdução aos tensores;
-* formatos utilizados em Deep Learning;
-* lotes de dados;
-* canais de cor.
+* formatos utilizados em Deep Learning.
+
+Esses conteúdos criarão uma ponte entre o Machine Learning tradicional e a disciplina de Redes Neurais.
 
 © @karizeviecelli - 2026
-
