@@ -1,10 +1,13 @@
-# AULA 04 --- Introdução à IA Generativa e Prompt Engineering
+# AULA 08 --- Introdução à IA Generativa e Prompt Engineering
 
 **Trilha de IA Aplicada --- Base Comum dos Projetos**\
 **Carga horária sugerida:** 4 horas\
 **Pré-requisitos:** noções de Machine Learning, classificação e NLP
 básico.
 
+
+**Link Colab
+https://colab.research.google.com/drive/1leZI7ShHE4jOMDzievMRley5l27SXEey?usp=sharing**
 ------------------------------------------------------------------------
 
 ## 1. Onde estamos?

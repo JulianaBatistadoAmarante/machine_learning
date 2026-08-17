@@ -1,9 +1,11 @@
-# AULA 01 --- KNN: Classificação por Vizinhos Mais Próximos
+# AULA 05 --- KNN: Classificação por Vizinhos Mais Próximos
 
 **Trilha de IA Aplicada --- Projeto Cuidadores**\
 **Carga horária sugerida:** 4 horas\
 **Nível:** introdutório, após Árvore de Decisão e acurácia
 
+**Link Colab
+https://colab.research.google.com/drive/1L1kqqjCdKLxwUOG6_E3UmQPqijEpHIgL?usp=sharing**
 ------------------------------------------------------------------------
 
 ## 1. Onde estamos na trilha?
@@ -35,14 +37,14 @@ programados.
 
 Com o passar do tempo, o sistema acumula registros como:
 
-  Dia       Turno     Lembretes   Atraso médio anterior Atrasou?
-  --------- ------- ----------- ----------------------- ----------
-  Segunda   Manhã             1                   2 min Não
-  Segunda   Noite             2                  15 min Sim
-  Terça     Manhã             1                   0 min Não
-  Sexta     Noite             3                  24 min Sim
-  Domingo   Tarde             2                  12 min Sim
-
+ | Dia    |   Turno   |  Lembretes  | Atraso médio |  anterior Atrasou?  |
+ |--------|-----------|-------------|--------------|---------------------|
+ |Segunda |  Manhã    |      1      |  2 min       |      Não            |
+ |Segunda |  Noite    |      2      | 15 min       |      Sim            |
+ |Terça   |  Manhã    |      1      |  0 min       |      Não            |
+ |Sexta   |  Noite    |      3      | 24 min       |      Sim            |
+ |Domingo |  Tarde    |      2      | 12 min       |      Sim            |
+---------------------------------------------------------------------------
 Queremos investigar:
 
 > **A partir de registros anteriores, é possível classificar uma nova
@@ -106,12 +108,13 @@ em que a resposta correta já é conhecida.
 
 Imagine:
 
-    Lembretes   Atraso médio Resultado
-  ----------- -------------- -------------
-            1              2 Não atrasou
-            3             22 Atrasou
-            1              1 Não atrasou
-            2             18 Atrasou
+   | Lembretes |  Atraso médio | Resultado |
+   |-----------|---------------|-----------|
+   |    1      |        2      | Não atrasou |
+   |    3      |       22      |  Atrasou  |
+   |    1      |        1      |Não atrasou|
+   |    2      |      18       |Atrasou  |
+   ------------------------------------------
 
 O modelo recebe exemplos contendo:
 
@@ -578,29 +581,19 @@ O `StandardScaler` exerce um papel parecido para as features numéricas.
 
 # 19. KNN × Árvore de Decisão
 
-Vocês já conhecem Árvore de Decisão.
+Vocês já conhecem a Árvore de Decisão.
 
 Agora podemos comparar os conceitos.
 
-  -----------------------------------------------------------------------
-  Característica          Árvore de Decisão       KNN
-  ----------------------- ----------------------- -----------------------
-  Ideia principal         cria decisões/regras a  procura exemplos
-                          partir das features     próximos
-
-  Usa vizinhos?           Não                     Sim
-
-  Distância é importante? Não da mesma forma      Sim
-
-  Escala costuma ser      Menos sensível          Muito importante
-  crítica?                                        
-
-  Possui K?               Não                     Sim
-
-  Pode classificar?       Sim                     Sim
-
-  É supervisionado?       Sim                     Sim
-  -----------------------------------------------------------------------
+| Característica | Árvore de Decisão | KNN |
+|---|---|---|
+| Ideia principal | Cria decisões e regras a partir das features | Procura exemplos próximos |
+| Usa vizinhos? | Não | Sim |
+| A distância é importante? | Não da mesma forma | Sim |
+| A escala costuma ser crítica? | Menos sensível | Muito importante |
+| Possui o parâmetro K? | Não | Sim |
+| Pode classificar? | Sim | Sim |
+| É supervisionado? | Sim | Sim |
 
 ### Importante
 

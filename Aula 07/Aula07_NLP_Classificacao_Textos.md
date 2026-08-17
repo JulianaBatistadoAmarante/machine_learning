@@ -1,9 +1,12 @@
-# AULA 03 --- Introdução ao NLP: Como a IA trabalha com textos?
+# AULA 07 --- Introdução ao NLP: Como a IA trabalha com textos?
 
 **Trilha de IA Aplicada --- Base Comum dos Projetos**\
 **Carga horária sugerida:** 4 horas\
 **Pré-requisitos:** features, target, classificação, treino/teste e
 métricas básicas.
+
+**Link Colab 
+https://colab.research.google.com/drive/1siIiWtC72rY-qq2hdU1G-Dl5oGhrwp8w?usp=sharing**
 
 ------------------------------------------------------------------------
 

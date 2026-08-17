@@ -1,9 +1,12 @@
-# AULA 02 --- Como avaliar um modelo de classificação?
+# AULA 06 --- Como avaliar um modelo de classificação?
 
 **Trilha de IA Aplicada --- Base Comum dos Projetos**\
 **Carga horária sugerida:** 4 horas\
 **Pré-requisitos:** preparação de dados, features, target, treino/teste,
 Árvore de Decisão, KNN e acurácia.
+
+**Link Colab
+https://colab.research.google.com/drive/1sFgVNPYzDT5Qr_BsDkU1dyDyibZNi6FL?usp=sharing**
 
 ------------------------------------------------------------------------
 
@@ -163,10 +166,11 @@ Para começar, usaremos classificação binária:
 
 Exemplo:
 
-               Previsto NÃO   Previsto SIM
-  ---------- -------------- --------------
-  Real NÃO               50              5
-  Real SIM               10             35
+  |             |Previsto NÃO |  Previsto SIM|
+  |----------|--------------|--------------|
+  |Real NÃO  |             50 |             5|
+  |Real SIM  |             10  |           35|
+  ----------------------------------------------
 
 Ela permite enxergar não apenas quantos erros aconteceram, mas **quais
 erros** aconteceram.
