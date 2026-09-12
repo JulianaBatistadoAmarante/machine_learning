@@ -22,7 +22,7 @@ Os conceitos aparecem apenas na seção em que são apresentados. Nas etapas seg
 
 ---
 
-# [BÁSICO] 1. Dados, Pandas e DataFrame
+#  1. Dados, Pandas e DataFrame
 
 ## 1.1 Pandas
 
@@ -97,7 +97,7 @@ Por que devemos preservar `df_bruto` e realizar as transformações em `df`?
 
 ---
 
-# [BÁSICO] 2. Qualidade dos dados
+#  2. Qualidade dos dados
 
 Qualidade de dados significa verificar se as informações podem ser utilizadas com confiança.
 
@@ -180,7 +180,7 @@ Qual dimensão da qualidade está sendo verificada quando comparamos `Híbrido` 
 
 ---
 
-# [BÁSICO] 3. Limpeza e tratamento
+#  3. Limpeza e tratamento
 
 ## 3.1 Remoção de duplicidades
 
@@ -270,7 +270,7 @@ Por que uma renda familiar de R$ 14.000 não deve ser automaticamente excluída?
 
 ---
 
-# [INTERMEDIÁRIO] 4. Percentis, IQR e outliers
+# 4. Percentis, IQR e outliers
 
 ## 4.1 Percentil
 
@@ -358,7 +358,7 @@ Um ponto aparece além do limite superior do BoxPlot. Quais perguntas devem ser 
 
 ---
 
-# [INTERMEDIÁRIO] 5. NumPy e representação dos dados
+# 5. NumPy e representação dos dados
 
 ## 5.1 NumPy
 
@@ -468,7 +468,7 @@ Em uma matriz com shape `(4994, 10)`, o que representam o primeiro e o segundo n
 
 ---
 
-# [INTERMEDIÁRIO] 6. Agregações e tabelas de pesquisa
+#  6. Agregações e tabelas de pesquisa
 
 ## 6.1 Agregação
 
@@ -541,7 +541,7 @@ Por que a média de uma coluna formada por 0 e 1 representa uma taxa?
 
 ---
 
-# [INTERMEDIÁRIO] 7. Gráficos e relações entre variáveis
+#  7. Gráficos e relações entre variáveis
 
 ## 7.1 Gráfico de barras
 
@@ -633,7 +633,7 @@ Se atividades entregues e nota final possuem correlação positiva, podemos afir
 
 ---
 
-# [AVANÇADO] 8. Preparação para Machine Learning
+#  8. Preparação para Machine Learning
 
 ## 8.1 Feature
 
@@ -741,7 +741,7 @@ Por que `nota_final` deve ser retirada das features quando a target é `aprovado
 
 ---
 
-# [AVANÇADO] 9. Árvore de Decisão
+#  9. Árvore de Decisão
 
 ## 9.1 Aprendizado supervisionado
 
@@ -827,7 +827,7 @@ Qual é o possível problema de permitir que uma Árvore de Decisão cresça sem
 
 ---
 
-# [AVANÇADO] 10. KNN e pipeline
+#  10. KNN e pipeline
 
 ## 10.1 KNN
 
@@ -917,7 +917,7 @@ Por que o `StandardScaler` deve estar dentro da pipeline, e não ser ajustado so
 
 ---
 
-# [AVANÇADO] 11. Avaliação da classificação
+#  11. Avaliação da classificação
 
 ## 11.1 Acurácia
 
@@ -1019,7 +1019,7 @@ Um modelo obteve 81,1% de acurácia, mas identificou somente 15 de 184 estudante
 
 ---
 
-# [AVANÇADO] 12. Regressão Linear
+#  12. Regressão Linear
 
 ## 12.1 Regressão Linear
 
@@ -1112,7 +1112,7 @@ Qual é a diferença principal entre MAE e RMSE?
 
 ---
 
-# [AVANÇADO] 13. Relação com Deep Learning
+# 13. Relação com Deep Learning
 
 ## 13.1 Machine Learning tabular
 
@@ -1170,7 +1170,7 @@ O que representam as dimensões `4994` e `24` no tensor da atividade?
 
 ---
 
-# [AVANÇADO] 14. Ética e interpretação responsável
+#  14. Ética e interpretação responsável
 
 ## 14.1 Modelo como apoio
 
